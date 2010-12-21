@@ -355,8 +355,8 @@ package com.ywit.radio91.view
 				var smiley:Sprite = new (obj.src as Class)() as Sprite;
 				smiley.name = obj.name;
 				_smileyContainer.addChild(smiley);
-				smiley.x = (i % 6) * 26;
-				smiley.y = Math.floor(i / 6) * 26;
+				smiley.x = (i % 6) * 28;
+				smiley.y = Math.floor(i / 6) * 28;
 				smiley.buttonMode = true;
 				smiley.addEventListener(MouseEvent.CLICK, insertSmiley);			
 			}
