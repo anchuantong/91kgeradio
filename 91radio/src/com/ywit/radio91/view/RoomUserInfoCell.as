@@ -1,7 +1,9 @@
 package com.ywit.radio91.view
 {
+	import com.ywit.radio91.constant.ViewRegister;
 	import com.ywit.radio91.data.PlayerData;
 	import com.ywit.radio91.event.UserEvent;
+	import com.ywit.radio91.util.ViewHelper;
 	
 	import flash.display.Sprite;
 
@@ -41,6 +43,8 @@ package com.ywit.radio91.view
 			userEvent.uid = object["uid"];
 			userEvent.uName = object["uname"];
 			PlayerData.getInstance().dispatchEvent(userEvent);
+
+			
 		}
 	}
 }

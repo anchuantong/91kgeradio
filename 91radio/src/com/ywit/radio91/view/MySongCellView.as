@@ -22,7 +22,9 @@ package com.ywit.radio91.view
 			ui_MySongCell.songsSinger.text = _obj["songsSinger"];
 			addChild(ui_MySongCell);
 			
-			ButtonUtil.changeButton(ui_MySongCell.btn_startSinging).addEventListener(MouseEvent.CLICK,startSingHandel);
+			
+			ui_MySongCell.btn_startSinging.addEventListener("CLICK_HUATONG",startSingHandel);
+//			ButtonUtil.changeButton(ui_MySongCell.btn_startSinging);
 			ui_MySongCell.btn_startSinging.buttonMode = true;
 		}
 		public function startSingHandel(e:Event=null):void{

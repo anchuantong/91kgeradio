@@ -1,6 +1,8 @@
 package com.ywit.radio91.util
 {
 	import com.ywit.radio91.center.UModelLocal;
+	
+	import flash.display.Sprite;
 
 	/**
 	 * main.swf对外调用base.swf的方法集合
@@ -61,7 +63,6 @@ package com.ywit.radio91.util
 		 */ 
 		public static function baseInitRoom(roomId:int):void{
 			if(_debug == 0){
-				trace("baseInitRoom");
 				return;
 			}
 			_invoker["baseInitRoom"](roomId);

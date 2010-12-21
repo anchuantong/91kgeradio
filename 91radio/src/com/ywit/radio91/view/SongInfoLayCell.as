@@ -2,6 +2,7 @@ package com.ywit.radio91.view
 {
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
+	import com.ywit.radio91.constant.ViewRegister;
 	import com.ywit.radio91.data.PlayerData;
 	import com.ywit.radio91.util.BaseInteract;
 	import com.ywit.radio91.util.ViewHelper;
@@ -124,6 +125,10 @@ package com.ywit.radio91.view
 		}
 		private function listenSongHandel(e:Event):void{
 			BaseInteract.baseStartListen(_obj["uid"]);
+			var roomView:RoomView = ViewHelper.getView(ViewRegister.ROOM_VIEW) as RoomView;
+			if(roomView){
+				roomView.focusInWatchSinger();
+			}
 		}
 	}
 }
