@@ -450,6 +450,10 @@ package com.ywit.radio91.view
 			}
 			
 			_playerData.cs_UserInfo(uid);//更新当前用户缓存
+			for(var y:int =1;y<9;y++){
+				MovieClip(ui_GiftListView["giftCell"+y]).gotoAndStop(1);
+			}
+			selectGift = null;
 			_playerData.cs_ListGift(page);
 			
 		}
@@ -654,6 +658,10 @@ package com.ywit.radio91.view
 			if(page>pcount){
 				page = pcount;
 			}
+			for(var y:int =1;y<9;y++){
+				MovieClip(ui_GiftListView["giftCell"+y]).gotoAndStop(1);
+			}
+			selectGift = null;
 			_playerData.cs_ListGift(page);
 		}
 		private function giftPrePageHandel(e:Event):void{
@@ -661,6 +669,10 @@ package com.ywit.radio91.view
 			if(page<=1){
 				page =1;
 			}
+			for(var y:int =1;y<9;y++){
+				MovieClip(ui_GiftListView["giftCell"+y]).gotoAndStop(1);
+			}
+			selectGift = null;
 			_playerData.cs_ListGift(page);
 		}
 		//礼物列表界面中数量修改时调用的方法
