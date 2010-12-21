@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<interacts>
+			<method name="Friends" description="好友列表">
+				<input name="uid" type="int" description="uid"></input>
+				<input name="curPage" type="int" description="第几页的数据"></input>
+				<output name="curPage" type="int" description="当前页码"></output>
+				<output name="pageSize" type="int" description="一页显示多少条目"></output>
+				<output name="pcount" type="int" description="共计多少页"></output>
+				<output name="count" type="int" description="共计多少好友"></output>
+				<outputList name="friendList">
+					<output name="uid" type="int" description="用户ID"></output>
+					<output name="uname" type="String" description="用户姓名"></output>
+					<output name="headimg" type="String" description="用户头像图片地址"></output>
+					<output name="exp" type="int" description="用户经验值"></output>
+					<output name="lv" type="int" description="用户等级"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="roomId" type="int" description="用户目前所在房间ID"></output>
+					<output name="roomName" type="String" description="用户目前所在房间名称"></output>
+					<output name="micStatus" type="int" description="0表示只为麦克风，1表示有摄像头"></output>
+				</outputList>
+			</method>	
+			
+			<method name="UserInfo" description="取得用户信息">
+				<input name="uid" type="int" description="uid"></input>
+					<output name="uid" type="int" description="用户ID"></output>
+					<output name="uname" type="String" description="用户姓名"></output>
+					<output name="headimg" type="String" description="用户头像图片地址"></output>
+					<output name="exp" type="int" description="用户经验值"></output>
+					<output name="lv" type="int" description="用户等级"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="roomId" type="int" description="用户目前所在房间ID"></output>
+					<output name="kmoney" type="int" description="用户拥有的K币数量"></output>
+					<output name="roomName" type="String" description="用户目前所在房间名称"></output>
+					<output name="micStatus" type="int" description="0表示只为麦克风，1表示有摄像头"></output>
+					<output name="manifesto" type="String" description="K歌宣言"></output>
+			</method>	
+			
+			<method name="ListRoom" description="房间列表">
+				<input name="category" type="int" description="1:官方电台;2:自定义电台"></input>
+				<output name="broadCastPrice" type="int" description="发布一条广播的价格"></output>
+				<output name="payUrl" type="String" description="去充值的网页地址"></output>
+				<outputList name="roomList">
+					<output name="roomId" type="int" description="用户ID"></output>
+					<output name="roomName" type="String" description="房间名称"></output>
+					<output name="maxUser" type="int" description="最大允许用户数"></output>
+					<output name="currentUser" type="int" description="房间当前用户数"></output>
+					<output name="currentSinger" type="int" description="正在唱歌的用户数"></output>
+				</outputList>
+			</method>	
+			
+			<method name="SendBroadCast" description="发送大喇叭">
+				<input name="content" type="String" description="喇叭内容"></input>
+				<input name="sendLink" type="int" description="是否发送房间链接；0:不发生；1：发生"></input>
+					<output name="status" type="int" description="503：服务器异常；403：没有权限操作；200保存成功"></output>
+					<output name="message" type="String" description="返回信息"></output>
+			</method>	
+			
+			
+			<method name="InitRoom" description="加入一个房间">
+				<input name="roomId" type="int" description="房间ID"></input>
+					<output name="status" type="int" description="//503：服务器异常；403：没有权限操作；303：房间已满;200保存成功"></output>
+					<output name="message" type="String" description="返回信息"></output>
+					<output name="timestp" type="int" description="服务器时间，精确到秒"></output>
+			</method>	
+			
+			<method name="LevelRoom" description="离开一个房间">
+			</method>	
+			
+			<method name="GetRoom" description="获取单个房间详细信息">
+				<input name="roomId" type="int" description="房间ID"></input>
+					<output name="roomId" type="int" description="用户ID"></output>
+					<output name="roomName" type="String" description="房间名称"></output>
+					<output name="maxUser" type="int" description="最大允许用户数"></output>
+					<output name="currentUser" type="int" description="房间当前用户数"></output>
+					<output name="currentSinger" type="int" description="正在唱歌的用户数"></output>
+			</method>	
+			
+			
+			
+			<method name="ListSingerUser" description="获取房间内正在唱歌的用户以及相应的歌曲信息">
+				<input name="roomId" type="int" description="房间ID"></input>
+				<outputList name="userList">
+					<output name="uid" type="int" description="玩家id"></output>
+					<output name="uname" type="String" description="玩家姓名"></output>
+					<output name="headimg" type="String" description="用户头像图片地址"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="manifesto" type="String" description="K歌宣言"></output>
+					<output name="songsId" type="int" description="正在唱的歌曲ID"></output>
+					<output name="songsName" type="String" description="歌曲名称"></output>
+					<output name="songsSinger" type="String" description="歌曲原唱"></output>
+					<output name="ofaId" type="int" description="歌曲录音ID"></output>
+					<output name="singerTime" type="int" description="目前歌曲时长"></output>
+					<output name="songsTime" type="int" description="歌曲总时长"></output>
+					<output name="endTimestp" type="int" description="结束时间，也是秒"></output>
+				</outputList>	
+			</method>
+			
+			
+			<method name="ListUser" description="房间内观众列表">
+				<input name="roomId" type="int" description="房间ID"></input>
+				<outputList name="userList">
+					<output name="uid" type="int" description="用户ID"></output>
+					<output name="uname" type="String" description="用户姓名"></output>
+					<output name="headimg" type="String" description="用户头像图片地址"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="manifesto" type="String" description="K歌宣言"></output>
+					<output name="exp" type="int" description="用户经验值"></output>
+					<output name="lv" type="int" description="用户等级"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="micStatus" type="int" description="0表示只为麦克风，1表示有摄像头"></output>
+
+				</outputList>	
+			</method>
+			
+			<method name="ListAllUser" description="房间内全部用户列表">
+				<input name="roomId" type="int" description="房间ID"></input>
+				<outputList name="userList">
+					<output name="uid" type="int" description="用户ID"></output>
+					<output name="uname" type="String" description="用户姓名"></output>
+					<output name="headimg" type="String" description="用户头像图片地址"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="manifesto" type="String" description="K歌宣言"></output>
+					<output name="exp" type="int" description="用户经验值"></output>
+					<output name="lv" type="int" description="用户等级"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="micStatus" type="int" description="0表示只为麦克风，1表示有摄像头"></output>
+					<output name="songsId" type="int" description="正在唱的歌曲ID,如果歌曲id为0，表示当前没有唱歌"></output>
+					<output name="songsName" type="String" description="歌曲名称"></output>
+					<output name="songsSinger" type="String" description="歌曲原唱"></output>
+					<output name="ofaId" type="int" description="歌曲录音ID"></output>
+					<output name="singerTime" type="int" description="目前歌曲时长"></output>
+					<output name="songsTime" type="int" description="歌曲总时长"></output>
+					<output name="endTimestp" type="int" description="结束时间，也是秒"></output>
+					<output name="created" type="String" description="如果唱歌，则是开始唱歌的时间，否则为空"></output>
+				</outputList>	
+			</method>
+			
+			
+			<method name="ListUserGift" description="用户收到的礼物列表信息">
+				<input name="uid" type="int" description="用户ID，等于0为当前用户"></input>
+				<outputList name="giftList">
+					<output name="sendUid" type="int" description="赠送礼物的用户ID"></output>
+					<output name="sendUname" type="String" description="赠送礼物的用户姓名"></output>
+					<output name="title" type="String" description="礼物名称"></output>
+					<output name="imgUrl" type="String" description="礼物对应的GIF图片地址"></output>
+					<output name="count" type="String" description="赠送的礼物个数"></output>
+					<output name="sendTime" type="String" description="赠送礼物的时间"></output>
+				</outputList>	
+			</method>
+			
+			<method name="ListUserSongs" description="我（用户）的歌本">
+				<input name="uid" type="int" description="用户ID，等于0为当前用户"></input>
+				<outputList name="songList">
+					<output name="songsId" type="int" description="歌曲ID"></output>
+					<output name="songsName" type="String" description="歌曲名称"></output>
+					<output name="songsSinger" type="String" description="歌曲原唱"></output>
+					<output name="imgUrl" type="String" description="歌曲图标地址"></output>
+				</outputList>	
+			</method>
+			
+			<method name="ListGift" description="礼物列表">
+				<input name="curPage" type="int" description="第几页的数据"></input>
+				<output name="curPage" type="int" description="当前页码"></output>
+				<output name="pageSize" type="int" description="一页显示多少条目"></output>
+				<output name="pcount" type="int" description="共计多少页"></output>
+				<output name="count" type="int" description="共计多少礼物"></output>
+				<outputList name="giftList">
+					<output name="giftId" type="int" description="礼物ID"></output>
+					<output name="title" type="String" description="礼物名称"></output>
+					<output name="description" type="String" description="礼物描述"></output>
+					<output name="imgUrl" type="String" description="礼物对应的GIF图片地址"></output>
+					<output name="price" type="int" description="礼物购买价格"></output>
+					<output name="exp" type="int" description="赠送礼物奖励经验值"></output>
+					<output name="award" type="int" description="赠送礼物奖励礼倦数"></output>
+				</outputList>	
+			</method>
+			
+			<method name="SendMessage" description="发送聊天消息">
+				<input name="content" type="String" description="聊天内容"></input>
+				<input name="recUid" type="int" description="消息接受放用户ID，如果是等于0则表示对所有人说"></input>
+				<input name="isPrivate" type="int" description="0：公开；1：悄悄话"></input>
+					<output name="status" type="int" description="503：服务器异常；403：没有权限操作；200保存成功"></output>
+					<output name="message" type="String" description="返回信息"></output>
+			</method>
+			
+			<method name="SendGift" description="给指定用户发送礼物">
+				<input name="recUid" type="int" description="礼物接受放用户ID，不能为空"></input>
+				<input name="giftId" type="int" description="礼物ID"></input>
+				<input name="count" type="int" description="赠送多少个礼物"></input>
+					<output name="status" type="int" description="503：服务器异常；403：没有权限操作；200保存成功"></output>
+					<output name="message" type="String" description="返回信息"></output>
+			</method>
+			
+			
+			
+			<method name="CreateNewRoom" description="新增一个房间列表">
+				<input name="roomName" type="String" description="房间名称"></input>
+				<input name="pawword" type="String" description="房间密码"></input>
+				<input name="maxUser" type="int" description="房间大小"></input>
+				<input name="limits" type="int" description="房间权限;1:房主授权唱歌；2：自由唱歌；3：房子一人唱歌"></input>
+					<output name="status" type="int" description="503：服务器异常；403：没有权限操作；200保存成功"></output>
+					<output name="message" type="String" description="返回信息"></output>
+					<output name="roomId" type="int" description="新建的房间ID"></output>
+			</method>
+			
+			
+						
+</interacts>

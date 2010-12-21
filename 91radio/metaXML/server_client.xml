@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<interacts>
+			<!-- push接口 -->
+			<method name="pushBroadCast" description="广播" transaction="true">
+					<input name="uid" type="int" description="发送者用户ID"></input>
+					<input name="uname" type="String" description="发送者用户姓名"></input>
+					<input name="content" type="String" description="喇叭内容"></input>
+					<input name="roomId" type="int" description="房间ID大于0，需要增加一个链接，进入房间"></input>
+					<input name="created" type="String" description="发生时间"></input>
+			</method>		
+			
+			
+			<method name="pushSingerInRoom" description="房间内正在唱歌的用户信息" transaction="true"><!-- 同时要根据这个push，往公聊框输出内容,开始唱歌：${uname}开始唱${songsName} 结束唱歌: ${uname}唱完${songsName}，得分${score} -->
+					<input name="status" type="int" description="0:开始唱歌;1：结束唱歌"></input>
+					<input name="uid" type="int" description="玩家id"></input>
+					<input name="uname" type="String" description="玩家姓名"></input>
+					<input name="headimg" type="String" description="用户头像图片地址"></input>
+					<input name="songsId" type="int" description="正在唱的歌曲ID"></input>
+					<input name="songsName" type="String" description="歌曲名称"></input>
+					<input name="songsSinger" type="String" description="歌曲原唱"></input>
+					<input name="ofaId" type="int" description="歌曲录音ID"></input>
+					<input name="singerTime" type="int" description="目前歌曲时长"></input>
+					<input name="songsTime" type="int" description="歌曲总时长"></input>
+					<input name="score" type="int" description="得分"></input>
+					<input name="endTimestp" type="int" description="结束时间，也是秒"></input>
+					<input name="created" type="String" description="发生时间"></input>
+			</method>	
+			
+			<!-- 2010-11-29新增 -->
+			<method name="pushListenInRoom" description="房间内听用户唱歌" transaction="true"><!-- 同时要根据这个push，往公聊框输出内容,开始听歌：${uname}开始听${listenUname}唱歌 -->
+					<input name="status" type="int" description="0:开始唱歌;1：结束唱歌"></input>
+					<input name="listenUid" type="int" description="听歌玩家id"></input>
+					<input name="listenUname" type="String" description="听歌玩家姓名"></input>
+					<input name="singerUid" type="int" description="唱歌用户ID"></input>
+					<input name="singerUname" type="String" description="唱歌玩家姓名"></input>
+					<input name="songsId" type="id" description="收听玩家正在唱的歌的id"></input>
+					<input name="songsName" type="String" description="收听玩家正在唱的歌名"></input>
+					<input name="follow" type="int" description="是否需要同时显示到关注歌手界面;1是，0否"></input>
+					<input name="created" type="String" description="发生时间"></input>
+			</method>	
+			
+			<method name="pushGiftMessage" description="接受/发送礼物接口" transaction="true">
+					<input name="sendUid" type="int" description="发送礼物用户ID"></input>
+					<input name="sendUname" type="String" description="发送礼物用户姓名"></input>
+					<input name="recUid" type="int" description="发送礼物用户ID"></input>
+					<input name="recUname" type="String" description="发送礼物用户姓名"></input>
+					<input name="giftName" type="String" description="礼物名称"></input>
+					<input name="giftImgUrl" type="String" description="礼物对应的图片地址"></input>
+					<input name="count" type="int" description="一共赠送多少个礼物，需要根据他显示${count}行"></input>
+					<input name="follow" type="int" description="是否需要同时显示到关注歌手界面;1是，0否"></input>
+					<input name="created" type="String" description="发生时间"></input>
+			</method>	
+			
+			<method name="pushAddRoom" description="用户加入房间通知其他用户" transaction="true">
+					<output name="uid" type="int" description="用户ID"></output>
+					<output name="uname" type="String" description="用户姓名"></output>
+					<output name="headimg" type="String" description="用户头像图片地址"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="manifesto" type="String" description="K歌宣言"></output>
+					<output name="exp" type="int" description="用户经验值"></output>
+					<output name="lv" type="int" description="用户等级"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="micStatus" type="int" description="0表示只为麦克风，1表示有摄像头"></output>
+					<output name="songsId" type="int" description="正在唱的歌曲ID,如果歌曲id为0，表示当前没有唱歌"></output>
+					<output name="songsName" type="String" description="歌曲名称"></output>
+					<output name="songsSinger" type="String" description="歌曲原唱"></output>
+					<output name="ofaId" type="int" description="歌曲录音ID"></output>
+					<output name="singerTime" type="int" description="目前歌曲时长"></output>
+					<output name="songsTime" type="int" description="歌曲总时长"></output>
+
+					<input name="roomId" type="int" description="房间ID"></input>
+					<input name="roomName" type="String" description="房间名称"></input>
+					<input name="created" type="String" description="发生时间"></input>
+			</method>	
+			
+			<method name="pushLevelRoom" description="用户离开房间通知其他用户" transaction="true">
+					<input name="uid" type="int" description="用户ID"></input>
+					<input name="uname" type="String" description="用户姓名"></input>
+					<input name="roomId" type="int" description="房间ID"></input>
+					<input name="roomName" type="String" description="房间名称"></input>
+					<input name="created" type="String" description="发生时间"></input>
+			</method>	
+			
+			<method name="pushPublicMessage" description="发送公聊聊天消息后通知其他用户" transaction="true">
+					<input name="sendUid" type="int" description="消息发送用户ID"></input>
+					<input name="sendUname" type="String" description="消息发送用户姓名"></input>
+					<input name="recUid" type="int" description="消息接收用户ID"></input>
+					<input name="recUname" type="String" description="消息接收用户姓名"></input>
+					<input name="content" type="String" description="聊天内容"></input>
+					<input name="created" type="String" description="聊天发送时间"></input>
+					<input name="follow" type="int" description="是否需要同时显示到关注歌手界面;1是，0否"></input>
+			</method>	
+			
+			
+			<method name="pushPrivateMessage" description="发送私聊聊天消息后通知其他用户" transaction="true">
+					<input name="sendUid" type="int" description="消息发送用户ID"></input>
+					<input name="sendUname" type="String" description="消息发送用户姓名"></input>
+					<input name="recUid" type="int" description="消息接收用户ID"></input>
+					<input name="recUname" type="String" description="消息接收用户姓名"></input>
+					<input name="content" type="String" description="聊天内容"></input>
+					<input name="created" type="String" description="聊天发送时间"></input>
+			</method>	
+			
+			
+			<method name="pushGetNotice" description="获取系统公告">
+				<inputList>
+					<input name="created" type="String" description="公告时间"></input>
+					<input name="content" type="String" description="公告内容"></input>
+				</inputList>	
+			</method>
+			
+			<method name="pushStarUser" description="获取房间唱歌历史最高分以及相应的歌曲信息">
+					<input name="uid" type="int" description="用户ID"></input>
+					<input name="uname" type="String" description="用户姓名"></input>
+					<input name="headimg" type="String" description="用户头像图片地址"></input>
+					<input name="exp" type="int" description="用户经验值"></input>
+					<input name="lv" type="int" description="用户等级"></input>
+					<input name="title" type="String" description="用户等级称谓"></input>
+					<input name="micStatus" type="int" description="0表示只为麦克风，1表示有摄像头"></input>
+					<input name="songsId" type="int" description="歌曲ID"></input>
+					<input name="songsName" type="String" description="歌曲名称"></input>
+					<input name="songsSinger" type="String" description="歌曲原唱"></input>
+					<input name="singerTime" type="int" description="目前歌曲时长"></input>
+					<input name="songsTime" type="int" description="歌曲总时长"></input>
+					<input name="score" type="int" description="得分"></input>
+					<input name="created" type="String" description="发生时间"></input>
+			</method>
+			
+			<method name="pushErrorConnection" description="连接错误推送接口" transaction="true"><!-- errorCode=600的情况，服务器会断开当前会话，请停止客户端一切操作，并提示用户 -->
+					<input name="errorCode" type="int" description="错误代码(600 :同一用户在其他地方登录;503：服务器异常；403：没有权限操作；404：接口不存在；408：连接超时;)"></input>
+					<input name="content" type="String" description="错误提示信息"></input>
+			</method>	
+			
+</interacts>
