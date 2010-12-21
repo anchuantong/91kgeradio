@@ -436,7 +436,7 @@ package com.ywit.radio91.view
 		
 		
 		
-		private function giftButClickHandel(e:Event):void{
+		private function giftButClickHandel(e:Event=null):void{
 /*			if(targetUser == null){
 				var errorViewResSendMessage:ErrorView = new ErrorView("您没有选择目标用户.");
 				addChild(errorViewResSendMessage);
@@ -1642,7 +1642,8 @@ package com.ywit.radio91.view
 //					selectTargetComboBoxByUID(targetUser.uid);
 					_sendGifTargetUID = targetUser.uid;
 					_sendGifTargetName = targetUser.uName;
-					ui_RoomView.roomChat.mc_popPresent.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+					giftButClickHandel();
+//					ui_RoomView.roomChat.mc_popPresent.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
 					//					}
 					break;
 				case OperateSongEvent.EVENT_LISTEN://开始听什么歌
