@@ -331,6 +331,8 @@ package com.ywit.radio91.view
 				ui_RoomView.roomChat.cb_isPrivateChat.enabled = true;
 				_sendGifTargetUID = ComboBox(e.target).selectedItem.data;
 				_sendGifTargetName = ComboBox(e.target).selectedLabel;
+				ui_RoomView.roomChat.cb_isPrivateChat.selected = true;
+				ui_RoomView.roomChat.cb_isPrivateChat.enabled = true;
 			}else{
 				ui_RoomView.roomChat.cb_isPrivateChat.enabled = false;
 				ui_RoomView.roomChat.cb_isPrivateChat.selected = false;
@@ -344,6 +346,10 @@ package com.ywit.radio91.view
 			for each(var ele:Object in  ui_RoomView.roomChat.targetComboBox.dataProvider.toArray()){
 				if(ele.data == uid){
 					ui_RoomView.roomChat.targetComboBox.selectedItem = ele;
+					if(uid > 0){
+						ui_RoomView.roomChat.cb_isPrivateChat.selected = true;
+						ui_RoomView.roomChat.cb_isPrivateChat.enabled = true;
+					}
 					return;
 				}
 			}
@@ -739,7 +745,12 @@ package com.ywit.radio91.view
 				ButtonUtil.changeButton(ui_RoomView.starInfo.mc_chat);
 				//收听的鼠标事件
 				if(!ui_RoomView.starInfo.mc_listenSong.hasEventListener(MouseEvent.CLICK)){
-					ui_RoomView.starInfo.mc_listenSong.addEventListener(MouseEvent.CLICK,function(e:MouseEvent):void{BaseInteract.baseStartListen(_currentStarUserResObj.uid);focusInWatchSinger()});
+					ui_RoomView.starInfo.mc_listenSong.addEventListener(MouseEvent.CLICK,function(e:MouseEvent):void{
+						if(_currentStarUserResObj != null && _currentStarUserResObj.uid == _playerData.playerObj["uid"]){
+							return;
+						}
+						BaseInteract.baseStartListen(_currentStarUserResObj.uid);
+						focusInWatchSinger()});
 				}
 				//添加送礼物鼠标点击事件
 				if(!ui_RoomView.starInfo.mc_sendPresent.hasEventListener(MouseEvent.CLICK)){
@@ -748,15 +759,18 @@ package com.ywit.radio91.view
 //							selectTargetComboBoxByUID(_currentStarUserResObj.uid);
 							_sendGifTargetUID = _currentStarUserResObj.uid;
 							_sendGifTargetName = _currentStarUserResObj.uname;
-							ui_RoomView.roomChat.mc_popPresent.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+//							ui_RoomView.roomChat.mc_popPresent.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+							giftButClickHandel();
 						});
 				}
 				
 				if(!ui_RoomView.starInfo.mc_chat.hasEventListener(MouseEvent.CLICK)){
 					ui_RoomView.starInfo.mc_chat.addEventListener(MouseEvent.CLICK,function(e:MouseEvent):void{
-						selectTargetComboBoxByUID(_currentStarUserResObj.uid)});
-						ui_RoomView.roomChat.cb_isPrivateChat.selected = true;
-						ui_RoomView.roomChat.cb_isPrivateChat.enabled = true;
+						selectTargetComboBoxByUID(_currentStarUserResObj.uid);
+						focusInChat();
+					});
+						
+						
 				}
 			}else{
 				
@@ -1673,6 +1687,13 @@ package com.ywit.radio91.view
 		}
 		
 		/**
+		 * 转到公聊框
+		 */ 
+		public function focusInChat():void{
+			ui_RoomView.roomChat.tb_publicChat.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+		}
+		
+		/**
 		 * 得到正在唱歌的人的列表
 		 */ 
 		private function getSingerList():Array{
@@ -1769,6 +1790,7 @@ package com.ywit.radio91.view
 			}
 			if(_curRoomUserType == ROOM_USER_TYPE_SINGER){
 				BaseInteract.baseStartListen(roomUserInfoCell.object["uid"]);
+				focusInWatchSinger();
 			}else{
 				roomUserInfoCell.setChatTarget();
 			}
@@ -1887,6 +1909,10 @@ package com.ywit.radio91.view
 //				
 //			}
 			
+		}
+		
+		public function addRoomBottom(disObj:DisplayObject):void{
+			this.addChildAt(disObj,0);
 		}
 		
 		/**

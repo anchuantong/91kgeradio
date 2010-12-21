@@ -182,10 +182,10 @@ package com.ywit.radio91.view
 			
 			this.graphics.lineStyle(0,0,0);
 			this.graphics.beginFill(0,0);
-			this.graphics.drawRect(0,0,385,117);
+			this.graphics.drawRect(0,0,385,115);
 			this.graphics.endFill();
 			
-			maskSprite.y=36;
+			maskSprite.y=38;
 			maskSprite.graphics.lineStyle(0,0,0);
 			maskSprite.graphics.beginFill(0,0.3);
 			maskSprite.graphics.drawRect(0,0,385,81);

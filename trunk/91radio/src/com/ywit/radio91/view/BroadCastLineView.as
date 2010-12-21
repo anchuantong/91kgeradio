@@ -67,8 +67,9 @@ package com.ywit.radio91.view
 			this.addChild(_rollingMsg);
 			if(_enterRoomBtn != null){
 				this.addChild(_enterRoomBtn);
-				_enterRoomBtn.x = _rollingMsg.x + _rollingMsg.width + 5;
-				_enterRoomBtn.y = 1;
+				_enterRoomBtn.x = _rollingMsg.x + _rollingMsg.width + 2;
+				_enterRoomBtn.y = 0;
+				_enterRoomBtn.buttonMode = true;
 			}
 		}
 		

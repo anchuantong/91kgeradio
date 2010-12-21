@@ -576,6 +576,7 @@ package com.ywit.radio91.view
 				return;
 			}
 			
+			
 			_textFlow.addChild(giftMessageHandel(obj));
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
@@ -636,7 +637,8 @@ package com.ywit.radio91.view
 //				inlineGraphic.firstBaselineOffset = BaselineOffset.AUTO;
 //				inlineGraphic.dominantBaseline = TextBaseline.IDEOGRAPHIC_CENTER;
 				p.addChild(inlineGraphic);
-			
+				p.marginLeft = 5;
+				p.marginBottom = 5;
 			
 			return p;
 		}
@@ -735,9 +737,9 @@ package com.ywit.radio91.view
 				case GIFT_MESSAGE:
 //					p = giftMessageHandel(obj);
 					
-					addGiftMessageHandel(obj);
-//					break;
+				 	addGiftMessageHandel(obj);
 					return;
+//					break;
 				case PUBLIC_MESSAGE:
 					p = publicMessageHandel(obj);
 					break;
@@ -746,6 +748,7 @@ package com.ywit.radio91.view
 					break;
 			}
 			
+
 			p.marginLeft = 5;
 			p.marginBottom = 5;
 			_textFlow.addChild(p);

@@ -370,9 +370,9 @@ package com.ywit.radio91.view
 						ViewHelper.removeView(ViewRegister.HALL_VIEW);
 						var disObj:DisplayObject = ViewHelper.addView(ViewRegister.ROOM_VIEW,ViewHelper._main);
 						disObj.x += 15;
-						if(UModelLocal.getInstance().debug ==1){
+//						if(UModelLocal.getInstance().debug ==1){
 							BaseInteract.baseInitRoom(_playerData.initRoomObj["roomId"]);
-						}
+//						}
 						return;
 					}
 					var errorView:ErrorView = new ErrorView(message);

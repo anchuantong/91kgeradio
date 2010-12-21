@@ -55,6 +55,11 @@ package com.ywit.radio91.view
 		 */ 
 		public function privateButHandel(e:MouseEvent):void{
 			roomUserInfoCell.setChatTarget();
+			
+			var roomView:RoomView = ViewHelper.getView(ViewRegister.ROOM_VIEW) as RoomView;
+			if(roomView){
+				roomView.focusInChat();
+			}
 		}
 		
 		/**
