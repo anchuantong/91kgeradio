@@ -42,7 +42,7 @@ package com.ywit.radio91.view
 			if(broadCastObj == null){
 				return null;
 			}
-			var broadCastLineView:BroadCastLineView = new BroadCastLineView("<font color='#654533'>"+broadCastObj.uname+": "+broadCastObj.content+"</font>",430,1000,5,broadCastObj.roomId,isOut);
+			var broadCastLineView:BroadCastLineView = new BroadCastLineView("<font color='#000000'>"+broadCastObj.uname+": "+broadCastObj.content+"</font><font color='#6CCAFF'>"+broadCastObj.created+"</font>",430,1000,5,broadCastObj.roomId,isOut);
 			broadCastLineView._broadCastObj = broadCastObj;
 			return broadCastLineView;
 		}
@@ -53,7 +53,7 @@ package com.ywit.radio91.view
 		}
 		
 		private function clickHandler(e:MouseEvent):void{
-			ConfirmView.show("是进入 "+roomId+" 号房间.",ViewHelper._main,enterRoomHandel,e,true,800,800)
+			ConfirmView.show("准备进入 "+roomId+" 号房间吗?",ViewHelper._main,enterRoomHandel,e,true,800,800)
 		}
 		
 		

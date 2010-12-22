@@ -1,10 +1,13 @@
 package com.ywit.radio91.event
 {
 	import flash.events.Event;
+	
+	import ghostcat.display.transfer.BookTransfer;
 
 	public class UserEvent extends Event {
 		public var uid:int;
 		public var uName:String;
+		public var isSelected:Boolean = false;
 		//选择用户发送礼物
 		public static const USER_SELECT_PRESENT:String = "USER_SELECT_PRESENT";
 		//选择用户聊天

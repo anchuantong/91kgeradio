@@ -281,7 +281,6 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.targetComboBox.setStyle("downArrowOverSkin",DownArrowOverSkin2);
 			ui_RoomView.roomChat.targetComboBox.setStyle("downArrowUpSkin",DownArrowUpSkin2);
 			
-			
 		}
 		
 		/**
@@ -331,8 +330,6 @@ package com.ywit.radio91.view
 				ui_RoomView.roomChat.cb_isPrivateChat.enabled = true;
 				_sendGifTargetUID = ComboBox(e.target).selectedItem.data;
 				_sendGifTargetName = ComboBox(e.target).selectedLabel;
-				ui_RoomView.roomChat.cb_isPrivateChat.selected = true;
-				ui_RoomView.roomChat.cb_isPrivateChat.enabled = true;
 			}else{
 				ui_RoomView.roomChat.cb_isPrivateChat.enabled = false;
 				ui_RoomView.roomChat.cb_isPrivateChat.selected = false;
@@ -346,10 +343,6 @@ package com.ywit.radio91.view
 			for each(var ele:Object in  ui_RoomView.roomChat.targetComboBox.dataProvider.toArray()){
 				if(ele.data == uid){
 					ui_RoomView.roomChat.targetComboBox.selectedItem = ele;
-					if(uid > 0){
-						ui_RoomView.roomChat.cb_isPrivateChat.selected = true;
-						ui_RoomView.roomChat.cb_isPrivateChat.enabled = true;
-					}
 					return;
 				}
 			}
@@ -645,6 +638,7 @@ package com.ywit.radio91.view
 			
 			_starSingerTimer.addEventListener(TimerEvent.TIMER,timerHandler);
 			
+			//好友搜索
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(Event.CHANGE,searchRoomUserList);
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_IN,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = ""});
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_OUT,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = "好友搜索"});
@@ -766,11 +760,11 @@ package com.ywit.radio91.view
 				
 				if(!ui_RoomView.starInfo.mc_chat.hasEventListener(MouseEvent.CLICK)){
 					ui_RoomView.starInfo.mc_chat.addEventListener(MouseEvent.CLICK,function(e:MouseEvent):void{
+						
+						ui_RoomView.roomChat.cb_isPrivateChat.selected = false;
 						selectTargetComboBoxByUID(_currentStarUserResObj.uid);
 						focusInChat();
 					});
-						
-						
 				}
 			}else{
 				
@@ -829,6 +823,9 @@ package com.ywit.radio91.view
 //		}
 		
 		private function backHallHandler(e:MouseEvent):void{
+			ConfirmView.show("确定返回大厅吗?",ViewHelper._main,backHallHandler2,e,true);
+		}
+		private function backHallHandler2(e:MouseEvent):void{
 			BaseInteract.baseLeaveRoom(_roomId);
 			_playerData.cs_LevelRoom();
 			ViewHelper.navigate(ViewRegister.ROOM_VIEW,ViewRegister.HALL_VIEW,ViewHelper._main);
@@ -1010,15 +1007,19 @@ package com.ywit.radio91.view
 			
 		}
 		private function publicChatButHandel(e:Event):void{
-			
+			_smileyContainer.visible = false; 
 		
 			ui_RoomView.roomChat.tb_publicChat.tb_bg.visible = true;
 			ui_RoomView.roomChat.tb_gift.tb_bg.visible = false;
 			ui_RoomView.roomChat.tb_mySongs.tb_bg.visible = false;
 			ui_RoomView.roomChat.tb_watchSinger.tb_bg.visible = false;
 			ui_RoomView.roomChat.gotoAndStop(1);
-			ui_RoomView.roomChat.clearPublicScreenBtn.buttonMode = true;
-			ui_RoomView.roomChat.clearPrivateScreenBtn.buttonMode = true;
+			if(ui_RoomView.roomChat.clearPublicScreenBtn){
+				ui_RoomView.roomChat.clearPublicScreenBtn.buttonMode = true;
+			}
+			if(ui_RoomView.roomChat.clearPrivateScreenBtn){
+				ui_RoomView.roomChat.clearPrivateScreenBtn.buttonMode = true;
+			}
 //			_scrollPanePrivate.visible = true;
 //			_scrollPanePublic.visible = true;
 //			_scrollPaneWatch.visible = false;
@@ -1059,6 +1060,8 @@ package com.ywit.radio91.view
 			
 		}
 		private function giftButHandel(e:Event):void{
+			_smileyContainer.visible = false;
+			
 			ui_RoomView.roomChat.tb_publicChat.tb_bg.visible = false;
 			ui_RoomView.roomChat.tb_gift.tb_bg.visible = true;
 			ui_RoomView.roomChat.tb_mySongs.tb_bg.visible = false;
@@ -1084,6 +1087,8 @@ package com.ywit.radio91.view
 			}
 		}
 		private function mySongsButHandel(e:Event):void{
+			_smileyContainer.visible = false;
+			
 			ui_RoomView.roomChat.tb_publicChat.tb_bg.visible = false;
 			ui_RoomView.roomChat.tb_gift.tb_bg.visible = false;
 			ui_RoomView.roomChat.tb_mySongs.tb_bg.visible = true;
@@ -1109,6 +1114,8 @@ package com.ywit.radio91.view
 			_playerData.cs_ListUserSongs(uid);
 		}
 		private function watchSingerButHandel(e:Event):void{
+			_smileyContainer.visible = false;
+			
 			ui_RoomView.roomChat.tb_publicChat.tb_bg.visible = false;
 			ui_RoomView.roomChat.tb_gift.tb_bg.visible = false;
 			ui_RoomView.roomChat.tb_mySongs.tb_bg.visible = false;
@@ -1122,7 +1129,9 @@ package com.ywit.radio91.view
 			watchChatView.visible = true;
 			
 			ui_RoomView.roomChat.gotoAndStop(4);
-			ui_RoomView.roomChat.clearScreenBtn.buttonMode = true;
+			if(ui_RoomView.roomChat.clearScreenBtn){
+				ui_RoomView.roomChat.clearScreenBtn.buttonMode = true;
+			}
 			if(!ui_RoomView.roomChat.clearScreenBtn.hasEventListener(MouseEvent.CLICK)){
 				ui_RoomView.roomChat.clearScreenBtn.addEventListener(MouseEvent.CLICK,clearWatchSingerScreenHandler);
 			}
@@ -1641,7 +1650,7 @@ package com.ywit.radio91.view
 						selectTargetComboBoxByUID(targetUser.uid);
 						_sendGifTargetUID = targetUser.uid;
 						_sendGifTargetName = targetUser.uName;
-						ui_RoomView.roomChat.cb_isPrivateChat.selected = true;
+						ui_RoomView.roomChat.cb_isPrivateChat.selected = targetUser.isSelected;
 						ui_RoomView.roomChat.cb_isPrivateChat.enabled = true;
 //						ui_RoomView.roomChat.mc_popPresent.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
 //					}

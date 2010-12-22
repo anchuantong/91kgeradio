@@ -145,7 +145,7 @@ package com.ywit.radio91.view
 		/**
 		 * 开始唱歌
 		 */ 
-		private function startSingingHandler(object:Object):ParagraphElement{
+		public function startSingingHandler(object:Object):ParagraphElement{
 			var p:ParagraphElement = new ParagraphElement();
 			var span:SpanElement;
 			var link:LinkElement;
@@ -169,7 +169,7 @@ package com.ywit.radio91.view
 			span.color = 0;
 			p.addChild(span);
 			
-			p.addChild(LinkElementUtil.addListenSongLink(uid,songsId,songsName));
+			p.addChild(LinkElementUtil.addListenSongLink(uid,songsId,songsName,object["endTimestp"]));
 			
 			return p;
 		}
@@ -177,7 +177,7 @@ package com.ywit.radio91.view
 		/**
 		 * 停止唱歌
 		 */ 
-		private function stopSingingHandler(object:Object):ParagraphElement{
+		public function stopSingingHandler(object:Object):ParagraphElement{
 			var p:ParagraphElement = new ParagraphElement();
 			var span:SpanElement;
 			
@@ -220,7 +220,7 @@ package com.ywit.radio91.view
 		/**
 		 * 开始收听
 		 */ 
-		private function startListenHandler(object:Object):ParagraphElement{
+		public function startListenHandler(object:Object):ParagraphElement{
 			var p:ParagraphElement = new ParagraphElement();
 			var span:SpanElement;
 			//			var link:LinkElement;
@@ -252,12 +252,12 @@ package com.ywit.radio91.view
 			span.color = 0;
 			p.addChild(span);
 			
-			p.addChild(LinkElementUtil.addListenSongLink(singerUid,songsId,songsName));
+			p.addChild(LinkElementUtil.addListenSongLink(singerUid,songsId,songsName,object["endTimestp"]));
 			
 			return p;
 		}
 		
-		private function privateMessageHandel(object:Object):ParagraphElement{
+		public function privateMessageHandel(object:Object):ParagraphElement{
 			var p:ParagraphElement = new ParagraphElement();
 			var span:SpanElement;
 			var inlineGraphic:InlineGraphicElement;
