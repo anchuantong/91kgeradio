@@ -39,9 +39,9 @@ package com.ywit.radio91.view
 		
 		
 		//	ConfirmView.show("asdasd",this,ddddd,true,800,800);
-		public static function show(context:String,container:DisplayObjectContainer,functionHandel:Function,event:Event=null,canOtherDoing:Boolean=false,width:int=800,height:int = 800):void{
+		public static function show(context:String,container:DisplayObjectContainer,functionHandel:Function,event:Event=null,canOtherNotDoing:Boolean=false,width:int=800,height:int = 800):void{
 			var sprite:Sprite;
-			if(canOtherDoing){
+			if(canOtherNotDoing){
 				sprite = new Sprite()
 				sprite.graphics.beginFill(0x000000,0.5);
 				sprite.graphics.drawRect(0, 0, width, height);

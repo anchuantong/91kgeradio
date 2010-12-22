@@ -16,7 +16,7 @@ package com.ywit.radio91.view
 
 	public class LinkElementUtil {
 		
-		public static function addUserLink(uid:int,uName:String):FlowElement{
+		public static function addUserLink(uid:int,uName:String,linkable:Boolean=true):FlowElement{
 			var link:LinkElement = new LinkElement();
 			link.setStyle("linkNormalFormat", new Dictionary());
 			var span:SpanElement = new SpanElement();
@@ -28,20 +28,23 @@ package com.ywit.radio91.view
 			span.text=uName;
 			span.color = 0xFF0099;
 			link.addChild(span);
-			link.addEventListener(MouseEvent.CLICK,function customClickHandler(e:Event):void{
-				var userEvent:UserEvent = new UserEvent(UserEvent.USER_SELECT_CHAT);
-				userEvent.uid = uid;
-				userEvent.uName = uName;
-				
-				PlayerData.getInstance().dispatchEvent(userEvent);
-			});
+			if(linkable){
+				link.addEventListener(MouseEvent.CLICK,function customClickHandler(e:Event):void{
+					var userEvent:UserEvent = new UserEvent(UserEvent.USER_SELECT_CHAT);
+					userEvent.uid = uid;
+					userEvent.uName = uName;
+					userEvent.isSelected = false;
+					
+					PlayerData.getInstance().dispatchEvent(userEvent);
+				});
+			}
 			return link;
 		}
 		
 		/**
 		 * 添加点击便唱的歌曲
 		 */ 
-		public static function addSingSongLink(uid:int,songId:int,songName:String):FlowElement{
+		public static function addSingSongLink(uid:int,songId:int,songName:String,linkable:Boolean=true):FlowElement{
 			var link:LinkElement = new LinkElement();
 			link.setStyle("linkNormalFormat", new Dictionary());
 			var span:SpanElement = new SpanElement();
@@ -49,13 +52,16 @@ package com.ywit.radio91.view
 				span.color = 0x0099FF;
 			
 				link.addChild(span);
-				link.addEventListener(MouseEvent.CLICK,function linkClickHandler(e:Event):void{
-				var evt:OperateSongEvent = new OperateSongEvent(OperateSongEvent.EVENT_SING);
-				evt.songId = songId;
-				evt.songName = songName;
-				evt.uid = uid;
-				ConfirmView.show("是否开始唱 "+evt.songName+" .",ViewHelper._main,confirmViewHandel,evt,true,800,800)
-			});
+				if(linkable){
+					link.addEventListener(MouseEvent.CLICK,function linkClickHandler(e:Event):void{
+						var evt:OperateSongEvent = new OperateSongEvent(OperateSongEvent.EVENT_SING);
+						evt.songId = songId;
+						evt.songName = songName;
+						evt.uid = uid;
+						ConfirmView.show("是否开始唱 "+evt.songName+" .",ViewHelper._main,confirmViewHandel,evt,true,800,800)
+					});
+				}
+				
 			return link;
 		}
 		private static function confirmViewHandel(evt:Event):void{
@@ -65,39 +71,48 @@ package com.ywit.radio91.view
 		/**
 		 * 添加点击便收听的歌曲
 		 */ 
-		public static function addListenSongLink(uid:int,songId:int,songName:String):FlowElement{
+		public static function addListenSongLink(uid:int,songId:int,songName:String,endTimerStr:int,linkable:Boolean=true):FlowElement{
 			var link:LinkElement = new LinkElement();
 			link.setStyle("linkNormalFormat", new Dictionary());
 			var span:SpanElement = new SpanElement();
 			span.text=songName;
 			span.color = 0x0099FF;
 			link.addChild(span);
-			link.addEventListener(MouseEvent.CLICK,function customClickHandler(e:Event):void{
-				var evt:OperateSongEvent = new OperateSongEvent(OperateSongEvent.EVENT_LISTEN);
-				evt.songId = songId;
-				evt.songName = songName;
-				evt.uid = uid;
-				ConfirmView.show("是否开始听 "+evt.songName+" .",ViewHelper._main,confirmViewHandel,evt,true,800,800)
-			});
+			if(linkable){
+				link.addEventListener(MouseEvent.CLICK,function customClickHandler(e:Event):void{
+					var nowClientTimestp:int= int((new Date().time/1000));
+					if((nowClientTimestp-PlayerData.getInstance().clientTimerstp+PlayerData.getInstance().serverTimerstp) >= endTimerStr){
+						//已经唱完了.
+					}else{
+						var evt:OperateSongEvent = new OperateSongEvent(OperateSongEvent.EVENT_LISTEN);
+						evt.songId = songId;
+						evt.songName = songName;
+						evt.uid = uid;
+						ConfirmView.show("是否开始听 "+evt.songName+" .",ViewHelper._main,confirmViewHandel,evt,true,800,800)
+					}
+				});
+			}
 			return link;
 		}
 		
 		/**
 		 * 添加有连接的房间名字
 		 */ 
-		public static function addRoomNameLink(roomId:int,roomName:String):FlowElement{
+		public static function addRoomNameLink(roomId:int,roomName:String,linkable:Boolean=true):FlowElement{
 			var link:LinkElement = new LinkElement();
 			link.setStyle("linkNormalFormat", new Dictionary());
 			var span:SpanElement = new SpanElement();
 			span.text=roomName;
 			span.color = 0x0032BF;
 			link.addChild(span);
-			link.addEventListener(MouseEvent.CLICK,function customClickHandler(e:Event):void{
-				var evt:EnterRoomEvent = new EnterRoomEvent(EnterRoomEvent.ENTER_ROOM);
-				evt.roomId = roomId;
-				evt.roomName = roomName;
-				ConfirmView.show("是进入 "+roomId+" 号房间.",ViewHelper._main,confirmViewHandel,evt,true,800,800)
-			});
+			if(linkable){
+				link.addEventListener(MouseEvent.CLICK,function customClickHandler(e:Event):void{
+					var evt:EnterRoomEvent = new EnterRoomEvent(EnterRoomEvent.ENTER_ROOM);
+					evt.roomId = roomId;
+					evt.roomName = roomName;
+					ConfirmView.show("是进入 "+roomId+" 号房间.",ViewHelper._main,confirmViewHandel,evt,true,800,800)
+				});
+			}
 			return link;
 		}
 	
