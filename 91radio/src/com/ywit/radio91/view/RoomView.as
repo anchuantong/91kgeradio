@@ -681,6 +681,14 @@ package com.ywit.radio91.view
 		}
 		//礼物列表界面中数量修改时调用的方法
 		private function changeTextHandel(e:Event):void{
+			var count:int = int(ui_GiftListView.count.text);
+			if(count<0){
+				count = 0;
+				ui_GiftListView.count.text = "0";
+			}else if(count>20){
+				count = 20;
+				ui_GiftListView.count.text = "20";
+			}
 			if(selectGift){
 				ui_GiftListView.totalMoney.text = int(int(selectGift["price"])*int(ui_GiftListView.count.text))+"K币";;
 			}else{
