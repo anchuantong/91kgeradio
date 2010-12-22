@@ -1789,11 +1789,11 @@ package com.ywit.radio91.view
 				roomList.addItem(item);
 //				allSingerUserMap.put(roomObj.roomId,roomUserInfoCell.object);
 			}
-			ui_RoomView.titleList.columnWidth=248;
-			ui_RoomView.titleList.columnCount=1;
-			ui_RoomView.titleList.direction="vertical";
-			ui_RoomView.titleList.scrollPolicy = "on";
-			ui_RoomView.titleList.rowHeight = 30;
+//			ui_RoomView.titleList.columnWidth=248;
+//			ui_RoomView.titleList.columnCount=1;
+//			ui_RoomView.titleList.direction="vertical";
+//			ui_RoomView.titleList.scrollPolicy = "on";
+//			ui_RoomView.titleList.rowHeight = 30;
 			_curAllRoomUserList = roomList.toArray();
 			ui_RoomView.titleList.dataProvider = roomList;	
 				
