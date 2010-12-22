@@ -1500,6 +1500,9 @@ package com.ywit.radio91.view
 					
 					if(status == 1){//结束唱歌
 						publicChatView.addMessage(MyTextOut.STOP_SINGING_MESSAGE,CommonEvent(e).data);
+						if(CommonEvent(e).data["follow"] == 1){
+							watchChatView.addMessage(MyTextOut.STOP_SINGING_MESSAGE,CommonEvent(e).data);
+						}
 						removeNoViewUserArray(uid);
 //						object["songsId"]   = 0;	
 						
@@ -1527,6 +1530,9 @@ package com.ywit.radio91.view
 					}else{//开始唱歌
 						
 						publicChatView.addMessage(MyTextOut.START_SINGING_MESSAGE,CommonEvent(e).data);
+						if(CommonEvent(e).data["follow"] == 1){
+							watchChatView.addMessage(MyTextOut.START_SINGING_MESSAGE,CommonEvent(e).data);
+						}
 						if(!isNoViewUserArrayContain(CommonEvent(e).data.uid)){
 							noViewUserArray.push(CommonEvent(e).data);
 						}
