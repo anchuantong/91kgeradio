@@ -930,6 +930,9 @@ package com.ywit.radio91.view
 				ui_RoomView.roomChat.mySongs_tileList.y     += _changeHeight;
 				ui_RoomView.roomChat.mySongs_tileList.height = 150;
 			}
+			if(ui_RoomView.titleList){
+				ui_RoomView.titleList.height = 185;
+			}
 		}
 		
 		
@@ -961,7 +964,11 @@ package com.ywit.radio91.view
 			watchChatView.y                      = -185;
 			watchChatView.height			     = 385;
 			publicChatView.height                = 247; 
-			privateChatView.height               = 127;  
+			privateChatView.height               = 127; 
+			
+			if(ui_RoomView.titleList){
+				ui_RoomView.titleList.height = 390;
+			}
 			roomUserInfoTip.roomUserInfoTipBaseY = 390-roomUserInfoTip.cellUserInfoHight;
 			if(ui_RoomView.roomChat.tileList_gift != null){
 				ui_RoomView.roomChat.tileList_gift.y -= _changeHeight;

@@ -42,6 +42,7 @@ package com.ywit.radio91.view
 			var userEvent:UserEvent = new UserEvent(UserEvent.USER_SELECT_CHAT);
 			userEvent.uid = object["uid"];
 			userEvent.uName = object["uname"];
+			userEvent.isSelected = true;
 			PlayerData.getInstance().dispatchEvent(userEvent);
 
 			
