@@ -1510,6 +1510,7 @@ package com.ywit.radio91.view
 						publicChatView.addMessage(MyTextOut.STOP_SINGING_MESSAGE,CommonEvent(e).data);
 						if(CommonEvent(e).data["follow"] == 1){
 							watchChatView.addMessage(MyTextOut.STOP_SINGING_MESSAGE,CommonEvent(e).data);
+							focusInWatchSinger();
 						}
 						removeNoViewUserArray(uid);
 //						object["songsId"]   = 0;	
@@ -1540,6 +1541,7 @@ package com.ywit.radio91.view
 						publicChatView.addMessage(MyTextOut.START_SINGING_MESSAGE,CommonEvent(e).data);
 						if(CommonEvent(e).data["follow"] == 1){
 							watchChatView.addMessage(MyTextOut.START_SINGING_MESSAGE,CommonEvent(e).data);
+							focusInWatchSinger();
 						}
 						if(!isNoViewUserArrayContain(CommonEvent(e).data.uid)){
 							noViewUserArray.push(CommonEvent(e).data);
