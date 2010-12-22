@@ -343,6 +343,10 @@ package com.ywit.radio91.view
 			for each(var ele:Object in  ui_RoomView.roomChat.targetComboBox.dataProvider.toArray()){
 				if(ele.data == uid){
 					ui_RoomView.roomChat.targetComboBox.selectedItem = ele;
+					if(uid > 0){
+						ui_RoomView.roomChat.cb_isPrivateChat.selected = true;
+						ui_RoomView.roomChat.cb_isPrivateChat.enabled = true;
+					}
 					return;
 				}
 			}
