@@ -19,6 +19,7 @@ package com.ywit.radio91.view
 	import com.greensock.plugins.FramePlugin;
 	import com.greensock.plugins.TweenPlugin;
 	import com.ywit.radio91.center.UModelLocal;
+	import com.ywit.radio91.component.MyTileList;
 	import com.ywit.radio91.constant.ViewRegister;
 	import com.ywit.radio91.data.PlayerData;
 	import com.ywit.radio91.event.CommonEvent;
@@ -190,22 +191,23 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.cb_isPrivateChat.enabled = false
 //			ui_RoomView.roomChat.targetComboBox.width = 100;
 			
-			ui_RoomView.titleList.setStyle("upArrowDisabledSkin",UpArrowUpSkin2);
-			ui_RoomView.titleList.setStyle("upArrowUpSkin",UpArrowUpSkin2);
-			ui_RoomView.titleList.setStyle("upArrowOverSkin",UpArrowOverSkin2);
-			ui_RoomView.titleList.setStyle("upArrowDownSkin",UpArrowDownSkin2);
-			ui_RoomView.titleList.setStyle("trackDisabledSkin",TrackUpSkin2);
-			ui_RoomView.titleList.setStyle("trackUpSkin",TrackUpSkin2);
-			ui_RoomView.titleList.setStyle("trackOverSkin",TrackOverSkin2);
-			ui_RoomView.titleList.setStyle("trackDownSkin",TrackDownSkin2);
-			ui_RoomView.titleList.setStyle("thumbDisabledSkin",ThumbUpSkin2);
-			ui_RoomView.titleList.setStyle("thumbUpSkin",ThumbUpSkin2);
-			ui_RoomView.titleList.setStyle("thumbOverSkin",ThumbOverSkin2);
-			ui_RoomView.titleList.setStyle("thumbDownSkin",ThumbDownSkin2);
-			ui_RoomView.titleList.setStyle("downArrowDisabledSkin",DownArrowDownSkin2);
-			ui_RoomView.titleList.setStyle("downArrowDownSkin",DownArrowDownSkin2);
-			ui_RoomView.titleList.setStyle("downArrowOverSkin",DownArrowOverSkin2);
-			ui_RoomView.titleList.setStyle("downArrowUpSkin",DownArrowUpSkin2);
+			
+			_myTileListUserInfoList.setStyle("upArrowDisabledSkin",UpArrowUpSkin2);
+			_myTileListUserInfoList.setStyle("upArrowUpSkin",UpArrowUpSkin2);
+			_myTileListUserInfoList.setStyle("upArrowOverSkin",UpArrowOverSkin2);
+			_myTileListUserInfoList.setStyle("upArrowDownSkin",UpArrowDownSkin2);
+			_myTileListUserInfoList.setStyle("trackDisabledSkin",TrackUpSkin2);
+			_myTileListUserInfoList.setStyle("trackUpSkin",TrackUpSkin2);
+			_myTileListUserInfoList.setStyle("trackOverSkin",TrackOverSkin2);
+			_myTileListUserInfoList.setStyle("trackDownSkin",TrackDownSkin2);
+			_myTileListUserInfoList.setStyle("thumbDisabledSkin",ThumbUpSkin2);
+			_myTileListUserInfoList.setStyle("thumbUpSkin",ThumbUpSkin2);
+			_myTileListUserInfoList.setStyle("thumbOverSkin",ThumbOverSkin2);
+			_myTileListUserInfoList.setStyle("thumbDownSkin",ThumbDownSkin2);
+			_myTileListUserInfoList.setStyle("downArrowDisabledSkin",DownArrowDownSkin2);
+			_myTileListUserInfoList.setStyle("downArrowDownSkin",DownArrowDownSkin2);
+			_myTileListUserInfoList.setStyle("downArrowOverSkin",DownArrowOverSkin2);
+			_myTileListUserInfoList.setStyle("downArrowUpSkin",DownArrowUpSkin2);
 			
 //			_scrollPanePrivate.source = privateChatView;
 //			_scrollPanePrivate.width = 489;
@@ -281,6 +283,45 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.targetComboBox.setStyle("downArrowOverSkin",DownArrowOverSkin2);
 			ui_RoomView.roomChat.targetComboBox.setStyle("downArrowUpSkin",DownArrowUpSkin2);
 			
+			_myTileListUserInfoList.x = 506.5;
+			_myTileListUserInfoList.y = 400;
+			_myTileListUserInfoList.verticalScrollPolicy = "on";
+			_myTileListUserInfoList.horizontalScrollPolicy = "off";
+			_myTileListUserInfoList._columnCount=1;
+			_myTileListUserInfoList._columnWidth = 243;
+			_myTileListUserInfoList._rowHeight = 30;
+			
+			_myTileListUserInfoList.width = 266;
+			_myTileListUserInfoList.height = 186;
+			
+			
+			_mySongs_tileList._columnWidth=476;
+			_mySongs_tileList._rowHeight = 25;
+			_mySongs_tileList.width=480;
+			_mySongs_tileList.height=123;
+			_mySongs_tileList.x = 9;
+			_mySongs_tileList.y = 48.35;
+			_mySongs_tileList.visible = false;
+			
+			_mySongs_tileList.setStyle("upArrowDisabledSkin",UpArrowUpSkin2);
+			_mySongs_tileList.setStyle("upArrowUpSkin",UpArrowUpSkin2);
+			_mySongs_tileList.setStyle("upArrowOverSkin",UpArrowOverSkin2);
+			_mySongs_tileList.setStyle("upArrowDownSkin",UpArrowDownSkin2);
+			_mySongs_tileList.setStyle("trackDisabledSkin",TrackUpSkin2);
+			_mySongs_tileList.setStyle("trackUpSkin",TrackUpSkin2);
+			_mySongs_tileList.setStyle("trackOverSkin",TrackOverSkin2);
+			_mySongs_tileList.setStyle("trackDownSkin",TrackDownSkin2);
+			_mySongs_tileList.setStyle("thumbDisabledSkin",ThumbUpSkin2);
+			_mySongs_tileList.setStyle("thumbUpSkin",ThumbUpSkin2);
+			_mySongs_tileList.setStyle("thumbOverSkin",ThumbOverSkin2);
+			_mySongs_tileList.setStyle("thumbDownSkin",ThumbDownSkin2);
+			_mySongs_tileList.setStyle("downArrowDisabledSkin",DownArrowDownSkin2);
+			_mySongs_tileList.setStyle("downArrowDownSkin",DownArrowDownSkin2);
+			_mySongs_tileList.setStyle("downArrowOverSkin",DownArrowOverSkin2);
+			_mySongs_tileList.setStyle("downArrowUpSkin",DownArrowUpSkin2);
+			
+			_mySongs_tileList.verticalScrollPolicy="on";
+			_mySongs_tileList.horizontalScrollPolicy = "off";
 		}
 		
 		/**
@@ -538,6 +579,7 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.addChildAt(privateChatView,0);
 			ui_RoomView.roomChat.addChildAt(publicChatView,0);
 			ui_RoomView.roomChat.addChildAt(watchChatView,0);
+			ui_RoomView.roomChat.addChildAt(_mySongs_tileList,0);
 			ui_RoomView.addChild(ui_GiftListView);
 			
 			ui_GiftListView.x = (Main.KG_WIDTH - ui_GiftListView.width)/2;
@@ -545,6 +587,7 @@ package com.ywit.radio91.view
 			ui_RoomView.addChild(ui_GiftTipView);
 			ui_RoomView.addChild(ui_SendGiftView);
 //			ui_RoomView.addChild(ui_ConfirmView);
+			ui_RoomView.addChild(_myTileListUserInfoList);
 			ui_RoomView.addChild(roomUserInfoTip);
 		}
 		
@@ -709,28 +752,27 @@ package com.ywit.radio91.view
 		private function searchRoomUserList(e:Event):void{
 			
 			var text:String = TextField(e.target).text;
-			var dp:DataProvider;
-			var oldDP:DataProvider = ui_RoomView.titleList.dataProvider;
-			oldDP.removeAll();
+			var dp:Array;
+			_myTileListUserInfoList.dataProvider = new Array();
 			
 			if(text == "" || text == null){
-				dp = new DataProvider();
-				dp.addItems(_curAllRoomUserList);
-				ui_RoomView.titleList.dataProvider = dp;	
+//				dp = new DataProvider();
+//				dp.addItems(_curAllRoomUserList);
+				_myTileListUserInfoList.dataProvider = _curAllRoomUserList;	
 				return;
 			}
 		
-			dp = new DataProvider();
+			dp = new Array();
 			
 			//搜索房间号 以及房间名
 			for each(var item:Object in _curAllRoomUserList){
-				var cell:RoomUserInfoCell = RoomUserInfoCell(item["source"]);
+				var cell:RoomUserInfoCell = item as RoomUserInfoCell;
 				if(cell.roomUserInfo.singInfo.text.search(text) != -1){
 					dp.addItem(item);
 				}
 			}
 			
-			ui_RoomView.titleList.dataProvider = dp;
+			_myTileListUserInfoList.dataProvider = dp;
 			
 		}
 		
@@ -913,7 +955,7 @@ package com.ywit.radio91.view
 //			ui_RoomView.btn_backHall.y += _changeHeight;
 //			ui_RoomView.btn_singerInHall.y += _changeHeight;
 			ui_RoomView.roomUserList.y += _changeHeight;
-			ui_RoomView.titleList.y    += _changeHeight;
+			_myTileListUserInfoList.y    += _changeHeight;
 			ui_RoomView.btn_changeSizeBtn.y += _changeHeight;
 			if(ui_RoomView.roomChat.clearPublicScreenBtn != null){
 				ui_RoomView.roomChat.clearPublicScreenBtn.y += 50;
@@ -934,12 +976,12 @@ package com.ywit.radio91.view
 			if(ui_RoomView.roomChat.mysongs_tilelistHead != null){
 				ui_RoomView.roomChat.mysongs_tilelistHead.y += _changeHeight;
 			}
-			if(ui_RoomView.roomChat.mySongs_tileList !=null){
-				ui_RoomView.roomChat.mySongs_tileList.y     += _changeHeight;
-				ui_RoomView.roomChat.mySongs_tileList.height = 150;
+			if(_mySongs_tileList !=null){
+				_mySongs_tileList.y     += _changeHeight;
+				_mySongs_tileList.height = 150;
 			}
-			if(ui_RoomView.titleList){
-				ui_RoomView.titleList.height = 185;
+			if(_myTileListUserInfoList){
+				_myTileListUserInfoList.height = 185;
 			}
 		}
 		
@@ -961,7 +1003,7 @@ package com.ywit.radio91.view
 //			ui_RoomView.btn_backHall.y -= _changeHeight;
 //			ui_RoomView.btn_singerInHall.y -= _changeHeight;
 			ui_RoomView.roomUserList.y -= _changeHeight;
-			ui_RoomView.titleList.y    -= _changeHeight;
+			_myTileListUserInfoList.y    -= _changeHeight;
 			ui_RoomView.btn_changeSizeBtn.y -= _changeHeight;
 			ui_RoomView.mc_mainRoomInfoFrameBg.gotoAndStop(2);
 			if(ui_RoomView.roomChat.clearPublicScreenBtn != null){
@@ -974,8 +1016,8 @@ package com.ywit.radio91.view
 			publicChatView.height                = 247; 
 			privateChatView.height               = 127; 
 			
-			if(ui_RoomView.titleList){
-				ui_RoomView.titleList.height = 390;
+			if(_myTileListUserInfoList){
+				_myTileListUserInfoList.height = 390;
 			}
 			roomUserInfoTip.roomUserInfoTipBaseY = 390-roomUserInfoTip.cellUserInfoHight;
 			if(ui_RoomView.roomChat.tileList_gift != null){
@@ -985,8 +1027,8 @@ package com.ywit.radio91.view
 			
 			if(ui_RoomView.roomChat.mysongs_tilelistHead != null){
 				ui_RoomView.roomChat.mysongs_tilelistHead.y -= _changeHeight;
-				ui_RoomView.roomChat.mySongs_tileList.y     -= _changeHeight;
-				ui_RoomView.roomChat.mySongs_tileList.height = 360;
+				_mySongs_tileList.y     -= _changeHeight;
+				_mySongs_tileList.height = 360;
 			}
 			
 			
@@ -1113,6 +1155,7 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.tb_mySongs.tb_bg.visible = true;
 			ui_RoomView.roomChat.tb_watchSinger.tb_bg.visible = false;
 			ui_RoomView.roomChat.gotoAndStop(3);
+			_mySongs_tileList.visible = true;
 //			_scrollPanePrivate.visible = false;
 //			_scrollPanePublic.visible = false;
 //			_scrollPaneWatch.visible = false;
@@ -1122,12 +1165,12 @@ package com.ywit.radio91.view
 			watchChatView.visible = false;
 			
 			if(ui_RoomView.btn_changeSizeBtn.currentFrame == 1){
-				ui_RoomView.roomChat.mySongs_tileList.y = 48.35;
+				_mySongs_tileList.y = 48.35;
 				ui_RoomView.roomChat.mysongs_tilelistHead.y = 24.15;
 			}
 			
 			if(ui_RoomView.btn_changeSizeBtn.currentFrame == 2){
-				ui_RoomView.roomChat.mySongs_tileList.y = 48.35 - _changeHeight;
+				_mySongs_tileList.y = 48.35 - _changeHeight;
 				ui_RoomView.roomChat.mysongs_tilelistHead.y = 24.15 - _changeHeight;
 			}
 			_playerData.cs_ListUserSongs(uid);
@@ -1326,43 +1369,36 @@ package com.ywit.radio91.view
 			}
 			return false;
 		}
+		private var _mySongs_tileList:MyTileList = new MyTileList();
 		private function refershMySongs(obj:Object):void{
-			if(!ui_RoomView.roomChat.mySongs_tileList){
-				return;
-			}
 			if(ui_RoomView.btn_changeSizeBtn.currentFrame == 1){
-				ui_RoomView.roomChat.mySongs_tileList.height = 150;
+				_mySongs_tileList.height = 150;
 			}else if (ui_RoomView.btn_changeSizeBtn.currentFrame == 2){
-				ui_RoomView.roomChat.mySongs_tileList.height = 360;
+				_mySongs_tileList.height = 360;
 			}
-			var songsList :DataProvider = new DataProvider();
+			var songsList :Array = new Array();
 			var i:int =0;
 			for each (var songCell:Object in obj.songList){
 				i++;
-				var item:Object = new Object();
 				var mySongCellView: MySongCellView = new MySongCellView(songCell);
 				
 				mySongCellView.ui_MySongCell.songsId.text = i+"";
-				item["source"]=mySongCellView; 
-				songsList.addItem(item);
+				songsList.push(mySongCellView);
 
+				if(!_mySongs_tileList.hasEventListener(MouseEvent.MOUSE_OVER)){
+					_mySongs_tileList.addEventListener(MouseEvent.MOUSE_OVER,mySongs_itemOverHandel);
+				}
+				if(!_mySongs_tileList.hasEventListener(MouseEvent.MOUSE_OUT)){
+					_mySongs_tileList.addEventListener(MouseEvent.MOUSE_OUT,mySongs_itemOutHandel);
+				}
+				
+				if(!_mySongs_tileList.hasEventListener(MouseEvent.DOUBLE_CLICK)){
+					mySongCellView.doubleClickEnabled = true;
+					_mySongs_tileList.addEventListener(MouseEvent.DOUBLE_CLICK,mySongs_itemDoubleClickHandel);
+				}
 				
 			}
-			ui_RoomView.roomChat.mySongs_tileList.columnWidth=476;
-			ui_RoomView.roomChat.mySongs_tileList.mouseEnabled = false;
-			ui_RoomView.roomChat.mySongs_tileList.mouseChildren = true;
-			ui_RoomView.roomChat.mySongs_tileList.dataProvider = songsList;	
-			if(!ui_RoomView.roomChat.mySongs_tileList.hasEventListener(ListEvent.ITEM_ROLL_OVER)){
-				ui_RoomView.roomChat.mySongs_tileList.addEventListener(ListEvent.ITEM_ROLL_OVER,mySongs_itemOverHandel);
-			}
-			if(!ui_RoomView.roomChat.mySongs_tileList.hasEventListener(ListEvent.ITEM_ROLL_OUT)){
-				ui_RoomView.roomChat.mySongs_tileList.addEventListener(ListEvent.ITEM_ROLL_OUT,mySongs_itemOutHandel);
-			}
-			
-			if(!ui_RoomView.roomChat.mySongs_tileList.hasEventListener(ListEvent.ITEM_DOUBLE_CLICK)){
-				ui_RoomView.roomChat.mySongs_tileList.addEventListener(ListEvent.ITEM_DOUBLE_CLICK,mySongs_itemDoubleClickHandel);
-			}
-				
+			_mySongs_tileList.dataProvider = songsList;	
 		}
 		private function mySongs_itemOutHandel(e:ListEvent):void{
 			var mySongCellView: MySongCellView;
@@ -1576,7 +1612,7 @@ package com.ywit.radio91.view
 					refreshRoomUser();
 					refershTimer();
 					if(UModelLocal.getInstance().debug == 0){
-										NetUntil.getInstance().send("{jsessionid:711857534_browser_sessionid,method:StartSing,sid:1,singTime:0,songsTime:180,score:0,songsName:爱我别走,songsSinger:张震 岳}");
+						NetUntil.getInstance().send("{jsessionid:711857534_browser_sessionid,method:StartSing,sid:1,singTime:0,songsTime:180,score:0,songsName:爱我别走,songsSinger:张震 岳}");
 					}
 					//公聊信息
 					break;
@@ -1754,15 +1790,15 @@ package com.ywit.radio91.view
 			}
 			return array;
 		}
-		
+		public var _myTileListUserInfoList:MyTileList = new MyTileList();
 		/**
 		 * 更新当前的房间用户中的roomUser列表
 		 */ 
 		private function refreshRoomUser():void{
 //			if(list == null ){
 //				
-//				if(ui_RoomView.titleList.dataProvider != null){
-//					ui_RoomView.titleList.dataProvider.removeAll();
+//				if(_myTileList.dataProvider != null){
+//					_myTileList.dataProvider.removeAll();
 //				}
 //				
 //				return;
@@ -1782,45 +1818,35 @@ package com.ywit.radio91.view
 			ui_RoomView.roomUserList.userListBut.tf_userList.text = "观众("+getViewerList().length+")";
 			ui_RoomView.roomUserList.singerListBut.tf_singerList.mouseEnabled = false;
 			ui_RoomView.roomUserList.userListBut.tf_userList.mouseEnabled = false;
-//			roomObjList.sortOn("roomId",Array.NUMERIC);
-			var roomList :DataProvider = new DataProvider();
+			
+			var roomList :Array = new Array();
 			for each (var roomObj:Object in list){
-				var item:Object = new Object();
 				var roomUserInfoCell:RoomUserInfoCell = new RoomUserInfoCell(roomObj);
-				item["source"]=roomUserInfoCell; 
-				roomList.addItem(item);
-//				allSingerUserMap.put(roomObj.roomId,roomUserInfoCell.object);
-			}
-//			ui_RoomView.titleList.columnWidth=248;
-//			ui_RoomView.titleList.columnCount=1;
-//			ui_RoomView.titleList.direction="vertical";
-//			ui_RoomView.titleList.scrollPolicy = "on";
-//			ui_RoomView.titleList.rowHeight = 30;
-			_curAllRoomUserList = roomList.toArray();
-			ui_RoomView.titleList.dataProvider = roomList;	
+				roomUserInfoCell.mouseChildren = false;
 				
-//			if(!ui_RoomView.titleList.hasEventListener(ListEvent.ITEM_CLICK)){
-//				ui_RoomView.titleList.addEventListener(ListEvent.ITEM_CLICK,roomUse_itemClickHandel);
-//			}
-			
+				if(!roomUserInfoCell.hasEventListener(MouseEvent.MOUSE_OVER)){
+					roomUserInfoCell.addEventListener(MouseEvent.MOUSE_OVER,roomUse_itemOverHandel);
+				}
+				if(!roomUserInfoCell.hasEventListener(MouseEvent.MOUSE_OUT)){
+					roomUserInfoCell.addEventListener(MouseEvent.MOUSE_OUT,roomUse_itemOutHandel);
+				}
+//				if(!roomUserInfoCell.hasEventListener(MouseEvent.CLICK)){
+//					roomUserInfoCell.addEventListener(MouseEvent.CLICK,roomUse_itemDoubleHandel);
+//				}
+				if(!roomUserInfoCell.hasEventListener(MouseEvent.DOUBLE_CLICK)){
+					roomUserInfoCell.doubleClickEnabled = true;
+					roomUserInfoCell.addEventListener(MouseEvent.DOUBLE_CLICK,roomUse_itemDoubleHandel);
+				}
+				
+				roomList.push(roomUserInfoCell);
+			}
+			_curAllRoomUserList = roomList;
+			_myTileListUserInfoList.dataProvider = roomList;
 			refreshTargetComboBox();
-//			if(!ui_RoomView.titleList.hasEventListener(ListEvent.ITEM_ROLL_OUT)){
-//				ui_RoomView.titleList.addEventListener(ListEvent.ITEM_ROLL_OUT,roomUse_itemOutHandel);
-//			}
-			if(!ui_RoomView.titleList.hasEventListener(ListEvent.ITEM_ROLL_OVER)){
-				ui_RoomView.titleList.addEventListener(ListEvent.ITEM_ROLL_OVER,roomUse_itemOverHandel);
-			}
-			if(!ui_RoomView.titleList.hasEventListener(ListEvent.ITEM_ROLL_OUT)){
-				ui_RoomView.titleList.addEventListener(ListEvent.ITEM_ROLL_OUT,roomUse_itemOutHandel);
-			}
-			if(!ui_RoomView.titleList.hasEventListener(ListEvent.ITEM_DOUBLE_CLICK)){
-				ui_RoomView.titleList.addEventListener(ListEvent.ITEM_DOUBLE_CLICK,roomUse_itemDoubleHandel);
-			}
-			
-			
 		}
-		private function roomUse_itemDoubleHandel(e:ListEvent):void{
-			var roomUserInfoCell:RoomUserInfoCell = RoomUserInfoCell(e.item["source"]);
+		private function roomUse_itemDoubleHandel(e:MouseEvent):void{
+			var roomUserInfoCell:RoomUserInfoCell = RoomUserInfoCell(e.target);
+//			var roomUserInfoCell:RoomUserInfoCell = RoomUserInfoCell(e.item["source"]);
 			if(uid == roomUserInfoCell.object.uid){
 				return;
 			}
@@ -1831,12 +1857,13 @@ package com.ywit.radio91.view
 				roomUserInfoCell.setChatTarget();
 			}
 		}
-		private function roomUse_itemOverHandel(e:ListEvent):void{
-			RoomUserInfoCell(e.item["source"]).roomUserInfo.roomUserInfoBg.visible = true;
-			roomUserInfoTip.show(e.item["source"]);
+		private function roomUse_itemOverHandel(e:MouseEvent):void{
+			var roomUserInfoCell:RoomUserInfoCell = RoomUserInfoCell(e.target);
+			roomUserInfoCell.roomUserInfo.roomUserInfoBg.visible = true;
+			roomUserInfoTip.show(roomUserInfoCell);
 		}
-		private function roomUse_itemOutHandel(e:ListEvent):void{
-			RoomUserInfoCell(e.item["source"]).roomUserInfo.roomUserInfoBg.visible = false;
+		private function roomUse_itemOutHandel(e:MouseEvent):void{
+			RoomUserInfoCell(e.target).roomUserInfo.roomUserInfoBg.visible = false;
 			roomUserInfoTip.startUnShowTimer();
 		}
 		
@@ -1844,9 +1871,9 @@ package com.ywit.radio91.view
 		 * 寻找当前列表里面是否存在uid的用户，如果存在更新当前列表
 		 */ 
 //		private function updateRoomUserByUID(uid:int):void{
-//			for each(var ele:Object in ui_RoomView.titleList.dataProvider.toArray()){
+//			for each(var ele:Object in _myTileList.dataProvider.toArray()){
 //				if(RoomUserInfoCell(ele["source"]).object["uid"] == uid){
-//					ui_RoomView.titleList.dataProvider = ui_RoomView.titleList.dataProvider;//该死的玩意不知道怎么更新，先设置一个原先的试试
+//					_myTileList.dataProvider = _myTileList.dataProvider;//该死的玩意不知道怎么更新，先设置一个原先的试试
 //					return;
 //				}
 //			}
