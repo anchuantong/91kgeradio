@@ -2,6 +2,7 @@ package com.ywit.radio91.view
 {
 	import com.ywit.radio91.center.UModelLocal;
 	import com.ywit.radio91.component.Button;
+	import com.ywit.radio91.component.MyTileList;
 	import com.ywit.radio91.constant.ViewRegister;
 	import com.ywit.radio91.data.PlayerData;
 	import com.ywit.radio91.event.CommonEvent;
@@ -10,8 +11,8 @@ package com.ywit.radio91.view
 	import com.ywit.radio91.util.BaseInteract;
 	import com.ywit.radio91.util.ButtonUtil;
 	import com.ywit.radio91.util.HashMap;
-	import com.ywit.radio91.util.SwfDataLoader;
 	import com.ywit.radio91.util.RegExpTool;
+	import com.ywit.radio91.util.SwfDataLoader;
 	import com.ywit.radio91.util.ViewHelper;
 	
 	import fl.data.DataProvider;
@@ -48,7 +49,6 @@ package com.ywit.radio91.view
 //		private var time:Timer = new Timer(3000);//广播显示的时间,下面一行显示持续15秒,上面一行持续15秒,共30 秒
 		private var _uid:int = UModelLocal.getInstance().uid;//UID
 		
-		private var index:int = -1;//当前选中房间的下标
 		private var _curRoomId:int;//当前请求的roomId；
 		
 		
@@ -85,6 +85,22 @@ package com.ywit.radio91.view
 			ButtonUtil.changeButton(ui_MovieClip_Hall.friendList.button_prePage);
 			ButtonUtil.changeButton(ui_MovieClip_Hall.friendList.button_nextPage);
 			ui_MovieClip_Hall.tab_bar_channel.gfpd.buttonMode = true;
+
+			
+			_tileList_roomList._columnWidth=255;
+			_tileList_roomList.width = 534;
+			_tileList_roomList.height = 403;
+			_tileList_roomList._rowHeight =95
+			_tileList_roomList.x = 8;
+			_tileList_roomList.y = 86;
+			_tileList_roomList._columnCount =2;
+//			_tileList_roomList.setStyle("disabledSkin",UI_RoomViewBG);
+			_tileList_roomList.setStyle("upSkin",UI_RoomViewBG);
+			_tileList_roomList.setStyle("contentPadding",2);
+			_tileList_roomList.verticalScrollPolicy = "on";
+			_tileList_roomList.horizontalScrollPolicy = "off";
+			
+			ui_MovieClip_Hall.addChild(_tileList_roomList);
 		}
 		
 		
@@ -120,9 +136,7 @@ package com.ywit.radio91.view
 		
 		override protected function configEventListener():void{
 			//房间选择监听
-			ui_MovieClip_Hall.tileList_roomList.addEventListener(ListEvent.ITEM_ROLL_OVER,itemOverHandel);
-			ui_MovieClip_Hall.tileList_roomList.addEventListener(ListEvent.ITEM_ROLL_OUT,itemOutHandel);
-			ui_MovieClip_Hall.tileList_roomList.addEventListener(ListEvent.ITEM_CLICK,itemClickHandel);
+			
 			
 			_playerData.addEventListener(AbsPlayerData.EVENT_RES_ListRoom,commonEventHandler);//请求房间返回
 			_playerData.addEventListener(AbsPlayerData.EVENT_RES_UserInfo,commonEventHandler);//请求用户返回
@@ -179,28 +193,27 @@ package com.ywit.radio91.view
 		
 		private function findRoomInputHandler(e:Event):void{
 			var text:String = TextField(e.target).text;
-			var dp:DataProvider;
-			var oldDP:DataProvider = DataProvider(ui_MovieClip_Hall.tileList_roomList.dataProvider);
-			oldDP.removeAll();
+			var dp:Array;
+//			var oldDP:DataProvider = DataProvider(_tileList_roomList.dataProvider);
+//			oldDP.removeAll();
+			_tileList_roomList.dataProvider = new Array();
+			
 			
 			if(text == "" || text == null){
-				dp = new DataProvider();
-				dp.addItems(_curRoomItemList);
-				ui_MovieClip_Hall.tileList_roomList.dataProvider = dp;
+				_tileList_roomList.dataProvider = _curRoomItemList;
 				return;
 			}
 			
 			
-			dp = new DataProvider();
-			
+			dp = new Array();
 			//搜索房间号 以及房间名
 			for each(var item:Object in _curRoomItemList){
-				var room:UI_MovieClip_Room = UI_MovieClip_Room(item["source"]);
-				if(room.text_roomId.text.search(text) != -1 || room.text_roomName.text.search(text) != -1){
-					dp.addItem(item);
+				var room:HallRoomCellView = HallRoomCellView(item);
+				if(room.ui_MovieClip_Room.text_roomId.text.search(text) != -1 || room.ui_MovieClip_Room.text_roomName.text.search(text) != -1){
+					dp.push(item);
 				}
 			}
-			ui_MovieClip_Hall.tileList_roomList.dataProvider = dp;
+			_tileList_roomList.dataProvider = dp;
 			
 			
 		}
@@ -697,56 +710,35 @@ package com.ywit.radio91.view
 			
 			
 //			roomObjList.sortOn("roomId",Array.NUMERIC);
-			var roomList :DataProvider = new DataProvider();
+			var roomList :Array = new Array();
 			for each (var roomObj:Object in roomObjList){
-				var item:Object = new Object();
-				var room: UI_MovieClip_Room = new UI_MovieClip_Room();
+				var hallRoomCellView: HallRoomCellView = new HallRoomCellView();
+				hallRoomCellView.setRoomObject(roomObj);
 				
-				room.text_roomId.embedFonts =false;
-				room.text_roomName.embedFonts =false;
-				room.text_userInfo.embedFonts =false;
-				room.text_Singer.embedFonts =false;
-				var roomId:String = String(roomObj.roomId);
-				if(roomObj.roomId < 10){
-					roomId = "00"+roomObj.roomId;
-				}else if(roomObj.roomId < 99){
-					roomId = "0"+roomObj.roomId;
+				roomList.push(hallRoomCellView);
+				roomViewMap.put(roomObj.roomId,hallRoomCellView);
+				hallRoomCellView.buttonMode=true;
+				
+				if(!hallRoomCellView.hasEventListener(MouseEvent.MOUSE_OVER)){
+					hallRoomCellView.addEventListener(MouseEvent.MOUSE_OVER,itemOverHandel);
 				}
-				
-				room.text_roomId.text = roomId;
-				room.text_roomName.text = (roomObj.roomName==null?"":roomObj.roomName);
-				room.text_userInfo.text = roomObj.currentUser+"/"+roomObj.maxUser;
-				room.text_Singer.text = roomObj.currentSinger+"/"+roomObj.currentUser;
-				
-				room.roomSelect_Bg.stop();
-				room.movie_font.gotoAndStop(1);//可加入
-				room.movie_roomMark.gotoAndStop(1);
-				if(int(roomObj.currentUser)>=int(roomObj.maxUser)){
-					room.movie_font.gotoAndStop(2);//满员
-					room.movie_roomMark.gotoAndStop(2);
+				if(!hallRoomCellView.hasEventListener(MouseEvent.MOUSE_OUT)){
+					hallRoomCellView.addEventListener(MouseEvent.MOUSE_OUT,itemOutHandel);
 				}
-//				room.useHandCursor = true;
-				item["source"]=room; 
-				
-				room.buttonMode=true;
-				room.useHandCursor = true;
-				
-				roomList.addItem(item);
-				roomViewMap.put(roomObj.roomId,room);
+				if(!hallRoomCellView.hasEventListener(MouseEvent.CLICK)){
+					hallRoomCellView.addEventListener(MouseEvent.CLICK,itemClickHandel);
+				}
 				
 			}
-			ui_MovieClip_Hall.tileList_roomList.columnWidth=243;
-			_curRoomItemList = roomList.toArray();
-			ui_MovieClip_Hall.tileList_roomList.dataProvider = roomList;
+			_curRoomItemList = roomList;
+			_tileList_roomList.dataProvider = roomList;
 			
-////			ui_MovieClip_Hall.tileList_roomList.mouseEnabled = false;
-//			ui_MovieClip_Hall.tileList_roomList.mouseChildren = true;
 			
 			
 		}
-	
-		private function itemClickHandel(e:ListEvent):void{
-			_curRoomId = int(e.item.source.text_roomId.text) as int;
+		private var _tileList_roomList:MyTileList = new MyTileList();
+		private function itemClickHandel(e:MouseEvent):void{
+			_curRoomId = int(HallRoomCellView(e.target)._obj["roomId"]) as int;
 			trace(_curRoomId);
 			enterRoom(_curRoomId)
 		}
@@ -762,25 +754,20 @@ package com.ywit.radio91.view
 //			_playerData.cs_GetRoom(e.item.source.text_roomId.text);
 		}
 		
-		private function itemOverHandel(e:ListEvent):void{
-			if(index != -1){
-				ui_MovieClip_Hall.tileList_roomList.dataProvider.getItemAt(index)["source"].roomSelect_Bg.gotoAndStop(1);
-			}
-			var room: UI_MovieClip_Room = UI_MovieClip_Room(e.item["source"]);
-			index = ui_MovieClip_Hall.tileList_roomList.dataProvider.getItemIndex(e.item);
-			room.roomSelect_Bg.gotoAndStop(2);
+		private function itemOverHandel(e:MouseEvent):void{
+			var room: HallRoomCellView = HallRoomCellView(e.target);
+			room.ui_MovieClip_Room.roomSelect_Bg.gotoAndStop(2);
 			
 			room.filters = [new ColorMatrixFilter([1,0,0,0,30,0,1,0,0,30,0,0,1,0,30,0,0,0,1,0])];
 			//f1bd05
 			//0d3566
 		}
 		
-		private function itemOutHandel(e:ListEvent):void{
-			var index:int = e.index
-			if(index != -1){
-				var room: UI_MovieClip_Room = UI_MovieClip_Room(e.item["source"]);
-				room.filters = null;
-			}
+		private function itemOutHandel(e:MouseEvent):void{
+			var room: HallRoomCellView = HallRoomCellView(e.target);
+			room.ui_MovieClip_Room.roomSelect_Bg.gotoAndStop(1);
+			
+			room.filters = null;
 			//f1bd05
 			//0d3566
 		}
@@ -808,9 +795,6 @@ package com.ywit.radio91.view
 		override public function destory():void{
 			super.destory();
 			//房间选择监听
-			ui_MovieClip_Hall.tileList_roomList.removeEventListener(ListEvent.ITEM_CLICK,itemOverHandel);
-			ui_MovieClip_Hall.tileList_roomList.removeEventListener(ListEvent.ITEM_DOUBLE_CLICK,enterRoom);
-			
 			_playerData.removeEventListener(AbsPlayerData.EVENT_RES_ListRoom,commonEventHandler);//请求房间返回
 			_playerData.removeEventListener(AbsPlayerData.EVENT_RES_UserInfo,commonEventHandler);//请求用户返回
 			_playerData.removeEventListener(AbsPlayerData.EVENT_RES_Friends,commonEventHandler);////请求好友返回
