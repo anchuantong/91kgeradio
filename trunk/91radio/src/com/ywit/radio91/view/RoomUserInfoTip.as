@@ -144,7 +144,8 @@ package com.ywit.radio91.view
 		public var cellUserInfoHight:int = 30;
 		public function setLocation(mouseX:int,mouseY:int):void{
 			ui_PlayerInfoTipView.x = 270;
-			ui_PlayerInfoTipView.y = roomUserInfoTipBaseY+cellUserInfoHight*int((mouseY-407)/this.cellUserInfoHight);
+//			ui_PlayerInfoTipView.y = roomUserInfoTipBaseY+cellUserInfoHight*int((mouseY-407)/this.cellUserInfoHight);
+			ui_PlayerInfoTipView.y = roomUserInfoCell.y+roomUserInfoCell.parent.parent.parent.y-15;
 		}
 	}
 }
