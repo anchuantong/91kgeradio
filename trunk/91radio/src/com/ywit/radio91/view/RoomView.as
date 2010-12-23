@@ -1098,6 +1098,7 @@ package com.ywit.radio91.view
 			privateChatView.visible = true;
 			publicChatView.visible = true;
 			watchChatView.visible = false;
+			_mySongs_tileList.visible = false;
 
 			if(ui_RoomView.btn_changeSizeBtn.currentFrame == 1){
 				ui_RoomView.roomChat.mc_dragLine.y = 110;
@@ -1135,6 +1136,7 @@ package com.ywit.radio91.view
 			privateChatView.visible = false;
 			publicChatView.visible = false;
 			watchChatView.visible = false;
+			_mySongs_tileList.visible = false;
 			
 			ui_RoomView.roomChat.gotoAndStop(2);
 			_playerData.cs_ListUserGift(uid);
@@ -1155,11 +1157,11 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.tb_mySongs.tb_bg.visible = true;
 			ui_RoomView.roomChat.tb_watchSinger.tb_bg.visible = false;
 			ui_RoomView.roomChat.gotoAndStop(3);
-			_mySongs_tileList.visible = true;
 //			_scrollPanePrivate.visible = false;
 //			_scrollPanePublic.visible = false;
 //			_scrollPaneWatch.visible = false;
 			
+			_mySongs_tileList.visible = true;
 			privateChatView.visible = false;
 			publicChatView.visible = false;
 			watchChatView.visible = false;
@@ -1189,6 +1191,7 @@ package com.ywit.radio91.view
 			privateChatView.visible = false;
 			publicChatView.visible = false;
 			watchChatView.visible = true;
+			_mySongs_tileList.visible = false;
 			
 			ui_RoomView.roomChat.gotoAndStop(4);
 			if(ui_RoomView.roomChat.clearScreenBtn){
@@ -1384,38 +1387,8 @@ package com.ywit.radio91.view
 				
 				mySongCellView.ui_MySongCell.songsId.text = i+"";
 				songsList.push(mySongCellView);
-
-				if(!_mySongs_tileList.hasEventListener(MouseEvent.MOUSE_OVER)){
-					_mySongs_tileList.addEventListener(MouseEvent.MOUSE_OVER,mySongs_itemOverHandel);
-				}
-				if(!_mySongs_tileList.hasEventListener(MouseEvent.MOUSE_OUT)){
-					_mySongs_tileList.addEventListener(MouseEvent.MOUSE_OUT,mySongs_itemOutHandel);
-				}
-				
-				if(!_mySongs_tileList.hasEventListener(MouseEvent.DOUBLE_CLICK)){
-					mySongCellView.doubleClickEnabled = true;
-					_mySongs_tileList.addEventListener(MouseEvent.DOUBLE_CLICK,mySongs_itemDoubleClickHandel);
-				}
-				
 			}
 			_mySongs_tileList.dataProvider = songsList;	
-		}
-		private function mySongs_itemOutHandel(e:ListEvent):void{
-			var mySongCellView: MySongCellView;
-			mySongCellView = MySongCellView(e.item["source"]);
-			mySongCellView.ui_MySongCell.mySongCellBg.visible = false;
-		}
-		private function mySongs_itemOverHandel(e:ListEvent):void{
-			var mySongCellView: MySongCellView;
-			mySongCellView = MySongCellView(e.item["source"]);
-			mySongCellView.ui_MySongCell.mySongCellBg.visible = true;
-		}
-		
-		private function mySongs_itemDoubleClickHandel(e:ListEvent):void{
-			var mySongCellView: MySongCellView;
-			mySongCellView = MySongCellView(e.item["source"]);
-			mySongCellView.startSingHandel();
-			
 		}
 		private function refershUserGift(obj:Object):void{
 			if(!ui_RoomView.roomChat.tileList_gift){
