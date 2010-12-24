@@ -134,6 +134,27 @@
 					<output name="created" type="String" description="如果唱歌，则是开始唱歌的时间，否则为空"></output>
 				</outputList>	
 			</method>
+			<method name="ListListens" description="房间内全部用户列表">
+				<outputList name="userList">
+					<output name="uid" type="int" description="用户ID"></output>
+					<output name="uname" type="String" description="用户姓名"></output>
+					<output name="headimg" type="String" description="用户头像图片地址"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="manifesto" type="String" description="K歌宣言"></output>
+					<output name="exp" type="int" description="用户经验值"></output>
+					<output name="lv" type="int" description="用户等级"></output>
+					<output name="title" type="String" description="用户等级称谓"></output>
+					<output name="micStatus" type="int" description="0表示只为麦克风，1表示有摄像头"></output>
+					<output name="songsId" type="int" description="正在唱的歌曲ID,如果歌曲id为0，表示当前没有唱歌"></output>
+					<output name="songsName" type="String" description="歌曲名称"></output>
+					<output name="songsSinger" type="String" description="歌曲原唱"></output>
+					<output name="ofaId" type="int" description="歌曲录音ID"></output>
+					<output name="singerTime" type="int" description="目前歌曲时长"></output>
+					<output name="songsTime" type="int" description="歌曲总时长"></output>
+					<output name="endTimestp" type="int" description="结束时间，也是秒"></output>
+					<output name="created" type="String" description="如果唱歌，则是开始唱歌的时间，否则为空"></output>
+				</outputList>	
+			</method>
 			
 			
 			<method name="ListUserGift" description="用户收到的礼物列表信息">
