@@ -257,7 +257,7 @@ package com.ywit.radio91.view
 					var friendList:Array = e.data["friendList"];
 					curPage = e.data["curPage"] as int;
 					pcount = e.data["pcount"] as int;
-					for (var i:int;i< 7;i++){
+					for (var i:int;i<= 7;i++){
 						var friendListObj:Object = friendList[i];
 						refershFriendList(ui_MovieClip_Hall.friendList["friend"+i],friendListObj);
 					}
