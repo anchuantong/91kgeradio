@@ -576,8 +576,10 @@ package com.ywit.radio91.view
 				return;
 			}
 			
-			
-			_textFlow.addChild(giftMessageHandel(obj));
+			var p:ParagraphElement = giftMessageHandel(obj);
+			p.marginLeft = 5;
+			p.marginBottom = 5;
+			_textFlow.addChild(p);
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
 			this.verticalScrollPosition= this.maxVerticalScrollPosition;
@@ -636,10 +638,7 @@ package com.ywit.radio91.view
 				inlineGraphic.source=SwfDataLoader.getGiftClass(giftImgUrl);
 //				inlineGraphic.firstBaselineOffset = BaselineOffset.AUTO;
 //				inlineGraphic.dominantBaseline = TextBaseline.IDEOGRAPHIC_CENTER;
-				p.addChild(inlineGraphic);
-				p.marginLeft = 5;
-				p.marginBottom = 5;
-			
+				p.addChild(inlineGraphic);				
 			return p;
 		}
 		

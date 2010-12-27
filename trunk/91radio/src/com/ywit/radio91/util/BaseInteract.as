@@ -63,6 +63,13 @@ package com.ywit.radio91.util
 		 */ 
 		public static function baseInitRoom(roomId:int):void{
 			if(_debug == 0){
+//				var sprite:Sprite = new Sprite();
+//				sprite.graphics.beginFill(0x000000);
+//				sprite.graphics.drawRect(0,0,800,600);
+//				sprite.graphics.endFill();
+//				ViewHelper._main.addRoomBottom(sprite);
+//				
+//				ViewHelper._main.addKplayer(sprite);
 				return;
 			}
 			_invoker["baseInitRoom"](roomId);

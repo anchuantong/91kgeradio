@@ -548,7 +548,7 @@ package com.ywit.radio91.view
 //				_bcLineView2.addEventListener(BroadCastLineView.EVENT_ENTER_ROOM,enterBroadCastRoomHandler,false,0,true);
 //				ui_MovieClip_Hall.broadCastView.addChild(_bcLineView2);
 				
-				_bcLineView2 = new BroadCastLineView("<font color='#654533'>"+broadCastObj.uname+": "+broadCastObj.content+"</font>",300,1000,5,broadCastObj.roomId);
+				_bcLineView2 = new BroadCastLineView("<font color='#FF0099'>"+broadCastObj.uname+": </font><font color='#654533'>"+broadCastObj.content+"</font>",300,1000,5,broadCastObj.roomId);
 				_bcLineView2.addEventListener(Event.COMPLETE,refersh);
 				_bcLineView2.addEventListener(BroadCastLineView.EVENT_ENTER_ROOM,enterBroadCastRoomHandler,false,0,true);
 				ui_MovieClip_Hall.broadCastView.addChild(_bcLineView2);
