@@ -1432,7 +1432,7 @@ package com.ywit.radio91.view
 				roomGiftCell.senderName.text = giftCell.sendUname;
 				roomGiftCell.giftCount.text = giftCell.count;
 				if(giftCell.imgUrl&&giftCell.imgUrl!=""){
-					GiftCellViewUtil.addGift2UserGiftList(180,0,roomGiftCell,giftCell);
+					GiftCellViewUtil.addGift2UserGiftList(215,0,roomGiftCell,giftCell);
 				}
 				item["source"]=roomGiftCell; 
 				roomList.addItem(item);
