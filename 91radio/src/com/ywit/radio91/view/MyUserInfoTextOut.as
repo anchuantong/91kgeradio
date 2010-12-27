@@ -79,8 +79,6 @@ package com.ywit.radio91.view
 //			
 //			inlineGraphic.source=SwfDataLoader.getGiftClass(giftImgUrl);
 //			p.addChild(inlineGraphic);
-			
-			
 			return p;
 		}
 		override public function setStly():void{
