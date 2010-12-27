@@ -42,7 +42,7 @@ package com.ywit.radio91.view
 			if(broadCastObj == null){
 				return null;
 			}
-			var broadCastLineView:BroadCastLineView = new BroadCastLineView("<font color='#000000'>"+broadCastObj.uname+": "+broadCastObj.content+"</font><font color='#6CCAFF'>"+broadCastObj.created+"</font>",430,1000,5,broadCastObj.roomId,isOut);
+			var broadCastLineView:BroadCastLineView = new BroadCastLineView("<font color='#FF0099'>"+broadCastObj.uname+": </font><font color='#654533'>"+broadCastObj.content+"</font><font color='#6CCAFF'>"+broadCastObj.created+"</font>",430,1000,5,broadCastObj.roomId,isOut);
 			broadCastLineView._broadCastObj = broadCastObj;
 			return broadCastLineView;
 		}

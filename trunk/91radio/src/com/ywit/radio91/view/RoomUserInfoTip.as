@@ -15,6 +15,7 @@ package com.ywit.radio91.view
 	import flash.events.FocusEvent;
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
+	import flash.geom.Point;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	import flash.utils.Timer;
@@ -84,6 +85,7 @@ package com.ywit.radio91.view
 		public function show(roomUserInfoCell:RoomUserInfoCell):void {
 			this.visible = true;
 			this.isOver = false;
+			this.addChild(ui_PlayerInfoTipView);
 			ui_PlayerInfoTipView.text_uname.mouseEnabled = false;
 			ui_PlayerInfoTipView.text_title.mouseEnabled = false;
 			ui_PlayerInfoTipView.text_manifesto.mouseEnabled = false;
@@ -115,7 +117,7 @@ package com.ywit.radio91.view
 				}
 			}
 			
-			this.addChild(ui_PlayerInfoTipView);
+			
 //			startUnShowTimer();
 			timer.stop();
 		}
@@ -145,7 +147,11 @@ package com.ywit.radio91.view
 		public function setLocation(mouseX:int,mouseY:int):void{
 			ui_PlayerInfoTipView.x = 270;
 //			ui_PlayerInfoTipView.y = roomUserInfoTipBaseY+cellUserInfoHight*int((mouseY-407)/this.cellUserInfoHight);
-			ui_PlayerInfoTipView.y = roomUserInfoCell.y+roomUserInfoCell.parent.parent.parent.y-15;
+			var gPoint:Point = roomUserInfoCell.parent.localToGlobal(new Point(roomUserInfoCell.x,roomUserInfoCell.y));
+			var lPoint:Point = ui_PlayerInfoTipView.parent.globalToLocal(gPoint);
+//			ui_PlayerInfoTipView.parent.globalToLocal(roomUserInfoCell.localToGlobal(new Point(roomUserInfoCell.x,roomUserInfoCell.y));
+//			ui_PlayerInfoTipView.y = roomUserInfoCell.y+roomUserInfoCell.parent.parent.parent.y-15;
+			ui_PlayerInfoTipView.y = lPoint.y - 15;
 		}
 	}
 }
