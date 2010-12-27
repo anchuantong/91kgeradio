@@ -43,14 +43,21 @@ package com.ywit.radio91.view
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.FocusEvent;
+	import flash.events.IMEEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.events.TextEvent;
 	import flash.events.TimerEvent;
+	import flash.system.Capabilities;
+	import flash.system.IME;
+	import flash.system.IMEConversionMode;
+	import flash.system.System;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
 	import flash.utils.Timer;
+	
+	import ghostcat.display.transfer.BookTransfer;
 	
 
 	/**
@@ -580,7 +587,7 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.addChildAt(publicChatView,0);
 			ui_RoomView.roomChat.addChildAt(watchChatView,0);
 			ui_RoomView.roomChat.addChildAt(_mySongs_tileList,0);
-			ui_RoomView.addChild(ui_GiftListView);
+			
 			
 			ui_GiftListView.x = (Main.KG_WIDTH - ui_GiftListView.width)/2;
 			ui_GiftListView.y = (Main.KG_HEIGHT - ui_GiftListView.height)/2;
@@ -589,6 +596,7 @@ package com.ywit.radio91.view
 //			ui_RoomView.addChild(ui_ConfirmView);
 			ui_RoomView.addChild(_myTileListUserInfoList);
 			ui_RoomView.addChild(roomUserInfoTip);
+			ui_RoomView.addChild(ui_GiftListView);
 		}
 		
 		
@@ -687,18 +695,36 @@ package com.ywit.radio91.view
 			
 			//好友搜索
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(Event.CHANGE,searchRoomUserList);
+//			ui_RoomView.roomUserList.search.tf_search.addEventListener(TextEvent.TEXT_INPUT,inputSearchRoomUserListHandler);
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_IN,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = ""});
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_OUT,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = "好友搜索"});
 //			ui_RoomView.broadCast.enterRoom.addEventListener(MouseEvent.CLICK,broadCastRoomIdLindClickHandler);
 			
 			//发送礼物确认框
 			//enter发送消息
+
 			ui_RoomView.roomChat.tf_chatInput.addEventListener(KeyboardEvent.KEY_UP,keyUpHandel);
+			//解决搜狗输入法冲突问题
+			ui_RoomView.roomChat.tf_chatInput.addEventListener(TextEvent.TEXT_INPUT,textInputHandler);
 		}
+		
+		/**
+		 * 输入字符搜索的时候
+		 */ 
+//		private function inputSearchRoomUserListHandler(e:TextEvent):void{
+//			
+//		}
+		
+		private var _enterInput:Boolean = false;
+		private function textInputHandler(e:TextEvent):void{
+			_enterInput = true;
+		}
+
 		private function keyUpHandel(e:KeyboardEvent):void{
-			if(e.keyCode == Keyboard.ENTER){
+			if(e.keyCode == Keyboard.ENTER && !_enterInput){
 				sendChatmessageHandel();
 			}
+			_enterInput = false;
 		}
 		private function giftnextPageHandel(e:Event):void{
 			page++;
@@ -768,7 +794,7 @@ package com.ywit.radio91.view
 			for each(var item:Object in _curAllRoomUserList){
 				var cell:RoomUserInfoCell = item as RoomUserInfoCell;
 				if(cell.roomUserInfo.singInfo.text.search(text) != -1){
-					dp.addItem(item);
+					dp.push(item);
 				}
 			}
 			
@@ -1932,7 +1958,7 @@ package com.ywit.radio91.view
 				return;
 				
 			}else{
-				_bcLineView = new BroadCastLineView("<font color='#000000'>"+broadCastObj.uname+": "+broadCastObj.content+"</font><font color='#6CCAFF'>"+broadCastObj.created+"</font>",650,1000,5,broadCastObj.roomId);
+				_bcLineView = new BroadCastLineView("<font color='#FF0099'>"+broadCastObj.uname+": </font><font color='#000000'>"+broadCastObj.content+"</font><font color='#6CCAFF'>"+broadCastObj.created+"</font>",650,1000,5,broadCastObj.roomId);
 				_bcLineView.y = 5;
 				ui_RoomView.broadCast.broadcastAnimation.gotoAndPlay(2);
 				_bcLineView.addEventListener(Event.COMPLETE,refersh);
