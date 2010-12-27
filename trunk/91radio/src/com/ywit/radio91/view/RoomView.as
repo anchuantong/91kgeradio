@@ -821,6 +821,9 @@ package com.ywit.radio91.view
 				if(!ui_RoomView.starInfo.mc_listenSong.hasEventListener(MouseEvent.CLICK)){
 					ui_RoomView.starInfo.mc_listenSong.addEventListener(MouseEvent.CLICK,function(e:MouseEvent):void{
 						if(_currentStarUserResObj != null && _currentStarUserResObj.uid == _playerData.playerObj["uid"]){
+							
+							var errorViewResSendMessage:ErrorView = new ErrorView("不能收听自己",null);
+							addChild(errorViewResSendMessage);
 							return;
 						}
 						BaseInteract.baseStartListen(_currentStarUserResObj.uid);
@@ -1513,6 +1516,7 @@ package com.ywit.radio91.view
 					if(CommonEvent(e).data["follow"] == 1){
 						privateChatView.addMessage(MyTextOut.PRIVATE_MESSAGE,CommonEvent(e).data);
 					}
+					focusInChat();
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushPublicMessage:
 					publicChatView.addMessage(MyTextOut.PUBLIC_MESSAGE,CommonEvent(e).data);
@@ -1595,6 +1599,7 @@ package com.ywit.radio91.view
 					publicChatView.addMessage(MyTextOut.START_LISTEN_MESSAGE,CommonEvent(e).data);
 					if(CommonEvent(e).data["follow"] == 1){
 						watchChatView.addMessage(MyTextOut.START_LISTEN_MESSAGE,CommonEvent(e).data);
+						focusInWatchSinger();
 					}
 					
 					break;
