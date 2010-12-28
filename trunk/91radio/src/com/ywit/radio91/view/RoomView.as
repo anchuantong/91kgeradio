@@ -822,7 +822,7 @@ package com.ywit.radio91.view
 					ui_RoomView.starInfo.mc_listenSong.addEventListener(MouseEvent.CLICK,function(e:MouseEvent):void{
 						if(_currentStarUserResObj != null && _currentStarUserResObj.uid == _playerData.playerObj["uid"]){
 							
-							var errorViewResSendMessage:ErrorView = new ErrorView("不能收听自己",null);
+							var errorViewResSendMessage:ErrorView = new ErrorView("不能收听自己歌曲",null);
 							addChild(errorViewResSendMessage);
 							return;
 						}
