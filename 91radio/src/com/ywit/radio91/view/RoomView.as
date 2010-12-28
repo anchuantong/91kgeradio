@@ -226,6 +226,7 @@ package com.ywit.radio91.view
 			
 			publicChatView.x = 2;
 			publicChatView.y = 24;
+			chatViewPanel.y = 24;
 			
 			watchChatView.x = 2;
 			watchChatView.y = 24;
@@ -601,12 +602,12 @@ package com.ywit.radio91.view
 			
 			ui_GiftListView.x = (Main.KG_WIDTH - ui_GiftListView.width)/2;
 			ui_GiftListView.y = (Main.KG_HEIGHT - ui_GiftListView.height)/2;
-			ui_RoomView.addChild(ui_GiftTipView);
 			ui_RoomView.addChild(ui_SendGiftView);
 //			ui_RoomView.addChild(ui_ConfirmView);
 			ui_RoomView.addChild(_myTileListUserInfoList);
 			ui_RoomView.addChild(roomUserInfoTip);
 			ui_RoomView.addChild(ui_GiftListView);
+			ui_RoomView.addChild(ui_GiftTipView);
 		}
 		
 		
@@ -721,7 +722,9 @@ package com.ywit.radio91.view
 			chatViewPanel.addEventListener(ChatViewPanelView.DRAG_LINE_MOVE,dragLineMoveHandel);
 		}
 		private function dragLineMoveHandel(e:Event=null):void{
-			ui_RoomView.roomChat.clearPublicScreenBtn.y	= chatViewPanel.y+publicChatView.y+publicChatView.height-15;
+			if(ui_RoomView.roomChat.clearPublicScreenBtn){
+				ui_RoomView.roomChat.clearPublicScreenBtn.y	= chatViewPanel.y+publicChatView.y+publicChatView.height-15;
+			}
 		}
 		/**
 		 * 输入字符搜索的时候
@@ -769,12 +772,12 @@ package com.ywit.radio91.view
 			if(count<0){
 				count = 0;
 				ui_GiftListView.count.text = "0";
-			}else if(count>20){
-				count = 20;
-				ui_GiftListView.count.text = "20";
+//			}else if(count>20){
+//				count = 20;
+//				ui_GiftListView.count.text = "20";
 			}
 			if(selectGift){
-				ui_GiftListView.totalMoney.text = int(int(selectGift["price"])*int(ui_GiftListView.count.text))+"K币";;
+				ui_GiftListView.totalMoney.text = int(int(selectGift["price"])*int(ui_GiftListView.count.selectedLabel))+"K币";;
 			}else{
 				ui_GiftListView.totalMoney.text = "0K币";
 			}
