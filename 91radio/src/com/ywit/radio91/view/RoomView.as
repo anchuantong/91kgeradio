@@ -235,7 +235,7 @@ package com.ywit.radio91.view
 			initSmileys();
 			initGifts();
 			_smileyContainer = new Sprite();
-			_smileyContainer.x = 340;
+			_smileyContainer.x = 333;
 			_smileyContainer.y = 20;
 			_smileyContainer.visible = false;
 			createSmileys();
@@ -1144,8 +1144,10 @@ package com.ywit.radio91.view
 				ui_RoomView.roomChat.clearPrivateScreenBtn.addEventListener(MouseEvent.CLICK,clearScreenBtnHandel,false,0,true);
 			}
 			
-			if(!ui_RoomView.roomChat.clearPublicScreenBtn.hasEventListener(MouseEvent.CLICK)){
-				ui_RoomView.roomChat.clearPublicScreenBtn.addEventListener(MouseEvent.CLICK,clearScreenBtnHandel,false,0,true);
+			if(ui_RoomView.roomChat.clearPublicScreenBtn){
+				if(!ui_RoomView.roomChat.clearPublicScreenBtn.hasEventListener(MouseEvent.CLICK)){
+					ui_RoomView.roomChat.clearPublicScreenBtn.addEventListener(MouseEvent.CLICK,clearScreenBtnHandel,false,0,true);
+				}
 			}
 			
 //			privateChatView.visible = true;
