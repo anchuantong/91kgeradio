@@ -1,7 +1,9 @@
 package com.ywit.radio91.view
 {
 	
+	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
@@ -36,7 +38,7 @@ package com.ywit.radio91.view
 			
 			this.graphics.clear();
 			this.graphics.lineStyle(0,0,0);
-			this.graphics.beginFill(0,0.1);
+			this.graphics.beginFill(0,0);
 			this.graphics.drawRect(0,0,_wight,_height);
 			this.graphics.endFill();
 			
@@ -67,10 +69,12 @@ package com.ywit.radio91.view
 				removeChild(mouseHitArea);
 			}
 		}
+		public static const DRAG_LINE_MOVE:String = "DragLineMove";
 		private function mouseMoveHandel(e:MouseEvent):void{
 			if(startDrop){
 				if(_height-mouseHitArea.mouseY-sprite2.height>=30&&mouseHitArea.mouseY >=30){
 					sprite2.y = mouseHitArea.mouseY-sprite2.height/2;
+					dispatchEvent(new Event(DRAG_LINE_MOVE));
 					updateSize();
 				}
 			}

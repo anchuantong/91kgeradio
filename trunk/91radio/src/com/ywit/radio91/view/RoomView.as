@@ -187,7 +187,7 @@ package com.ywit.radio91.view
 			
 			initBroadCastView();
 			
-//			privateChatView.x = 2;
+			privateChatView.x = 2;
 //			privateChatView.y = 123;
 			
 			ButtonUtil.changeButton(ui_RoomView.broadCast.but_sendMessage);
@@ -331,6 +331,8 @@ package com.ywit.radio91.view
 			
 			_mySongs_tileList.verticalScrollPolicy="on";
 			_mySongs_tileList.horizontalScrollPolicy = "off";
+			
+			dragLineMoveHandel();
 		}
 		
 		/**
@@ -714,8 +716,13 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.tf_chatInput.addEventListener(KeyboardEvent.KEY_UP,keyUpHandel);
 			//解决搜狗输入法冲突问题
 			ui_RoomView.roomChat.tf_chatInput.addEventListener(TextEvent.TEXT_INPUT,textInputHandler);
+			
+			
+			chatViewPanel.addEventListener(ChatViewPanelView.DRAG_LINE_MOVE,dragLineMoveHandel);
 		}
-		
+		private function dragLineMoveHandel(e:Event=null):void{
+			ui_RoomView.roomChat.clearPublicScreenBtn.y	= chatViewPanel.y+publicChatView.y+publicChatView.height-15;
+		}
 		/**
 		 * 输入字符搜索的时候
 		 */ 
@@ -994,9 +1001,9 @@ package com.ywit.radio91.view
 			ui_RoomView.roomUserList.y += _changeHeight;
 			_myTileListUserInfoList.y    += _changeHeight;
 			ui_RoomView.btn_changeSizeBtn.y += _changeHeight;
-			if(ui_RoomView.roomChat.clearPublicScreenBtn != null){
-				ui_RoomView.roomChat.clearPublicScreenBtn.y += 50;
-			}
+//			if(ui_RoomView.roomChat.clearPublicScreenBtn != null){
+//				ui_RoomView.roomChat.clearPublicScreenBtn.y += 50;
+//			}
 //			privateChatView.y                  = 123;  
 //			publicChatView.y                   = 24;
 			watchChatView.y                    = 24;
@@ -1045,9 +1052,9 @@ package com.ywit.radio91.view
 			_myTileListUserInfoList.y    -= _changeHeight;
 			ui_RoomView.btn_changeSizeBtn.y -= _changeHeight;
 			ui_RoomView.mc_mainRoomInfoFrameBg.gotoAndStop(2);
-			if(ui_RoomView.roomChat.clearPublicScreenBtn != null){
-				ui_RoomView.roomChat.clearPublicScreenBtn.y -= 50;
-			}
+//			if(ui_RoomView.roomChat.clearPublicScreenBtn != null){
+//				ui_RoomView.roomChat.clearPublicScreenBtn.y -= 50;
+//			}
 //			privateChatView.y                    = 79;  
 //			publicChatView.y                     = -185;   
 			chatViewPanel.y = -185;
@@ -1082,6 +1089,7 @@ package com.ywit.radio91.view
 			}else{
 				changeSizeBig();
 			}
+			dragLineMoveHandel();
 		}
 		
 		private function clearScreenBtnHandel(e:Event):void{
@@ -1152,7 +1160,7 @@ package com.ywit.radio91.view
 				chatViewPanel.y = 24;
 				chatViewPanel.height = 167;
 				
-				ui_RoomView.roomChat.clearPublicScreenBtn.y = 89.6;
+//				ui_RoomView.roomChat.clearPublicScreenBtn.y = 89.6;
 			}
 			
 			if(ui_RoomView.btn_changeSizeBtn.currentFrame == 2){
@@ -1164,7 +1172,7 @@ package com.ywit.radio91.view
 //				privateChatView.height               = 127; 
 				chatViewPanel.y = -185;
 				chatViewPanel.height = 374;
-				ui_RoomView.roomChat.clearPublicScreenBtn.y = 89.6 - 50;
+//				ui_RoomView.roomChat.clearPublicScreenBtn.y = 89.6 - 50;
 			}
 			
 		}
