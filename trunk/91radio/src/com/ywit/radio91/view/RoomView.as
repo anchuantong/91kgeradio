@@ -929,7 +929,8 @@ package com.ywit.radio91.view
 		private function backHallHandler2(e:MouseEvent):void{
 			BaseInteract.baseLeaveRoom(_roomId);
 			_playerData.cs_LevelRoom();
-			ViewHelper.navigate(ViewRegister.ROOM_VIEW,ViewRegister.HALL_VIEW,ViewHelper._main);
+			var disObj:DisplayObject = ViewHelper.navigate(ViewRegister.ROOM_VIEW,ViewRegister.HALL_VIEW,ViewHelper._main) as DisplayObject;
+			disObj.x += 10;
 		}
 		private function sendGiftHandel(e:Event):void{
 //			var count:int = int(ui_GiftListView.count.text);

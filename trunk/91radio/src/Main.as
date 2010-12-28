@@ -130,7 +130,7 @@ package
 		private function connectHandler(e:Event):void{
 			ViewHelper.removePopView(ViewRegister.SYSTEM_INFO_VIEW);
 			var disObj:DisplayObject = ViewHelper.addView(ViewRegister.HALL_VIEW,this);
-			disObj.x += 15;
+			disObj.x += 12;
 			dispatchEvent(e);
 		}
 		

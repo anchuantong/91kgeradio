@@ -382,7 +382,7 @@ package com.ywit.radio91.view
 						_playerData.clientTimerstp = int((new Date()).time/1000);
 						ViewHelper.removeView(ViewRegister.HALL_VIEW);
 						var disObj:DisplayObject = ViewHelper.addView(ViewRegister.ROOM_VIEW,ViewHelper._main);
-						disObj.x += 15;
+						disObj.x += 10;
 //						if(UModelLocal.getInstance().debug ==1){
 							BaseInteract.baseInitRoom(_playerData.initRoomObj["roomId"]);
 //						}
