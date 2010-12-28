@@ -33,6 +33,12 @@ package com.ywit.radio91.view
 //		public static var _giftsMap:HashMap ;
 		private var _selectManager:SelectionManager;
 		
+		public function updateHight(hight:int):void{
+			this.height = hight;
+			_textFlow.flowComposer.updateAllContainers();
+			this.update();
+//			this.verticalScrollPosition= this.maxVerticalScrollPosition;
+		}
 		public function MyTextOut(weight:int,hight:int) {
 			super();
 			_textFlow = new TextFlow();
@@ -636,8 +642,8 @@ package com.ywit.radio91.view
 				
 //				inlineGraphic.source=_giftsMap.getValue(giftImgUrl)["src"] as Class;
 				inlineGraphic.source=SwfDataLoader.getGiftClass(giftImgUrl);
-//				inlineGraphic.firstBaselineOffset = BaselineOffset.AUTO;
-//				inlineGraphic.dominantBaseline = TextBaseline.IDEOGRAPHIC_CENTER;
+//				inlineGraphic.firstBaselineOffset = BaselineOffset.ASCENT;
+				inlineGraphic.dominantBaseline = TextBaseline.IDEOGRAPHIC_BOTTOM;
 				p.addChild(inlineGraphic);				
 			return p;
 		}

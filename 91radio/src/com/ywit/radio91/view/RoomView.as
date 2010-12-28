@@ -79,6 +79,8 @@ package com.ywit.radio91.view
 		private var privateChatView:MyTextOut = new MyTextOut(489,81);
 		private var publicChatView:MyTextOut = new MyTextOut(489,86);
 		private var watchChatView:MyTextOut = new MyTextOut(489,175);
+		private var chatViewPanel:ChatViewPanelView = new ChatViewPanelView(489,175);
+		
 		
 		
 		private var ui_GiftListView:UI_GiftListView = new UI_GiftListView();
@@ -185,8 +187,8 @@ package com.ywit.radio91.view
 			
 			initBroadCastView();
 			
-			privateChatView.x = 2;
-			privateChatView.y = 123;
+//			privateChatView.x = 2;
+//			privateChatView.y = 123;
 			
 			ButtonUtil.changeButton(ui_RoomView.broadCast.but_sendMessage);
 			ButtonUtil.changeButton(ui_RoomView.btn_changeSizeBtn);
@@ -583,8 +585,14 @@ package com.ywit.radio91.view
 			addChild(ui_RoomView);
 			ui_RoomView.addChild(songInfoLay);
 			
-			ui_RoomView.roomChat.addChildAt(privateChatView,0);
-			ui_RoomView.roomChat.addChildAt(publicChatView,0);
+//			ui_RoomView.roomChat.addChildAt(privateChatView,0);
+//			ui_RoomView.roomChat.addChildAt(publicChatView,0);
+			chatViewPanel.addPlane(ChatViewPanelView.PANEL_1,publicChatView);
+			chatViewPanel.addPlane(ChatViewPanelView.PANEL_2,privateChatView);
+			
+			ui_RoomView.roomChat.addChildAt(chatViewPanel,0);
+			
+			
 			ui_RoomView.roomChat.addChildAt(watchChatView,0);
 			ui_RoomView.roomChat.addChildAt(_mySongs_tileList,0);
 			
@@ -989,12 +997,14 @@ package com.ywit.radio91.view
 			if(ui_RoomView.roomChat.clearPublicScreenBtn != null){
 				ui_RoomView.roomChat.clearPublicScreenBtn.y += 50;
 			}
-			privateChatView.y                  = 123;  
-			publicChatView.y                   = 24;
+//			privateChatView.y                  = 123;  
+//			publicChatView.y                   = 24;
 			watchChatView.y                    = 24;
+			chatViewPanel.y = 24;
 			watchChatView.height			   = 175;
-			publicChatView.height              = 86; 
-			privateChatView.height                  = 81; 
+			chatViewPanel.height = 175;
+//			publicChatView.height              = 86; 
+//			privateChatView.height                  = 81; 
 			
 			roomUserInfoTip.roomUserInfoTipBaseY = 390;
 			if(ui_RoomView.roomChat.tileList_gift != null){
@@ -1038,12 +1048,14 @@ package com.ywit.radio91.view
 			if(ui_RoomView.roomChat.clearPublicScreenBtn != null){
 				ui_RoomView.roomChat.clearPublicScreenBtn.y -= 50;
 			}
-			privateChatView.y                    = 79;  
-			publicChatView.y                     = -185;   
+//			privateChatView.y                    = 79;  
+//			publicChatView.y                     = -185;   
+			chatViewPanel.y = -185;
 			watchChatView.y                      = -185;
 			watchChatView.height			     = 385;
-			publicChatView.height                = 247; 
-			privateChatView.height               = 127; 
+//			publicChatView.height                = 247; 
+//			privateChatView.height               = 127; 
+			chatViewPanel.height = 385;
 			
 			if(_myTileListUserInfoList){
 				_myTileListUserInfoList.height = 390;
@@ -1124,28 +1136,34 @@ package com.ywit.radio91.view
 				ui_RoomView.roomChat.clearPublicScreenBtn.addEventListener(MouseEvent.CLICK,clearScreenBtnHandel,false,0,true);
 			}
 			
-			privateChatView.visible = true;
-			publicChatView.visible = true;
+//			privateChatView.visible = true;
+//			publicChatView.visible = true;
+			chatViewPanel.visible = true;
 			watchChatView.visible = false;
 			_mySongs_tileList.visible = false;
 
 			if(ui_RoomView.btn_changeSizeBtn.currentFrame == 1){
-				ui_RoomView.roomChat.mc_dragLine.y = 110;
-				privateChatView.y                  = 123; 
-				publicChatView.y                   = 24;
-				publicChatView.height              = 86; 
-				privateChatView.height             = 81; 
+//				ui_RoomView.roomChat.mc_dragLine.y = 110;
+//				privateChatView.y                  = 123; 
+//				publicChatView.y                   = 24;
+//				publicChatView.height              = 86; 
+//				privateChatView.height             = 81; 
+				
+				chatViewPanel.y = 24;
+				chatViewPanel.height = 167;
+				
 				ui_RoomView.roomChat.clearPublicScreenBtn.y = 89.6;
 			}
 			
 			if(ui_RoomView.btn_changeSizeBtn.currentFrame == 2){
-				ui_RoomView.roomChat.mc_dragLine.y = 60;
+//				ui_RoomView.roomChat.mc_dragLine.y = 60;
 				
-				privateChatView.y                  = 79;  
-				publicChatView.y                   = -185;
-				publicChatView.height                = 247; 
-				privateChatView.height               = 127; 
-				
+//				privateChatView.y                  = 79;  
+//				publicChatView.y                   = -185;
+//				publicChatView.height                = 247; 
+//				privateChatView.height               = 127; 
+				chatViewPanel.y = -185;
+				chatViewPanel.height = 374;
 				ui_RoomView.roomChat.clearPublicScreenBtn.y = 89.6 - 50;
 			}
 			
@@ -1162,8 +1180,10 @@ package com.ywit.radio91.view
 //			_scrollPanePublic.visible = false;
 //			_scrollPaneWatch.visible = false;
 			
-			privateChatView.visible = false;
-			publicChatView.visible = false;
+//			privateChatView.visible = false;
+//			publicChatView.visible = false;
+			chatViewPanel.visible = false;
+			
 			watchChatView.visible = false;
 			_mySongs_tileList.visible = false;
 			
@@ -1191,8 +1211,9 @@ package com.ywit.radio91.view
 //			_scrollPaneWatch.visible = false;
 			
 			_mySongs_tileList.visible = true;
-			privateChatView.visible = false;
-			publicChatView.visible = false;
+//			privateChatView.visible = false;
+//			publicChatView.visible = false;
+			chatViewPanel.visible = false;
 			watchChatView.visible = false;
 			
 			if(ui_RoomView.btn_changeSizeBtn.currentFrame == 1){
@@ -1217,8 +1238,9 @@ package com.ywit.radio91.view
 //			_scrollPanePublic.visible = false;
 //			_scrollPaneWatch.visible = true;
 			
-			privateChatView.visible = false;
-			publicChatView.visible = false;
+//			privateChatView.visible = false;
+//			publicChatView.visible = false;
+			chatViewPanel.visible = false;
 			watchChatView.visible = true;
 			_mySongs_tileList.visible = false;
 			
