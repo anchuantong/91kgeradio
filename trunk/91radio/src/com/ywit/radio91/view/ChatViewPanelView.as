@@ -72,7 +72,7 @@ package com.ywit.radio91.view
 		public static const DRAG_LINE_MOVE:String = "DragLineMove";
 		private function mouseMoveHandel(e:MouseEvent):void{
 			if(startDrop){
-				if(_height-mouseHitArea.mouseY-sprite2.height>=30&&mouseHitArea.mouseY >=30){
+				if(_height-mouseHitArea.mouseY-sprite2.height>=15&&mouseHitArea.mouseY >=30){
 					sprite2.y = mouseHitArea.mouseY-sprite2.height/2;
 					dispatchEvent(new Event(DRAG_LINE_MOVE));
 					updateSize();
@@ -87,14 +87,14 @@ package com.ywit.radio91.view
 						removeChild(displayObject);
 					}
 					displayObject1 = displayObject;
-					addChild(displayObject);
+					addChildAt(displayObject,0);
 					break;
 				case PANEL_2:
 					if(displayObject2){
 						removeChild(displayObject);
 					}
 					displayObject2 = displayObject;
-					addChild(displayObject);
+					addChildAt(displayObject,0);
 					break;
 			}
 			updateSize();
@@ -103,11 +103,11 @@ package com.ywit.radio91.view
 		private function updateSize():void{
 			if(displayObject1){
 				displayObject1.y = 0;
-				displayObject1.updateHight(sprite2.y);
+				displayObject1.updateHight(sprite2.y+5);
 			}
 			if(displayObject2){
-				displayObject2.y = sprite2.y+sprite2.height;
-				displayObject2.updateHight(_height-sprite2.y-sprite2.height);
+				displayObject2.y = sprite2.y+sprite2.height-5;
+				displayObject2.updateHight(_height-sprite2.y-sprite2.height+5);
 			}
 		}
 	}

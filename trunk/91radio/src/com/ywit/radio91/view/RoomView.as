@@ -235,7 +235,7 @@ package com.ywit.radio91.view
 			initSmileys();
 			initGifts();
 			_smileyContainer = new Sprite();
-			_smileyContainer.x = 333;
+			_smileyContainer.x = 323;
 			_smileyContainer.y = 20;
 			_smileyContainer.visible = false;
 			createSmileys();
@@ -406,20 +406,21 @@ package com.ywit.radio91.view
 		}
 		private function createSmileys():void {
 			var _smileys:Array = MyTextOut._smileysMap.values();
+			var boold:int = 5;
 			for (var i:int = 0; i < _smileys.length; i++) {
 				var obj:Object = _smileys[i];
 				var smiley:Sprite = new (obj.src as Class)() as Sprite;
 				smiley.name = obj.name;
 				_smileyContainer.addChild(smiley);
-				smiley.x = (i % 6) * 28;
-				smiley.y = Math.floor(i / 6) * 28;
+				smiley.x = boold+(i % 6) * 28;
+				smiley.y = boold+Math.floor(i / 6) * 28;
 				smiley.buttonMode = true;
 				smiley.addEventListener(MouseEvent.CLICK, insertSmiley);			
 			}
 			
 			_smileyContainer.graphics.lineStyle(1,0x5EA7DC,1);
 			_smileyContainer.graphics.beginFill(0xFFFFFF,1);
-			_smileyContainer.graphics.drawRoundRect(0,0,_smileyContainer.width,_smileyContainer.height,20,20);
+			_smileyContainer.graphics.drawRoundRect(0,0,_smileyContainer.width+boold*2,_smileyContainer.height+boold*2,20,20);
 			_smileyContainer.graphics.endFill();
 		}
 		public function insertSmiley(evt:MouseEvent):void {
