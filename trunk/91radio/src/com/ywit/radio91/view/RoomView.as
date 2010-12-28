@@ -772,9 +772,9 @@ package com.ywit.radio91.view
 			if(count<0){
 				count = 0;
 				ui_GiftListView.count.text = "0";
-//			}else if(count>20){
-//				count = 20;
-//				ui_GiftListView.count.text = "20";
+			}else if(count>111){
+				count = 111;
+				ui_GiftListView.count.text = "111";
 			}
 			if(selectGift){
 				ui_GiftListView.totalMoney.text = int(int(selectGift["price"])*int(ui_GiftListView.count.selectedLabel))+"K币";;
