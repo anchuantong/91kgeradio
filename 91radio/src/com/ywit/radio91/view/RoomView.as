@@ -392,7 +392,7 @@ package com.ywit.radio91.view
 		/**
 		 * 根据uid选择目标comboBox的选项
 		 */ 
-		private function selectTargetComboBoxByUID(uid:int):void{
+		public function selectTargetComboBoxByUID(uid:int):void{
 			for each(var ele:Object in  ui_RoomView.roomChat.targetComboBox.dataProvider.toArray()){
 				if(ele.data == uid){
 					ui_RoomView.roomChat.targetComboBox.selectedItem = ele;
@@ -491,7 +491,20 @@ package com.ywit.radio91.view
 			}
 		}
 		
-		
+		/**
+		 * 被外部调用的弹出礼物面板
+		 */ 
+		public function popPresentPannel(uid:int):void{
+			_sendGifTargetUID = uid;
+			var object:Object = _allPlayerUserMap.getValue(uid);
+			if(object == null){
+				var errorViewResSendMessage:ErrorView = new ErrorView("当前用户不在房间");
+				addChild(errorViewResSendMessage);
+				return;
+			}
+			_sendGifTargetName =  object["uname"];
+			giftButClickHandel();
+		}
 		
 		private function giftButClickHandel(e:Event=null):void{
 /*			if(targetUser == null){
