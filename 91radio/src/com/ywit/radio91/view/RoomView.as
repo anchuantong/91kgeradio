@@ -849,7 +849,7 @@ package com.ywit.radio91.view
 		 */ 
 		private function starInfoShowStar(boolean:Boolean):void{
 			if(boolean){
-				ui_RoomView.starInfo.gotoAndStop(2);
+				ui_RoomView.starInfo.gotoAndPlay(2);
 				ui_RoomView.starInfo.mc_listenSong.visible = true;
 				ui_RoomView.starInfo.mc_sendPresent.visible = true;
 				ui_RoomView.starInfo.mc_chat.visible = true;
@@ -895,7 +895,7 @@ package com.ywit.radio91.view
 				ui_RoomView.starInfo.tf_title.text = "";
 				ui_RoomView.starInfo.tf_singerName.text = "";
 				ui_RoomView.starInfo.tf_songName.text = "";
-				ui_RoomView.starInfo.loader_userImg.source = null;
+				ui_RoomView.starInfo.touxiang.loader_userImg.source = null;
 				ui_RoomView.starInfo.mc_listenSong.visible = false;
 				ui_RoomView.starInfo.mc_sendPresent.visible = false;
 				ui_RoomView.starInfo.mc_chat.visible = false;
@@ -1762,7 +1762,7 @@ package com.ywit.radio91.view
 					ui_RoomView.starInfo.tf_title.text = objStarUser.title;
 					ui_RoomView.starInfo.tf_singerName.text = objStarUser.uname;
 					ui_RoomView.starInfo.tf_songName.text = objStarUser.songsName;
-					ui_RoomView.starInfo.loader_userImg.source = objStarUser.headimg;
+					ui_RoomView.starInfo.touxiang.loader_userImg.source = objStarUser.headimg;
 					if(objStarUser.singerTime < objStarUser.songsTime){
 						_starSingerTimer.start();
 					}
