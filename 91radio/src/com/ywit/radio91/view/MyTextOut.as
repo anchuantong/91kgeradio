@@ -22,6 +22,7 @@ package com.ywit.radio91.view
 	import flashx.textLayout.elements.SpanElement;
 	import flashx.textLayout.elements.TextFlow;
 	import flashx.textLayout.formats.BaselineOffset;
+	import flashx.textLayout.formats.FormatValue;
 	import flashx.textLayout.formats.TextLayoutFormat;
 	
 	
@@ -583,8 +584,8 @@ package com.ywit.radio91.view
 			}
 			
 			var p:ParagraphElement = giftMessageHandel(obj);
-			p.marginLeft = 5;
-			p.marginBottom = 5;
+//			p.marginLeft = 5;
+//			p.marginBottom = 5;
 			_textFlow.addChild(p);
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
@@ -642,9 +643,12 @@ package com.ywit.radio91.view
 				
 //				inlineGraphic.source=_giftsMap.getValue(giftImgUrl)["src"] as Class;
 				inlineGraphic.source=SwfDataLoader.getGiftClass(giftImgUrl);
-//				inlineGraphic.firstBaselineOffset = BaselineOffset.ASCENT;
+				inlineGraphic.firstBaselineOffset = BaselineOffset.ASCENT;
 				inlineGraphic.dominantBaseline = TextBaseline.IDEOGRAPHIC_BOTTOM;
-				p.addChild(inlineGraphic);				
+//				inlineGraphic.paddingTop = FormatValue.INHERIT;
+				p.addChild(inlineGraphic);	
+//				p.lineHeight = inlineGraphic.height;
+				inlineGraphic.lineHeight = "100%";
 			return p;
 		}
 		
@@ -754,9 +758,10 @@ package com.ywit.radio91.view
 			}
 			
 
-			p.marginLeft = 5;
-			p.marginBottom = 5;
+//			p.marginLeft = 5;
+//			p.marginBottom = 5;
 			_textFlow.addChild(p);
+			p.lineHeight = 18;
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
 			this.verticalScrollPosition= this.maxVerticalScrollPosition;

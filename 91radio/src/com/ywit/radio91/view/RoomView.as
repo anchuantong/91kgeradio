@@ -79,7 +79,7 @@ package com.ywit.radio91.view
 		private var privateChatView:MyTextOut = new MyTextOut(489,81);
 		private var publicChatView:MyTextOut = new MyTextOut(489,86);
 		private var watchChatView:MyTextOut = new MyTextOut(489,175);
-		private var chatViewPanel:ChatViewPanelView = new ChatViewPanelView(489,175);
+		private var chatViewPanel:ChatViewPanelView = new ChatViewPanelView(489,185);
 		
 		
 		
@@ -124,6 +124,8 @@ package com.ywit.radio91.view
 		private const ROOM_USER_TYPE_SINGER:String = "ROOM_USER_TYPE_SING";
 		//观众
 		private const ROOM_USER_TYPE_VIEWER:String = "ROOM_USER_TYPE_VIEWER";
+		//听歌者
+		private const ROOM_USER_TYPE_LISTENER:String = "ROOM_USER_TYPE_Listener";
 		
 		private var _curRoomUserType:String = ROOM_USER_TYPE_SINGER;
 		
@@ -192,7 +194,7 @@ package com.ywit.radio91.view
 			
 			ButtonUtil.changeButton(ui_RoomView.broadCast.but_sendMessage);
 			ButtonUtil.changeButton(ui_RoomView.btn_changeSizeBtn);
-			ui_RoomView.roomUserList.pdphListBut.visible = false;
+//			ui_RoomView.roomUserList.listenerListBut.visible = false;
 			
 			//关注主播暂时不显示，等到收听某人唱歌的时候显示
 			ui_RoomView.roomChat.tb_watchSinger.visible = false;
@@ -265,7 +267,8 @@ package com.ywit.radio91.view
 			
 			ui_RoomView.roomUserList.singerListBut.buttonMode = true;
 			ui_RoomView.roomUserList.userListBut.buttonMode = true;
-			ui_RoomView.roomUserList.pdphListBut.buttonMode = true;
+			ui_RoomView.roomUserList.listenerListBut.buttonMode = true;
+			ui_RoomView.roomUserList.listenerListBut.mouseChildren = false;
 			
 //			ButtonUtil.changeButton(ui_RoomView.roomChat.clearPublicScreenBtn);
 //			ButtonUtil.changeButton(ui_RoomView.roomChat.clearPrivateScreenBtn);
@@ -648,6 +651,7 @@ package com.ywit.radio91.view
 			_playerData.addEventListener(AbsPlayerData.EVENT_RES_SendBroadCast,commonEventHandler);//发送广播信息
 			_playerData.addEventListener(AbsPlayerData.EVENT_RES_SendGift,commonEventHandler);//发送礼物
 			_playerData.addEventListener(AbsPlayerData.EVENT_RES_SendMessage,commonEventHandler);//发送信息
+			_playerData.addEventListener(AbsPlayerData.EVENT_RES_ListListens,commonEventHandler);//发送信息
 			
 			_playerData.addEventListener(AbsPlayerData.EVENT_RES_InitRoom,resInitAnotherRoomHandler);//在房间里面进入房间的处理函数
 		
@@ -663,12 +667,12 @@ package com.ywit.radio91.view
 			//用户列表切换按钮监听
 			ui_RoomView.roomUserList.singerListBut.butBg.visible = true;
 			ui_RoomView.roomUserList.userListBut.butBg.visible = false;
-			ui_RoomView.roomUserList.pdphListBut.butBg.visible = false;
+			ui_RoomView.roomUserList.listenerListBut.butBg.visible = false;
 			
 			ui_RoomView.roomUserList.singerListBut.addEventListener(MouseEvent.CLICK,singerListButHandel);
 			ui_RoomView.roomUserList.userListBut.addEventListener(MouseEvent.CLICK,userListButHandel);
 
-			ui_RoomView.roomUserList.pdphListBut.addEventListener(MouseEvent.CLICK,pdphListButHandel);//暂时不做
+			ui_RoomView.roomUserList.listenerListBut.addEventListener(MouseEvent.CLICK,pdphListButHandel);//暂时不做
 			
 			//广播按钮监听
 			ui_RoomView.broadCast.but_sendMessage.addEventListener(MouseEvent.CLICK,wantBroadCastButHandel);
@@ -1026,7 +1030,7 @@ package com.ywit.radio91.view
 //			publicChatView.y                   = 24;
 			watchChatView.y                    = 24;
 			chatViewPanel.y = 24;
-			watchChatView.height			   = 175;
+			watchChatView.height			   = 185;
 			chatViewPanel.height = 175;
 //			publicChatView.height              = 86; 
 //			privateChatView.height                  = 81; 
@@ -1178,7 +1182,7 @@ package com.ywit.radio91.view
 //				privateChatView.height             = 81; 
 				
 				chatViewPanel.y = 24;
-				chatViewPanel.height = 167;
+				chatViewPanel.height = 185;
 				
 //				ui_RoomView.roomChat.clearPublicScreenBtn.y = 89.6;
 			}
@@ -1349,7 +1353,7 @@ package com.ywit.radio91.view
 		private function singerListButHandel(e:Event=null):void{
 			ui_RoomView.roomUserList.singerListBut.butBg.visible = true;
 			ui_RoomView.roomUserList.userListBut.butBg.visible = false;
-			ui_RoomView.roomUserList.pdphListBut.butBg.visible = false;
+			ui_RoomView.roomUserList.listenerListBut.butBg.visible = false;
 			ui_RoomView.roomUserList.gotoAndStop(1);
 			_curRoomUserType = ROOM_USER_TYPE_SINGER;
 			refreshRoomUser();
@@ -1359,18 +1363,19 @@ package com.ywit.radio91.view
 		private function userListButHandel(e:Event=null):void{
 			ui_RoomView.roomUserList.singerListBut.butBg.visible = false;
 			ui_RoomView.roomUserList.userListBut.butBg.visible = true;
-			ui_RoomView.roomUserList.pdphListBut.butBg.visible = false;
+			ui_RoomView.roomUserList.listenerListBut.butBg.visible = false;
 //			ui_RoomView.roomUserList.gotoAndStop(2);
 			_curRoomUserType = ROOM_USER_TYPE_VIEWER;
 			refreshRoomUser();
 //			_playerData.cs_ListUser(_roomId);
 		}
-		private function pdphListButHandel(e:Event):void{
+		private function pdphListButHandel(e:Event = null):void{
 			ui_RoomView.roomUserList.singerListBut.butBg.visible = false;
 			ui_RoomView.roomUserList.userListBut.butBg.visible = false;
-			ui_RoomView.roomUserList.pdphListBut.butBg.visible = false;
-			ui_RoomView.roomUserList.gotoAndStop(3);
-			refreshRoomUser();
+			ui_RoomView.roomUserList.listenerListBut.butBg.visible = true;
+//			ui_RoomView.roomUserList.gotoAndStop(3);
+//			refreshRoomUser();
+			_playerData.cs_ListListens();
 		}
 		private function showSongInfoHandel(songInfo:SongInfoLayCell,singer:Object,key:String):void{
 			songInfoLay.isViewingMap.put(key,singer);
@@ -1639,6 +1644,11 @@ package com.ywit.radio91.view
 //							allSingerUserMap.put(uid,CommonEvent(e).data);
 //						}
 //						object["songsId"] = CommonEvent(e).data.songsId;
+						
+						if(CommonEvent(e).data.uid == _playerData.playerObj.uid){
+							pdphListButHandel();
+							//自己开始唱歌的时候
+						}
 					}
 //					updateRoomUserByUID(uid);
 //					_allPlayerUserMap.put(uid,CommonEvent(e).data);
@@ -1650,6 +1660,8 @@ package com.ywit.radio91.view
 					if(CommonEvent(e).data["follow"] == 1){
 						watchChatView.addMessage(MyTextOut.START_LISTEN_MESSAGE,CommonEvent(e).data);
 						focusInWatchSinger();
+						pdphListButHandel();
+						//自己开始唱歌的时候
 					}
 					
 					break;
@@ -1804,9 +1816,15 @@ package com.ywit.radio91.view
 						UModelLocal.getInstance().uid = userInfoObj["uid"];
 					}
 					break;
+				case AbsPlayerData.EVENT_RES_ListListens:
+					var listListens:Object = CommonEvent(e).data;
+					listListenerArray = listListens["userList"];
+					_curRoomUserType = ROOM_USER_TYPE_LISTENER;
+					refreshRoomUser();
+					break;
 			}
 		}
-		
+		private var listListenerArray:Array = [];
 		public function focusInWatchSinger():void{
 			ui_RoomView.roomChat.tb_watchSinger.visible = true;//什么时候将他们隐藏掉呢
 			ui_RoomView.roomChat.tb_watchSinger.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
@@ -1830,6 +1848,12 @@ package com.ywit.radio91.view
 				}
 			}
 			return array;
+		}
+		/**
+		 * 得到没有唱歌的观众的列表
+		 */ 
+		private function getListenerList():Array{
+			return listListenerArray;
 		}
 		
 		/**
@@ -1867,9 +1891,14 @@ package com.ywit.radio91.view
 				list = getViewerList();
 			}
 			
+			if(_curRoomUserType == ROOM_USER_TYPE_LISTENER){
+				list = getListenerList();
+			}
+			
 			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
 			ui_RoomView.roomUserList.singerListBut.tf_singerList.text = "唱歌("+ getSingerList().length +")";
 			ui_RoomView.roomUserList.userListBut.tf_userList.text = "观众("+getViewerList().length+")";
+			ui_RoomView.roomUserList.listenerListBut.tf_pdphList.text = "听歌("+getListenerList().length+")";
 			ui_RoomView.roomUserList.singerListBut.tf_singerList.mouseEnabled = false;
 			ui_RoomView.roomUserList.userListBut.tf_userList.mouseEnabled = false;
 			
@@ -2066,7 +2095,7 @@ package com.ywit.radio91.view
 			_playerData.removeEventListener(OperateSongEvent.EVENT_SING,commonEventHandler);//玩家选中
 			_playerData.removeEventListener(OperateSongEvent.EVENT_LISTEN,commonEventHandler);//玩家选中
 
-			ui_RoomView.roomUserList.pdphListBut.removeEventListener(MouseEvent.CLICK,pdphListButHandel);//暂时不做
+			ui_RoomView.roomUserList.listenerListBut.removeEventListener(MouseEvent.CLICK,pdphListButHandel);//暂时不做
 			
 			//广播按钮监听
 			ui_RoomView.broadCast.but_sendMessage.removeEventListener(MouseEvent.CLICK,wantBroadCastButHandel);
