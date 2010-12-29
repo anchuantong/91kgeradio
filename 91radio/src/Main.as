@@ -98,6 +98,30 @@ package
 		}
 		
 		/**
+		 * 被外部呼叫调用的弹出礼物面板
+		 */ 
+		public function sendGift(uid:int):void{
+			var roomView:RoomView = RoomView(ViewHelper.getView(ViewRegister.ROOM_VIEW));  
+			if(roomView == null){
+				throw new Error("sendGift failed!! case by roomView is null");
+				return;
+			}
+			roomView.popPresentPannel(uid);
+		}
+		
+		/**
+		 * 被外部呼叫调用的设置私聊面板
+		 */ 
+		public function sendPrivateMessage(uid:int):void{
+			var roomView:RoomView = RoomView(ViewHelper.getView(ViewRegister.ROOM_VIEW));  
+			if(roomView == null){
+				throw new Error("sendPrivateMessage failed!! case by roomView is null");
+				return;
+			}
+			roomView.selectTargetComboBoxByUID(uid);
+		}
+		
+		/**
 		 * 为房间加载一个底部的显示对象
 		 */ 
 		public function addRoomBottom(disObj:DisplayObject):void{
