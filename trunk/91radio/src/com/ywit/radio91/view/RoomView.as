@@ -229,6 +229,7 @@ package com.ywit.radio91.view
 			publicChatView.x = 2;
 			publicChatView.y = 24;
 			chatViewPanel.y = 24;
+			chatViewPanel.visible = false;
 			
 			watchChatView.x = 2;
 			watchChatView.y = 24;
@@ -625,6 +626,8 @@ package com.ywit.radio91.view
 			ui_RoomView.addChild(roomUserInfoTip);
 			ui_RoomView.addChild(ui_GiftListView);
 			ui_RoomView.addChild(ui_GiftTipView);
+			
+			publicChatButHandel();
 		}
 		
 		
@@ -1138,7 +1141,7 @@ package com.ywit.radio91.view
 			//ui_RoomView.roomChat.targetComboBox.selectedItem.data
 			
 		}
-		private function publicChatButHandel(e:Event):void{
+		private function publicChatButHandel(e:Event=null):void{
 			_smileyContainer.visible = false; 
 		
 			ui_RoomView.roomChat.tb_publicChat.tb_bg.visible = true;
@@ -1168,8 +1171,8 @@ package com.ywit.radio91.view
 				}
 			}
 			
-//			privateChatView.visible = true;
-//			publicChatView.visible = true;
+			privateChatView.visible = true;
+			publicChatView.visible = true;
 			chatViewPanel.visible = true;
 			watchChatView.visible = false;
 			_mySongs_tileList.visible = false;
@@ -1212,8 +1215,8 @@ package com.ywit.radio91.view
 //			_scrollPanePublic.visible = false;
 //			_scrollPaneWatch.visible = false;
 			
-//			privateChatView.visible = false;
-//			publicChatView.visible = false;
+			privateChatView.visible = false;
+			publicChatView.visible = false;
 			chatViewPanel.visible = false;
 			
 			watchChatView.visible = false;
@@ -1243,8 +1246,8 @@ package com.ywit.radio91.view
 //			_scrollPaneWatch.visible = false;
 			
 			_mySongs_tileList.visible = true;
-//			privateChatView.visible = false;
-//			publicChatView.visible = false;
+			privateChatView.visible = false;
+			publicChatView.visible = false;
 			chatViewPanel.visible = false;
 			watchChatView.visible = false;
 			
@@ -1270,8 +1273,8 @@ package com.ywit.radio91.view
 //			_scrollPanePublic.visible = false;
 //			_scrollPaneWatch.visible = true;
 			
-//			privateChatView.visible = false;
-//			publicChatView.visible = false;
+			privateChatView.visible = false;
+			publicChatView.visible = false;
 			chatViewPanel.visible = false;
 			watchChatView.visible = true;
 			_mySongs_tileList.visible = false;
@@ -1678,7 +1681,7 @@ package com.ywit.radio91.view
 					refreshRoomUser();
 					refershTimer();
 					if(UModelLocal.getInstance().debug == 0){
-						NetUntil.getInstance().send("{jsessionid:711857534_browser_sessionid,method:StartSing,sid:1,singTime:0,songsTime:180,score:0,songsName:爱我别走,songsSinger:张震 岳}");
+//						NetUntil.getInstance().send("{jsessionid:711857534_browser_sessionid,method:StartSing,sid:1,singTime:0,songsTime:180,score:0,songsName:爱我别走,songsSinger:张震 岳}");
 					}
 					//公聊信息
 					break;
