@@ -1681,7 +1681,7 @@ package com.ywit.radio91.view
 					refreshRoomUser();
 					refershTimer();
 					if(UModelLocal.getInstance().debug == 0){
-//						NetUntil.getInstance().send("{jsessionid:711857534_browser_sessionid,method:StartSing,sid:1,singTime:0,songsTime:180,score:0,songsName:爱我别走,songsSinger:张震 岳}");
+						NetUntil.getInstance().send("{jsessionid:711857534_browser_sessionid,method:StartSing,sid:1,singTime:0,songsTime:180,score:0,songsName:爱我别走,songsSinger:张震 岳}");
 					}
 					//公聊信息
 					break;
@@ -1894,11 +1894,12 @@ package com.ywit.radio91.view
 				list = getViewerList();
 			}
 			
+			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
+			
 			if(_curRoomUserType == ROOM_USER_TYPE_LISTENER){
 				list = getListenerList();
 			}
 			
-			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
 			ui_RoomView.roomUserList.singerListBut.tf_singerList.text = "唱歌("+ getSingerList().length +")";
 			ui_RoomView.roomUserList.userListBut.tf_userList.text = "观众("+getViewerList().length+")";
 			ui_RoomView.roomUserList.listenerListBut.tf_pdphList.text = "听歌("+getListenerList().length+")";
