@@ -29,6 +29,10 @@ package com.ywit.radio91.view
 	import flash.text.TextField;
 	import flash.utils.Timer;
 
+	/**
+	 * 大厅界面
+	 * 
+	 */ 
 	public class HallView extends AbsView
 	{
 		public var ui_MovieClip_Hall:UI_MovieClip_Hall = new UI_MovieClip_Hall();
