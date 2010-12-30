@@ -124,6 +124,12 @@
 					<input name="songsTime" type="int" description="歌曲总时长"></input>
 					<input name="score" type="int" description="得分"></input>
 					<input name="created" type="String" description="发生时间"></input>
+					<input name="sendUid" type="int" description="发送礼物用户ID"></input>
+					<input name="sendUname" type="String" description="发送礼物用户姓名"></input>
+					<input name="gift" type="String" description="发送礼物用户姓名"></input>
+					<input name="giftName" type="String" description="礼物名称"></input>
+					<input name="giftImgUrl" type="String" description="礼物对应的图片地址"></input>
+					<input name="count" type="int" description="一共赠送多少个礼物，需要根据他显示${count}行"></input>
 			</method>
 			
 			<method name="pushErrorConnection" description="连接错误推送接口" transaction="true"><!-- errorCode=600的情况，服务器会断开当前会话，请停止客户端一切操作，并提示用户 -->
