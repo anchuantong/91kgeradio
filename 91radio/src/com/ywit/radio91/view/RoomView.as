@@ -48,6 +48,7 @@ package com.ywit.radio91.view
 	import flash.events.MouseEvent;
 	import flash.events.TextEvent;
 	import flash.events.TimerEvent;
+	import flash.geom.ColorTransform;
 	import flash.system.Capabilities;
 	import flash.system.IME;
 	import flash.system.IMEConversionMode;
@@ -842,6 +843,50 @@ package com.ywit.radio91.view
 		}
 		
 		/**
+		 * 是否播放星级歌手里面的头像面板特效
+		 */ 
+		private function playEffectStarInfoTouXiang(b:Boolean):void{
+			var colorTF:ColorTransform;
+			function colorOffsetEnterFrameHandler(e:Event):void{
+				colorTF = new ColorTransform();
+				colorTF.redOffset = ui_RoomView.starInfo.touxiang.transform.colorTransform.redOffset -5;
+				colorTF.blueOffset = ui_RoomView.starInfo.touxiang.transform.colorTransform.blueOffset -5;
+				colorTF.greenOffset = ui_RoomView.starInfo.touxiang.transform.colorTransform.greenOffset -5;
+				if(colorTF.redOffset <=0){
+					colorTF = new ColorTransform();
+					colorTF.redOffset = 0;
+					colorTF.blueOffset = 0;
+					colorTF.greenOffset = 0;
+					ui_RoomView.starInfo.touxiang.transform.colorTransform = colorTF; 
+					if(e.target.hasEventListener(Event.ENTER_FRAME)){
+						e.target.removeEventListener(Event.ENTER_FRAME,colorOffsetEnterFrameHandler);
+					}
+					return;
+						}
+				ui_RoomView.starInfo.touxiang.transform.colorTransform = colorTF;
+				
+			}
+			
+			if(b){
+				colorTF = new ColorTransform();
+				colorTF.redOffset = 255;
+				colorTF.blueOffset = 255;
+				colorTF.greenOffset = 255;
+				ui_RoomView.starInfo.touxiang.transform.colorTransform = colorTF; 
+				this.addEventListener(Event.ENTER_FRAME,colorOffsetEnterFrameHandler);
+			}else{
+				if(this.hasEventListener(Event.ENTER_FRAME)){
+					this.removeEventListener(Event.ENTER_FRAME,colorOffsetEnterFrameHandler);
+				}
+				colorTF = new ColorTransform();
+				colorTF.redOffset = 0;
+				colorTF.blueOffset = 0;
+				colorTF.greenOffset = 0;
+				ui_RoomView.starInfo.touxiang.transform.colorTransform = colorTF; 
+			}
+		}
+		
+		/**
 		 * 星级歌手面板是否显示歌手信息
 		 * 默认为不显示
 		 * 不显示就显示为点击开唱部分
@@ -849,7 +894,8 @@ package com.ywit.radio91.view
 		 */ 
 		private function starInfoShowStar(boolean:Boolean):void{
 			if(boolean){
-				ui_RoomView.starInfo.gotoAndPlay(2);
+				ui_RoomView.starInfo.gotoAndStop(2);
+				playEffectStarInfoTouXiang(true);
 				ui_RoomView.starInfo.mc_listenSong.visible = true;
 				ui_RoomView.starInfo.mc_sendPresent.visible = true;
 				ui_RoomView.starInfo.mc_chat.visible = true;
@@ -899,6 +945,7 @@ package com.ywit.radio91.view
 				ui_RoomView.starInfo.mc_listenSong.visible = false;
 				ui_RoomView.starInfo.mc_sendPresent.visible = false;
 				ui_RoomView.starInfo.mc_chat.visible = false;
+				playEffectStarInfoTouXiang(false);
 				ui_RoomView.starInfo.gotoAndStop(1);
 				if(!ui_RoomView.starInfo.btn_clickToSing.hasEventListener(MouseEvent.CLICK)){
 					ui_RoomView.starInfo.btn_clickToSing.addEventListener(MouseEvent.CLICK,function(e:MouseEvent):void{
