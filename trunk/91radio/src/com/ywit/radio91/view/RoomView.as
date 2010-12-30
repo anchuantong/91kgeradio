@@ -1811,10 +1811,11 @@ package com.ywit.radio91.view
 					_curStarUserSingTime   = singerTime;
 					starInfoShowStar(true);
 //					ui_RoomView.starInfo.tf_title.text = objStarUser.title;
-					ui_RoomView.starInfo.tf_singerName.text = "<font color='#1699C5'>收到 </font><font color='#ABDF95'>"+ objStarUser.sendUname +"</font>";
-					ui_RoomView.starInfo.tf_title.text = "<font color='#1699C5'>" + objStarUser.giftName + "</font><font color='#ABDF95'> " + objStarUser.count +"</font>个";
+					ui_RoomView.starInfo.tf_singerName.htmlText = "<font color='#1699C5'>收到 </font><font color='#ABDF95'>"+ objStarUser.sendUname +"</font>";
+					ui_RoomView.starInfo.tf_title.htmlText = "<font color='#1699C5'>" + objStarUser.giftName + "</font><font color='#ABDF95'> " + objStarUser.count +"</font>个";
 					ui_RoomView.starInfo.tf_songName.text = objStarUser.songsName;
 					ui_RoomView.starInfo.touxiang.loader_userImg.source = objStarUser.headimg;
+					ui_RoomView.starInfo.touxiang.tf_uname.text = objStarUser.uname;
 					if(objStarUser.singerTime < objStarUser.songsTime){
 						_starSingerTimer.start();
 					}
