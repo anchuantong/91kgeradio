@@ -2030,15 +2030,15 @@ package com.ywit.radio91.view
 		//广播里面使用的广播一行的对象
 		private var _bcLineView:BroadCastLineView;
 		
-		private function refershBroadCastTimer():void{
+		private function refershBroadCastTimer(e:Event=null):void{
 //			if(broadCastMessageArray.length >= 0&&!broadCastTime.running){
 //				broadCastTime.addEventListener(TimerEvent.TIMER,refersh);
 //				broadCastTime.start();
 //				refersh(new Event(""));
 //			}
 			
-			if(_bcLineView == null){
-				refersh(new Event(""));
+			if(_bcLineView == null||_bcLineView._isRollingOver){
+				refersh();
 			}
 			
 		}
@@ -2079,8 +2079,12 @@ package com.ywit.radio91.view
 			var errorView:ErrorView = new ErrorView(status+":"+message);
 			addChild(errorView);
 		}
-		
-		private function refersh(e:Event):void{
+		private function bcLineViewSecondTimeHandel(e:Event=null):void{
+			if(broadCastMessageArray.length>0){
+				refersh();
+			}
+		}
+		private function refersh(e:Event=null):void{
 			var broadCastObj:Object = broadCastMessageArray.shift();
 			
 			if(_bcLineView != null && ui_RoomView.broadCast.contains(_bcLineView)){
@@ -2096,7 +2100,8 @@ package com.ywit.radio91.view
 				_bcLineView = new BroadCastLineView("<font color='#FF0099'>"+broadCastObj.uname+": </font><font color='#000000'>"+broadCastObj.content+"</font><font color='#6CCAFF'>"+broadCastObj.created+"</font>",650,1000,5,broadCastObj.roomId);
 				_bcLineView.y = 5;
 				ui_RoomView.broadCast.broadcastAnimation.gotoAndPlay(2);
-				_bcLineView.addEventListener(Event.COMPLETE,refersh);
+				_bcLineView.addEventListener(Event.COMPLETE,refershBroadCastTimer);
+				_bcLineView.addEventListener(BroadCastLineView.SECONDTIME_COMPLETE,bcLineViewSecondTimeHandel);
 				_bcLineView.addEventListener(BroadCastLineView.EVENT_ENTER_ROOM,enterAnotherRoomHandler);
 				ui_RoomView.broadCast.addChild(_bcLineView);
 				_bcLineView.x = 44;
