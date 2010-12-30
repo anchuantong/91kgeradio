@@ -15,7 +15,7 @@ package com.ywit.radio91.view
 	 */ 
 	public class BroadCastLineView extends AbsView
 	{
-	
+		public static const SECONDTIME_COMPLETE:String = "SecondTimeComplete";
 		private var _rollingMsg:RollingMsg;
 		public var _isRollingOver:Boolean=false;
 		//进入房间的链接
@@ -30,6 +30,7 @@ package com.ywit.radio91.view
 			
 			_rollingMsg = new RollingMsg(text,width,step,isout);
 			_rollingMsg.addEventListener(Event.COMPLETE,completeHandler);
+			_rollingMsg.addEventListener(SECONDTIME_COMPLETE,completeHandler2);
 			if(roomId >0){
 				_enterRoomBtn = new UI_EnterRoomFromBC();
 				_enterRoomBtn.addEventListener(MouseEvent.CLICK, clickHandler);
@@ -49,6 +50,9 @@ package com.ywit.radio91.view
 		
 		private function completeHandler(e:Event):void{
 			_isRollingOver = true;
+			dispatchEvent(e);
+		}
+		private function completeHandler2(e:Event):void{
 			dispatchEvent(e);
 		}
 		
@@ -85,6 +89,8 @@ package com.ywit.radio91.view
 
 	}
 }
+import com.ywit.radio91.view.BroadCastLineView;
+
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.text.TextField;
@@ -152,7 +158,6 @@ class RollingMsg extends Sprite{
 		
 		},100);
 	}
-	
 	/**
 	 * 滚动完了第一遍，滚动第二遍的处理
 	 */ 
@@ -164,7 +169,7 @@ class RollingMsg extends Sprite{
 				if(_isout){
 					dispatchEvent(new Event(Event.COMPLETE));
 				}else{
-					_timeOutId = setTimeout(rollingThirdTime,5000);
+					_timeOutId = setTimeout(rollingThirdTime,1000);
 				}
 			}
 			m_txt.x -= _step;
@@ -174,6 +179,7 @@ class RollingMsg extends Sprite{
 	}
 	
 	private function rollingThirdTime():void{
+		dispatchEvent(new Event(BroadCastLineView.SECONDTIME_COMPLETE));
 		clearTimeout(_timeOutId);
 		_intervalId = setInterval(function():void{
 			if(m_txt.x <= -m_txt.width){
