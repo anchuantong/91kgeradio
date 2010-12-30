@@ -44,6 +44,7 @@
 					<input name="sendUname" type="String" description="发送礼物用户姓名"></input>
 					<input name="recUid" type="int" description="发送礼物用户ID"></input>
 					<input name="recUname" type="String" description="发送礼物用户姓名"></input>
+					<input name="giftId" type="int" description="礼物ID"></input>
 					<input name="giftName" type="String" description="礼物名称"></input>
 					<input name="giftImgUrl" type="String" description="礼物对应的图片地址"></input>
 					<input name="count" type="int" description="一共赠送多少个礼物，需要根据他显示${count}行"></input>
