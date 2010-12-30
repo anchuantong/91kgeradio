@@ -62,9 +62,10 @@ package com.ywit.radio91.view
 	
 
 	/**
-	 * startUser接口 是不是 push
-	 * EVENT_RES_GetNotice接口是不是push
-	 * 关注接口没有
+	 * 
+	 * 进入房间后的房间界面
+	 * 所有的侦听基本都写在configEventListener方法里面
+	 * 
 	 */ 
 	public class RoomView extends AbsView {
 		public var ui_RoomView:UI_RoomView = new UI_RoomView();
@@ -1593,6 +1594,7 @@ package com.ywit.radio91.view
 				case AbsPlayerData.EVENT_PUSH_pushGiftMessage:
 					var object:Object = CommonEvent(e).data;
 					var count:int = object["count"];
+					var giftId:int = object["giftId"];
 					for( var i:int;i<count;i++){
 						object["nowCount"] = i+1;
 						publicChatView.addMessage(MyTextOut.GIFT_MESSAGE,object);
@@ -1600,6 +1602,8 @@ package com.ywit.radio91.view
 							watchChatView.addMessage(MyTextOut.GIFT_MESSAGE,object);
 						}
 					}
+					
+					BaseInteract.baseShowGift(giftId,count);
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushLevelRoom:
 					CommonEvent(e).data["isLevel"] = true;
@@ -1806,8 +1810,9 @@ package com.ywit.radio91.view
 					
 					_curStarUserSingTime   = singerTime;
 					starInfoShowStar(true);
-					ui_RoomView.starInfo.tf_title.text = objStarUser.title;
-					ui_RoomView.starInfo.tf_singerName.text = objStarUser.uname;
+//					ui_RoomView.starInfo.tf_title.text = objStarUser.title;
+					ui_RoomView.starInfo.tf_singerName.text = "<font color='#1699C5'>收到 </font><font color='#ABDF95'>"+ objStarUser.sendUname +"</font>";
+					ui_RoomView.starInfo.tf_title.text = "<font color='#1699C5'>" + objStarUser.giftName + "</font><font color='#ABDF95'> " + objStarUser.count +"</font>个";
 					ui_RoomView.starInfo.tf_songName.text = objStarUser.songsName;
 					ui_RoomView.starInfo.touxiang.loader_userImg.source = objStarUser.headimg;
 					if(objStarUser.singerTime < objStarUser.songsTime){

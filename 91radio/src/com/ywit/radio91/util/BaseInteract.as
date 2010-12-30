@@ -86,6 +86,17 @@ package com.ywit.radio91.util
 			_invoker["cancelRadioSocket"]();
 		}
 		
+		/**
+		 * 取消的时候调用外部的方法,移除并返回应用的上一层
+		 */ 
+		public static function baseShowGift(giftId:int,giftCount:int):void{
+			if(_debug == 0){
+				trace("baseShowGift");
+				return;
+			}
+			_invoker["showGift"](giftId,giftCount);
+		}
+		
 		
 	}
 }
