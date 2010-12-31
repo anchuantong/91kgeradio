@@ -1395,7 +1395,7 @@ package com.ywit.radio91.view
 		}
 		private function sendBroadCastMessage(e:Event=null):void{
 			var sendValue:int = ui_roomBroadCast.isAddRoomLink.selected?1:0;
-			_playerData.cs_SendBroadCast(RegExpTool.deleteLineChanger(ui_roomBroadCast.text_broadCastContext.text),sendValue);
+			_playerData.cs_SendBroadCast("\""+RegExpTool.deleteLineChanger(ui_roomBroadCast.text_broadCastContext.text+"\""),sendValue);
 			if(ui_roomBroadCast.parent){
 				removeChild(ui_roomBroadCast);
 			}
