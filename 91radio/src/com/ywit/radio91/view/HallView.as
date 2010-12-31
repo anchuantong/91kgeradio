@@ -604,7 +604,7 @@ package com.ywit.radio91.view
 		private function sendBroadCastMessage(e:Event):void{
 //			NetUntil.getInstance().send("{\"jsessionid\":\"711857534_browser_sessionid\",\"method\":\"sendBroadCast\",\"content\":\""+hallView.ui_BroadCastContextView.text_broadCastContext.text+"\",\"sendLink\":0}");
 			
-			_playerData.cs_SendBroadCast(RegExpTool.deleteLineChanger(ui_BroadCastContextView.text_broadCastContext.text),0);
+			_playerData.cs_SendBroadCast("\""+RegExpTool.deleteLineChanger(ui_BroadCastContextView.text_broadCastContext.text+"\""),0);
 			if(ui_BroadCastContextView.parent){
 				removeChild(ui_BroadCastContextView);
 			}
