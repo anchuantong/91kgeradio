@@ -169,7 +169,7 @@ class RollingMsg extends Sprite{
 				if(_isout){
 					dispatchEvent(new Event(Event.COMPLETE));
 				}else{
-					_timeOutId = setTimeout(rollingThirdTime,1000);
+					_timeOutId = setTimeout(rollingThirdTime,500);
 				}
 			}
 			m_txt.x -= _step;
