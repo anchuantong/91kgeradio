@@ -1,17 +1,3 @@
-/**
- * 12-3
- * 遗留问题
- * 1。  comboBox中增加私聊方法
- *     处理:增加一个事件监听,收到事件监听后创建OBJ到DP
- * 2。聊天发送给服务器就断开了服务器连接问题.
- * 3。礼物的发送.
- * 4。表情和礼物分别用swc编译.
- * 5。用户TIP显示
- * 6。用户列表中的头像大小,图标大小.
- * 7。 最大化
- * 8。返回房间
- * 9。我的歌本
- */	
 
 package com.ywit.radio91.view
 {
@@ -65,9 +51,14 @@ package com.ywit.radio91.view
 	 * 
 	 * 进入房间后的房间界面
 	 * 所有的侦听基本都写在configEventListener方法里面
-	 * 
+	 * 这个界面包含了各种在房间界面中出现的界面，可能某些界面没有采用绝对的面相对象进行包装
+	 * 请仔细阅读UI.FLA中的ui界面层次。
+	 * 注意:程序中使用到了_currentStarUserResObj对象，该对象本来是用以描述右上角
+	 * 星级唱歌用户的现在已经由原设计改为了送礼便即时出现的对象。
+	 * 这里请注意这一变动。
 	 */ 
 	public class RoomView extends AbsView {
+		//fla文件里面对应的类
 		public var ui_RoomView:UI_RoomView = new UI_RoomView();
 		private var _playerData:PlayerData =PlayerData.getInstance();
 		private var _roomId:int = 1;//房间id
@@ -176,7 +167,7 @@ package com.ywit.radio91.view
 		}
 		
 		/**
-		 * 将播放器加载进来
+		 * 将外部播放器加载到房间界面roomView中
 		 */ 
 		public function addKPlayer(disObj:DisplayObject):void{
 			ui_RoomView.mc_roomBg.mc_KPlayerBg.addChild(disObj);
@@ -204,7 +195,7 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.cb_isPrivateChat.enabled = false
 //			ui_RoomView.roomChat.targetComboBox.width = 100;
 			
-			
+			//设置房间里面滚动条的统一样式，相对于大厅滚动条样式，这里是运行时设置的
 			_myTileListUserInfoList.setStyle("upArrowDisabledSkin",UpArrowUpSkin2);
 			_myTileListUserInfoList.setStyle("upArrowUpSkin",UpArrowUpSkin2);
 			_myTileListUserInfoList.setStyle("upArrowOverSkin",UpArrowOverSkin2);

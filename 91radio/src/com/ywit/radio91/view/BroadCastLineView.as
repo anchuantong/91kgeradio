@@ -12,6 +12,7 @@ package com.ywit.radio91.view
 	/**
 	 * 一行滚动的播放条
 	 * 可以附加一个显示一个房间链接 
+	 * 用在大厅和房间的广播功能上
 	 */ 
 	public class BroadCastLineView extends AbsView
 	{

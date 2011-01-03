@@ -13,7 +13,9 @@ package com.ywit.radio91.view
 	import flashx.textLayout.elements.FlowElement;
 	import flashx.textLayout.elements.LinkElement;
 	import flashx.textLayout.elements.SpanElement;
-
+/**
+ * 提供程序中使用到的link功能的工具类，比如聊天里的人名连接，歌曲链接等等。
+ */ 
 	public class LinkElementUtil {
 		
 		public static function addUserLink(uid:int,uName:String,linkable:Boolean=true):FlowElement{

@@ -1,7 +1,9 @@
 package com.ywit.radio91.util
 {
 	import flash.utils.Dictionary;
-	
+/**
+ * 用来注册界面的注册器
+ */ 	
 	public class Register
 	{
 		protected var dict : Dictionary = new Dictionary();

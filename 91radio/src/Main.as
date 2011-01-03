@@ -21,6 +21,13 @@ package
 	import flash.system.Security;
 	
 	//[Frame(factoryClass="Preloader")] 
+	/**
+	 * 主程序启动入口
+	 * 主舞台入口
+	 * base调用的main方法所在类
+	 * 舞台宽高固定设置为800*800
+	 * 帧数为24
+	 */ 
 	[SWF(width="800",height="800",rate="24",backgroundColor="0xA6D4FF")]
 	public class Main extends Sprite
 	{
@@ -30,6 +37,7 @@ package
 		
 		private var assetLoader:Loader = new Loader();
 		private var _playerData:PlayerData = PlayerData.getInstance();
+		//填充背景的png
 		[Embed(@source="resources/fillBG.png")]
 		private var _fillBg:Class;
 		

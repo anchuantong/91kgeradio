@@ -31,6 +31,9 @@ package com.ywit.radio91.view
 
 	/**
 	 * 大厅界面
+	 * 所有大厅包含的界面都在这里做定位和初始化
+	 * 所有和大厅相关的数据请求侦听也在这个部分。
+	 * 所有的侦听基本都写在configEventListener方法里面
 	 * 
 	 */ 
 	public class HallView extends AbsView
@@ -187,14 +190,16 @@ package com.ywit.radio91.view
 		private function enterRoomEventHandel(e:EnterRoomEvent):void{
 			enterRoom(e.roomId);
 		}
+		
+		/**
+		 * 当程序完成以后要做的数据载入动作
+		 */ 
 		private function loadData():void{
 			_playerData.cs_UserInfo(_uid);
 		}
-		
-		private function addListener():void{
-			
-		}
-		
+		/**
+		 * 在搜索房间框输入字符的时候要做的事件处理函数
+		 */ 
 		private function findRoomInputHandler(e:Event):void{
 			var text:String = TextField(e.target).text;
 			var dp:Array;
@@ -254,6 +259,11 @@ package com.ywit.radio91.view
 		private function closeApplictionHandel(e:Event):void{
 			BaseInteract.cancelRadioSocket();
 		}
+		
+		/**
+		 * 程序中所有的事件监听函数基本都在这个地方做集中匹配处理
+		 * 请对照configeventListener函数中所有的侦听函数
+		 */ 
 		public function commonEventHandler( e:CommonEvent):void {
 			switch (e.type) {
 				case AbsPlayerData.EVENT_RES_Friends:
@@ -612,6 +622,10 @@ package com.ywit.radio91.view
 //		private function ddddd(e:Event=null):void{
 //			
 //		}
+		
+		/**
+		 * 
+		 */ 
 		private function createRoomHandel(e:Event):void{
 			//			NetUntil.getInstance().send("{\"jsessionid\":\"711857534_browser_sessionid\",\"method\":\"sendBroadCast\",\"content\":\""+hallView.ui_BroadCastContextView.text_broadCastContext.text+"\",\"sendLink\":0}");
 			var userCount:int = 5;

@@ -1,7 +1,11 @@
 package com.ywit.radio91.center
 {
 	
-
+/**
+ * 整个程序使用的数据中心类
+ * 所有有关全局的配置相关的数据都记录在这里
+ * 使用单例模式
+ */ 
 	public class UModelLocal
 	{
 		private static var _uModelLocal:UModelLocal;
@@ -23,6 +27,7 @@ package com.ywit.radio91.center
 		//0本地调试，1远程调试(发布)
 		public var debug:int = 1;
 		//TODO可能需要写在外部的config
+		//程序使用的资源地址
 		private var _resourceURL:String = "http://rtmpxn.91kge.com/res/sns/xn/fv1/";
 		
 		
