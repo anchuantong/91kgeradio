@@ -1,3 +1,7 @@
+/**
+ * 这个类是弹出一个确认框
+ * 
+ * */
 package com.ywit.radio91.view
 {
 	import com.ywit.radio91.util.ViewHelper;
@@ -39,6 +43,8 @@ package com.ywit.radio91.view
 		
 		
 		//	ConfirmView.show("asdasd",this,ddddd,true,800,800);
+		//直接调用show,用法如上,
+		//其中 functionHandel:是只点击了"确定"后所要做的事情
 		public static function show(context:String,container:DisplayObjectContainer,functionHandel:Function,event:Event=null,canOtherNotDoing:Boolean=false,width:int=800,height:int = 800):void{
 			var sprite:Sprite;
 			if(canOtherNotDoing){

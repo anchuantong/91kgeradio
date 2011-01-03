@@ -1,3 +1,6 @@
+/**
+ * 
+ * 房间界面右下角用户列表中显示的单元对象*/
 package com.ywit.radio91.view
 {
 	import com.ywit.radio91.constant.ViewRegister;

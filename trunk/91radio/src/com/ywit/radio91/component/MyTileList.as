@@ -1,3 +1,6 @@
+/**
+ * 这个类是一个列表类 ,用在房间列表,房间界面右下角的用户列表,歌本列表.
+ */
 package com.ywit.radio91.component
 {
 	import fl.containers.ScrollPane;
@@ -6,10 +9,20 @@ package com.ywit.radio91.component
 	import flash.display.Sprite;
 
 	public class MyTileList extends ScrollPane {
+		/**
+		 * 用来存放内容的容器*/
 		private  var _context:Sprite;
+		/**
+		 * 这个数组中存放的是需要显示的元素*/
 		private var _dataProvider:Array;
+		/**
+		 * 多少列,默认是1*/
 		public var _columnCount:int = 1;
+		/**
+		 * 显示单位的高度*/
 		public var _rowHeight:int = 30;
+		/**
+		 * 显示单位的宽度*/
 		public var _columnWidth:int = 248;
 		public function MyTileList() {
 			super();
@@ -23,10 +36,14 @@ package com.ywit.radio91.component
 			return _dataProvider;
 		}
 		
+		/**
+		 * 这个方法是刷新显示的方法 在,
+		 * */
 		public function set dataProvider(dataProvider:Array):void{
 			deleteAllCell();
 			var xNow:int = 0;
 			var yNow:int = 0;
+			//按照当前的规则算坐标添加
 			for (var i:int=0;i<dataProvider.length;i++){
 				var cell:DisplayObject = dataProvider[i] as DisplayObject;
 				
@@ -43,6 +60,8 @@ package com.ywit.radio91.component
 			this.update();
 		}
 		//清空内容
+		/**
+		 * 将当前显示的所有内容全部清除*/
 		public function deleteAllCell():void{
 			if(!_context){
 				return;
@@ -52,6 +71,7 @@ package com.ywit.radio91.component
 				_context.removeChildAt(0);
 			}
 		}
+		
 		public function addCell(cell:Sprite):void{
 			_context.addChild(cell);
 			this.update();

@@ -1,3 +1,5 @@
+/**
+ * 服务端和客户端之间通信的类*/
 package com.ywit.radio91.util
 {
 	import com.serialization.json.JSON;
@@ -43,7 +45,12 @@ package com.ywit.radio91.util
 			
 		}
 		private var isNeedReConnet:Boolean = false;
+		/**
+		 * 服务器地址*/
 		private var _host:String;
+		
+		/**
+		 * 端口*/
 		private var _port:int;
 		public function connect(host:String,port:int):void{
 //			socket.connect(UModelLocal.getInstance().xmlSocket,UModelLocal.getInstance().xmlSocketPost);

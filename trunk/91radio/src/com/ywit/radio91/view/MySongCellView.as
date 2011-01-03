@@ -1,3 +1,5 @@
+/**
+ * 歌本列表中显示的一个小单元对象*/
 package com.ywit.radio91.view
 {
 	import com.ywit.radio91.component.Button;

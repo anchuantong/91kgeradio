@@ -1,3 +1,5 @@
+/**
+ * 这个类是为了制作公聊和私聊之间的滚动效果而设计的*/
 package com.ywit.radio91.view
 {
 	
@@ -11,7 +13,9 @@ package com.ywit.radio91.view
 	public class ChatViewPanelView extends Sprite {
 		private var _height:int ;
 		private var _wight:int ;
+		//中间可以拖动的样式
 		private var sprite2:MainRoomInfoFrame_dragLine = new MainRoomInfoFrame_dragLine();
+		//用来监听鼠标响应事件
 		private var mouseHitArea:Sprite = new Sprite();
 		private var startDrop:Boolean = false;
 		public static const PANEL_1:int = 1;
@@ -20,6 +24,7 @@ package com.ywit.radio91.view
 		private var displayObject1:MyTextOut;
 		private var displayObject2:MyTextOut;
 		
+		//只有分上下 两个区域
 		public function ChatViewPanelView(wight:int,height:int) {
 			this._wight= wight;
 			this.height= height;
@@ -31,6 +36,7 @@ package com.ywit.radio91.view
 			
 			addChild(sprite2);
 		}
+		//设置这个类的高度,同是调整两个界面的高度
 		override public function set height(height:Number):void{
 			this._height= height;
 			sprite2.y = 78;
@@ -79,7 +85,8 @@ package com.ywit.radio91.view
 				}
 			}
 		}
-		
+		/**
+		 * location:是往哪个界面里添加,,会讲目标界面原有的对象移除掉在添加*/
 		public function addPlane(location:int,displayObject:MyTextOut):void{
 			switch(location){
 				case PANEL_1:
@@ -99,7 +106,7 @@ package com.ywit.radio91.view
 			}
 			updateSize();
 		}
-		
+		//跟新两个界面的高度
 		private function updateSize():void{
 			if(displayObject1){
 				displayObject1.y = 0;

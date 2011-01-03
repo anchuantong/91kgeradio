@@ -1,3 +1,5 @@
+/**
+ * 错误界面的显示*/
 package com.ywit.radio91.view
 {
 	import com.ywit.radio91.util.ButtonUtil;
@@ -9,6 +11,7 @@ package com.ywit.radio91.view
 	public class ErrorView extends AbsView
 	{
 		private var ui_ErrorView:UI_ErrorView = new UI_ErrorView();
+		//functionHandel:是点击确定后所调用的方法
 		public function ErrorView(str:String,functionHandel:Function=null)
 		{
 			ui_ErrorView.x = Main.KG_WIDTH/2-ui_ErrorView.width/2;

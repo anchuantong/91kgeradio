@@ -1,3 +1,5 @@
+/**
+ * 一个聊天的界面,公聊 私聊 关注*/
 package com.ywit.radio91.view
 {
 	

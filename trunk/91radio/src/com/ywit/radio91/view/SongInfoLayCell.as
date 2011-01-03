@@ -1,3 +1,5 @@
+/**
+ * 由名字可以知道这个类是房间顶部的滚动条中显示的对象*/
 package com.ywit.radio91.view
 {
 	import com.greensock.TweenLite;
