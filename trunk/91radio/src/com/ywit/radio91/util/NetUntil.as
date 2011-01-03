@@ -14,6 +14,10 @@ package com.ywit.radio91.util
 	import flash.events.SecurityErrorEvent;
 	import flash.net.XMLSocket;
 
+/**
+ * 用于客户端最底层的接收和发送请求的类
+ * 
+ */ 
 	public class NetUntil extends EventDispatcher
 	{
 		

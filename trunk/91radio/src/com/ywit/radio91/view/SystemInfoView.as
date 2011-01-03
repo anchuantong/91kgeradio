@@ -7,7 +7,9 @@ package com.ywit.radio91.view
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-
+/**
+ * 系统面板，提示正在连接中
+ */ 
 	public class SystemInfoView extends AbsView
 	{
 		private var ui_Movieclip_NetCont:UI_Movieclip_NetCont = new UI_Movieclip_NetCont();

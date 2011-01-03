@@ -3,7 +3,9 @@ package com.ywit.radio91.view
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.text.TextField;
-
+/**
+ * 登陆界面，程序中暂时没有用到。
+ */ 
 	public class LoginView extends AbsView
 	{
 		public var username:TextField = new TextField();

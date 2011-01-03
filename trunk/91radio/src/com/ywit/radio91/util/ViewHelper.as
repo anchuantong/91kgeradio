@@ -8,14 +8,19 @@ package com.ywit.radio91.util
 	
 	import mx.core.IVisualElement;
 	
-	
+/**
+ * 导航界面使用的工具类，使得在任何地方都可以引用管理界面
+ * 使用该工具产生的view在同一时刻只能存在一个实例，以前存在的实例将被立即销毁
+ */ 	
 	public class ViewHelper
 	{
 		public static var register:Register;
 		private static var activeViews:Dictionary = new Dictionary();
 		
 		public static var _main:Main;
-		
+		/**
+		 * 添加一个view实例到父容器
+		 */ 
 		public static function addView(view:String, parent:DisplayObjectContainer):DisplayObject {
 			var oldView:DisplayObject = activeViews[view];
 			if(oldView!=null){
@@ -26,7 +31,9 @@ package com.ywit.radio91.util
 			parent.addChild(newView);
 			return newView;
 		}
-	
+	/**
+	 *  得到一个已经存在的view实例
+	 */ 
 		public static function getView(view:String):DisplayObject {
 			var oldView:DisplayObject = activeViews[view];
 			if(oldView == null){
@@ -34,6 +41,10 @@ package com.ywit.radio91.util
 			}
 			return oldView;
 		}		
+		
+		/**
+		 * 从一个实例导航到另一个实例并且销毁以前的实例
+		 */ 
 		public static function navigate(view_from:String, view_to:String, parent:DisplayObjectContainer):DisplayObject {
 			var view:DisplayObject = addView(view_to, parent);
 			if(activeViews[view_from]!=null){
@@ -66,6 +77,10 @@ package com.ywit.radio91.util
 
 		}	
 		
+		/**
+		 * 
+		 * 弹出一个view实例并且作为有模式的具有灰色背景的窗口，居中对齐。
+		 */ 
 		public static function popView(view:String,parent:DisplayObjectContainer, width:Number=0,height:Number=0):DisplayObject {
 			var sprite:Sprite = new Sprite();
 			parent.addChild(sprite);
@@ -81,6 +96,9 @@ package com.ywit.radio91.util
 			
 		}
 		
+		/**
+		 *  删除弹出的窗口
+		 */ 
 		public static function removePopView(view:String):void{
 			var popView:DisplayObject = getView(view);
 			if(popView&&popView.parent&&popView.parent.parent){

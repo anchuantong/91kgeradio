@@ -4,6 +4,7 @@ package com.ywit.radio91.event
 	
 	/**
 	 * 类说明：一个携带数据的高度抽象的事件
+	 * 只携带数据和事件类型
 	 * @time 2010-11-26 下午02:17:38
 	 * @author keynes
 	 */

@@ -5,7 +5,9 @@ package com.ywit.radio91.util
 	
 	import flash.display.DisplayObject;
 	import flash.display.SimpleButton;
-
+/**
+ * 如果需要为按钮加入移动上去的辉光效果请使用改类提供的静态方法changeButton。
+ */ 
 	public class ButtonUtil {
 
 		public static function changeButton(button:DisplayObject):Button{

@@ -4,6 +4,8 @@ package com.ywit.radio91.view
 	
 	/**
 	 * 所有注册view的父类
+	 * 统一了界面实例的要做的事情
+	 * 初始化，布局，侦听函数的顺序全部做好了。
 	 */ 
 	public class AbsView extends Sprite
 	{
