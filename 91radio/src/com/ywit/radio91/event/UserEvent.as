@@ -1,3 +1,5 @@
+/**
+ * 用在房间界面右下角的用户列表事件*/
 package com.ywit.radio91.event
 {
 	import flash.events.Event;

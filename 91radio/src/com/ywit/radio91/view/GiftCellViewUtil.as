@@ -1,3 +1,5 @@
+/**
+ * 这个类是 礼物列表中的用来存放一个礼物的对象*/
 package com.ywit.radio91.view
 {
 	import com.ywit.radio91.center.UModelLocal;
@@ -17,6 +19,8 @@ package com.ywit.radio91.view
 		public static function getHaveGiftClass(giftName:String):Class{
 			return allGift.getValue(giftName) as Class;
 		}
+		/**
+		 * 将礼物加载到用户的礼物列表中*/
 		public static function addGift2UserGiftList(x:int,y:int,movieClip:MovieClip,giftObj:Object):void {
 			var giftName:String = giftObj["imgUrl"];
 			var cl:Class = getHaveGiftClass(giftName);
@@ -55,6 +59,8 @@ package com.ywit.radio91.view
 				});
 			}
 		}
+		/**
+		 * 这个是加载到 弹出来的礼物列表,选择发送的礼物列表中*/
 		public static function addGift2GiftList(movieClip:MovieClip,giftObj:Object=null):void {
 			if(giftObj == null){
 				removeGift(movieClip);

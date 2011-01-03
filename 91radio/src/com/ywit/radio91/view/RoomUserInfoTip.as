@@ -1,3 +1,5 @@
+/**
+ * 房间界面右下角用户列表 鼠标经过时显示的tip界面*/
 package com.ywit.radio91.view
 {
 	import com.greensock.TweenLite;

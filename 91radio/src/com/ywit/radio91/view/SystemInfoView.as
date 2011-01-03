@@ -1,3 +1,5 @@
+/**
+ * "连接中"的界面*/
 package com.ywit.radio91.view
 {
 	import com.ywit.radio91.util.BaseInteract;

@@ -1,3 +1,5 @@
+/**
+ * 一个房间的显示对象,包含人满的判断等*/
 package com.ywit.radio91.view
 {
 	import flash.display.Sprite;

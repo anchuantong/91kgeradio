@@ -1,3 +1,5 @@
+/**
+ * 这个一个类描述的是在房间顶部那个滚动条*/
 package com.ywit.radio91.view
 {
 	import com.greensock.TweenLite;

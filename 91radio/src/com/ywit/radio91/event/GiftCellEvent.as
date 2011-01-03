@@ -1,3 +1,5 @@
+/**
+ * 用在礼物列表中的事件*/
 package com.ywit.radio91.event
 {
 	import flash.events.Event;

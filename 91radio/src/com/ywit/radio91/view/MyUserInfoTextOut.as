@@ -1,3 +1,5 @@
+/**
+ * 这个是大厅右下角的玩家动态*/
 package com.ywit.radio91.view
 {
 	import com.ywit.radio91.util.SwfDataLoader;

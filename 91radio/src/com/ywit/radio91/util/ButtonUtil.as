@@ -1,3 +1,5 @@
+/**
+ * 这个类是将一个button类包装成另一个有效果的button类*/
 package com.ywit.radio91.util
 {
 	
@@ -9,7 +11,8 @@ package com.ywit.radio91.util
  * 如果需要为按钮加入移动上去的辉光效果请使用改类提供的静态方法changeButton。
  */ 
 	public class ButtonUtil {
-
+		/**
+		 * 下面的button类是指定的效果*/
 		public static function changeButton(button:DisplayObject):Button{
 			var newButton :Button = new Button();
 			
