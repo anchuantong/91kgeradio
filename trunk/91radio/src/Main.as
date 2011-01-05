@@ -137,6 +137,14 @@ package
 			roomView.addRoomBottom(disObj);
 		}
 		
+		/**
+		 *提供socket 
+		 */
+		public function send(data:String):void{
+			NetUntil.getInstance().send(data);
+			
+		}
+		
 		private function fillBg():void{
 			var img_target:DisplayObject = new _fillBg();
 			var bmpData:BitmapData = new BitmapData(img_target.width, img_target.height);

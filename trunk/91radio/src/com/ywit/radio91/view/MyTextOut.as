@@ -144,6 +144,7 @@ package com.ywit.radio91.view
 		public static const GIFT_MESSAGE:String = "GiftMessage";
 		public static const PUBLIC_MESSAGE:String = "PublicMessage";
 		public static const PRIVATE_MESSAGE:String = "privateMessage";
+		public static const BROADCAST_MESSAGE:String = "BroadCastMessage";
 		
 		public static const STOP_SINGING_MESSAGE:String = "STOP_SINGING_MESSAGE";
 		public static const START_SINGING_MESSAGE:String = "START_SINGING_MESSAGE";
@@ -436,6 +437,8 @@ package com.ywit.radio91.view
 			
 			return p;
 		}
+		
+		
 		public function noticeMessageHandel(object:Object):ParagraphElement{
 			var p:ParagraphElement = new ParagraphElement();
 			var span:SpanElement;
@@ -463,6 +466,45 @@ package com.ywit.radio91.view
 			
 			return p;
 		}
+		
+		public function publicBroadCastHandel(object:Object):ParagraphElement{
+			var p:ParagraphElement = new ParagraphElement();
+			var span:SpanElement;
+			var link:LinkElement;
+			var inlineGraphic:InlineGraphicElement;
+			
+//			var str:String  = "【大喇叭】";
+			var str:String  = "";
+			var created:String = object["created"];
+			var content:String = object["content"];
+			var sendUid:int = object["uid"];
+			var sender:String = object["uname"];
+			
+			span = new SpanElement();
+			span.text=created+" ";
+			p.addChild(span);
+			
+			p.addChild(LinkElementUtil.addUserLink(sendUid,sender));
+			
+			
+			span = new SpanElement();
+			span.text="使用大喇叭";
+			span.color = 0xFF0000;
+			p.addChild(span);
+			
+			span = new SpanElement();
+			span.text=": ";
+			span.color = 0;
+			p.addChild(span);
+			
+			span = new SpanElement();
+			span.text=content;
+			span.color = 0xFF0000;
+			p.addChild(span);
+			
+			return p;
+		}
+		
 		public function roomMessageHandel(object:Object):ParagraphElement{
 			var p:ParagraphElement = new ParagraphElement();
 			var span:SpanElement;
@@ -753,6 +795,9 @@ package com.ywit.radio91.view
 //					break;
 				case PUBLIC_MESSAGE:
 					p = publicMessageHandel(obj);
+					break;
+				case BROADCAST_MESSAGE:
+					p = publicBroadCastHandel(obj);
 					break;
 				case PRIVATE_MESSAGE:
 					p = privateMessageHandel(obj);
