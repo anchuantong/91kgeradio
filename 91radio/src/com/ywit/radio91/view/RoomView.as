@@ -1578,9 +1578,9 @@ package com.ywit.radio91.view
  					var errorContext:String = "你已经和服务器断开连接.";
 					if(CommonEvent(e).data){
 						errorContext = CommonEvent(e).data.content
-						var errorViewResSendMessage:ErrorView = new ErrorView(errorContext,closeApplictionHandel);
-						addChild(errorViewResSendMessage);
 					}
+					var errorViewResSendMessage:ErrorView = new ErrorView(errorContext,closeApplictionHandel);
+					addChild(errorViewResSendMessage);
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushGiftMessage:
 					var object:Object = CommonEvent(e).data;
@@ -2102,6 +2102,7 @@ package com.ywit.radio91.view
 				_bcLineView.addEventListener(BroadCastLineView.EVENT_ENTER_ROOM,enterAnotherRoomHandler);
 				ui_RoomView.broadCast.addChild(_bcLineView);
 				_bcLineView.x = 44;
+				publicChatView.addMessage(MyTextOut.BROADCAST_MESSAGE,broadCastObj);
 //				ui_RoomView.broadCast.tf_broadcastMessage.htmlText ="<font color='#654533'>"+broadCastObj.uname+" 使用大喇叭: "+broadCastObj.content+"</font>";
 			}
 //			if(_bcLineView == null){
