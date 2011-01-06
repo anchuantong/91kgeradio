@@ -1529,7 +1529,11 @@ package com.ywit.radio91.view
 			for each (var giftCell:Object in obj.giftList){
 				var item:Object = new Object();
 				var roomGiftCell: mc_RoomGiftCell = new mc_RoomGiftCell();
-				roomGiftCell.senderName.text = giftCell.sendUname;
+				var senderName:String=giftCell.sendUname;
+				if(giftCell.recUname!=undefined){
+					senderName=senderName+"→"+giftCell.recUname;
+				}
+				roomGiftCell.senderName.text =senderName;
 				roomGiftCell.giftCount.text = giftCell.count;
 				if(giftCell.imgUrl&&giftCell.imgUrl!=""){
 					GiftCellViewUtil.addGift2UserGiftList(215,0,roomGiftCell,giftCell);
