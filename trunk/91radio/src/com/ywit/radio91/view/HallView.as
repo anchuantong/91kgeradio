@@ -45,8 +45,7 @@ package com.ywit.radio91.view
 		public var ui_RoomCreate:UI_RoomCreate = new UI_RoomCreate();
 		//当前频道得到房间列表的数组数据
 		private var _curRoomItemList:Array;//房间列表的缓存
-		
-		
+	
 		private var _listRoomResOb:Object;//服务器返回中的数据
 		private var curPage:int;//当前页面
 		private var pcount:int;//总页面
@@ -58,16 +57,16 @@ package com.ywit.radio91.view
 		
 		private var _curRoomId:int;//当前请求的roomId；
 		
-		
-		
 		private var userInfoTextOut:MyUserInfoTextOut = new MyUserInfoTextOut(205,181);
 		
-		public function HallView() {
+		public function HallView()
+		{
 			super();
 			loadData();
 		}
-		override protected function initView():void{
-//			initGifts();
+		override protected function initView():void
+		{
+            //initGifts();
 			new SwfDataLoader();
 			
 			initBroadCastContext();
@@ -140,11 +139,9 @@ package com.ywit.radio91.view
 //			MyTextOut._giftsMap = _giftsMap;
 		}
 		
-		
 		override protected function configEventListener():void{
 			//房间选择监听
-			
-			
+		
 			_playerData.addEventListener(AbsPlayerData.EVENT_RES_ListRoom,commonEventHandler);//请求房间返回
 			_playerData.addEventListener(AbsPlayerData.EVENT_RES_UserInfo,commonEventHandler);//请求用户返回
 			_playerData.addEventListener(AbsPlayerData.EVENT_RES_Friends,commonEventHandler);////请求好友返回
@@ -256,7 +253,8 @@ package com.ywit.radio91.view
 			}
 			mc.visible = true;	
 		}
-		private function closeApplictionHandel(e:Event):void{
+		private function closeApplictionHandel(e:Event):void
+		{
 			BaseInteract.cancelRadioSocket();
 		}
 		
@@ -724,9 +722,7 @@ package com.ywit.radio91.view
 			}else{
 				roomObjList = _listRoomResOb['roomList'];
 			}
-			
-			
-			
+		
 //			roomObjList.sortOn("roomId",Array.NUMERIC);
 			var roomList :Array = new Array();
 			for each (var roomObj:Object in roomObjList){
