@@ -489,7 +489,7 @@ package com.ywit.radio91.view
 			
 			span = new SpanElement();
 			span.text="使用大喇叭";
-			span.color = 0xFF0000;
+			span.color = 0;
 			p.addChild(span);
 			
 			span = new SpanElement();
@@ -679,7 +679,22 @@ package com.ywit.radio91.view
 				p.addChild(span);
 				
 				span = new SpanElement();
-				span.text="第"+nowCount+"个"+giftName;
+				span.text="第";
+				span.color = 0;
+				p.addChild(span);
+				
+				span = new SpanElement();
+				span.text=nowCount+"";
+				span.color = 0x800080;
+				p.addChild(span);
+				
+				span = new SpanElement();
+				span.text="个";
+				span.color = 0;
+				p.addChild(span);
+				
+				span = new SpanElement();
+				span.text=giftName;
 				span.color = 0x800080;
 				p.addChild(span);
 				
