@@ -10,9 +10,9 @@ import flash.events.EventDispatcher;
 作者:keynes
 **/
 public class AbsPlayerData extends EventDispatcher{;
-			private var _netUtil:NetUntil = NetUntil.getInstance();
-			public var  jsessionid:String;
-			private static var  _instance:AbsPlayerData;
+        private var _netUtil:NetUntil = NetUntil.getInstance();
+	    public var  jsessionid:String;
+		private static var  _instance:AbsPlayerData;
    	    public static var EVENT_RES_Friends:String = "event_res_Friends";
    	    public static var EVENT_RES_UserInfo:String = "event_res_UserInfo";
    	    public static var EVENT_RES_ListRoom:String = "event_res_ListRoom";
@@ -30,7 +30,7 @@ public class AbsPlayerData extends EventDispatcher{;
    	    public static var EVENT_RES_SendMessage:String = "event_res_SendMessage";
    	    public static var EVENT_RES_SendGift:String = "event_res_SendGift";
    	    public static var EVENT_RES_CreateNewRoom:String = "event_res_CreateNewRoom";
-//以下为push方法的事件;
+        //以下为push方法的事件;
    		public static var EVENT_PUSH_pushBroadCast:String = "event_push_pushBroadCast";
    		public static var EVENT_PUSH_pushSingerInRoom:String = "event_push_pushSingerInRoom";
    		public static var EVENT_PUSH_pushListenInRoom:String = "event_push_pushListenInRoom";
@@ -54,7 +54,7 @@ public class AbsPlayerData extends EventDispatcher{;
 					_netUtil.send("{jsessionid:"+jsessionid+",method:UserInfo"+",uid:"+uid+'}');
 }
   	 	public function responseUserInfo(resObj:Object):void{;
-   			var commEvent:CommonEvent = new CommonEvent(EVENT_RES_UserInfo);
+   			    var commEvent:CommonEvent = new CommonEvent(EVENT_RES_UserInfo);
    				commEvent.data        = resObj;
    				dispatchEvent(commEvent);
    			};

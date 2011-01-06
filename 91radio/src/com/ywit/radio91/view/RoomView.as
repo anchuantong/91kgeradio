@@ -140,13 +140,13 @@ package com.ywit.radio91.view
 //			setUpStyle();
 			loadData();
 		}
-		private function loadData():void{
+		private function loadData():void
+		{
 		
 			_roomId = _playerData.initRoomObj["roomId"];
 			var obj:Object = _playerData.fetchRoomObj(_roomId);
 			roomName = obj.roomName;
-			
-			
+		
 			singerListButHandel();
 //			userListButHandel();
 			initGiftListView();
@@ -519,6 +519,7 @@ package com.ywit.radio91.view
 			_playerData.cs_UserInfo(uid);//更新当前用户缓存
 			for(var y:int =1;y<9;y++){
 				MovieClip(ui_GiftListView["giftCell"+y]).gotoAndStop(1);
+				MovieClip(ui_GiftListView["giftCell"+y]).buttonMode = true;
 			}
 			selectGift = null;
 			_playerData.cs_ListGift(page);
@@ -1529,11 +1530,7 @@ package com.ywit.radio91.view
 			for each (var giftCell:Object in obj.giftList){
 				var item:Object = new Object();
 				var roomGiftCell: mc_RoomGiftCell = new mc_RoomGiftCell();
-				var senderName:String=giftCell.sendUname;
-				if(giftCell.recUname!=undefined){
-					senderName=senderName+"→"+giftCell.recUname;
-				}
-				roomGiftCell.senderName.text =senderName;
+				roomGiftCell.senderName.text = giftCell.sendUname;
 				roomGiftCell.giftCount.text = giftCell.count;
 				if(giftCell.imgUrl&&giftCell.imgUrl!=""){
 					GiftCellViewUtil.addGift2UserGiftList(215,0,roomGiftCell,giftCell);
@@ -1561,7 +1558,8 @@ package com.ywit.radio91.view
 				
 			}
 		} 
-		private function closeApplictionHandel(e:Event):void{
+		private function closeApplictionHandel(e:Event):void
+		{
 			BaseInteract.cancelRadioSocket();
 		}
 		public function commonEventHandler( e:Event):void {

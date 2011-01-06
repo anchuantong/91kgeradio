@@ -36,6 +36,10 @@ package com.ywit.radio91.view
 //		public static var _giftsMap:HashMap ;
 		private var _selectManager:SelectionManager;
 		
+		private var chatNum:int = 0;
+		
+		
+		
 		public function updateHight(hight:int):void{
 			this.height = hight;
 			_textFlow.flowComposer.updateAllContainers();
@@ -111,7 +115,7 @@ package com.ywit.radio91.view
 			for(var i:int=0;i<num;i++){
 				_textFlow.removeChildAt(0);
 			}
-			
+			chatNum = 0;
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
 			this.verticalScrollPosition= this.maxVerticalScrollPosition;
@@ -823,7 +827,14 @@ package com.ywit.radio91.view
 //			p.marginLeft = 5;
 //			p.marginBottom = 5;
 			_textFlow.addChild(p);
-			p.lineHeight = 18;
+			
+			if(chatNum == 0){
+				p.lineHeight = 0;
+			}else{
+				p.lineHeight = 18;
+			}
+			chatNum++;
+	
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
 			this.verticalScrollPosition= this.maxVerticalScrollPosition;

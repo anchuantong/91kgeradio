@@ -83,7 +83,7 @@ package com.ywit.radio91.util
 			dispatchEvent(event);
 			isNeedReConnet = true;
 		}
-		
+		//接受到数据的情况
 		private function dataHandler(event:DataEvent):void {
 			trace("datahandler:"+event.text);
 			if(event.text==""){
