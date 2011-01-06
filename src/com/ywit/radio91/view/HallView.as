@@ -316,9 +316,9 @@ package com.ywit.radio91.view
 					var errorContext:String = "你已经和服务器断开连接.";
 					if(CommonEvent(e).data){
 						errorContext = CommonEvent(e).data.content
+						var errorViewResSendMessage:ErrorView = new ErrorView(errorContext,closeApplictionHandel);
+						addChild(errorViewResSendMessage);
 					}
-					var errorViewResSendMessage:ErrorView = new ErrorView(errorContext,closeApplictionHandel);
-					addChild(errorViewResSendMessage);
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushSingerInRoom:
 					var singerInRoomObj:Object = e.data;

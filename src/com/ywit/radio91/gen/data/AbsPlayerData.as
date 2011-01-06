@@ -1,10 +1,7 @@
 package com.ywit.radio91.gen.data{
 import com.ywit.radio91.event.CommonEvent;
-import com.ywit.radio91.util.BaseInteract;
-import com.ywit.radio91.util.NetUntil;
-
 import flash.events.EventDispatcher;
-
+import com.ywit.radio91.util.NetUntil;
 /**
 生成日期:Wed Dec 29 2010
 作者:keynes
@@ -233,11 +230,6 @@ public class AbsPlayerData extends EventDispatcher{;
    				commEvent.data        = resObj;
    				dispatchEvent(commEvent);
    			};
-		
-		public function responseStartListen(resObj:Object):void{;
-			BaseInteract.baseSendPacket(resObj);
-		};
-		
 			public static function getInstance():AbsPlayerData{;
 							if (_instance == null) {;
 								_instance = new AbsPlayerData();

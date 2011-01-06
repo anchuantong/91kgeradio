@@ -97,14 +97,6 @@ package com.ywit.radio91.util
 			_invoker["showGift"](giftId,giftCount);
 		}
 		
-		public static function baseSendPacket(resObj:Object):void{
-			if(_debug == 0){
-				trace("baseSendPacket");
-				return;
-			}
-			_invoker["dataRec"](resObj);
-		}
-		
 		
 	}
 }
