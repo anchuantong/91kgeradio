@@ -37,9 +37,7 @@ package com.ywit.radio91.view
 		private var _selectManager:SelectionManager;
 		
 		private var chatNum:int = 0;
-		
-		
-		
+	
 		public function updateHight(hight:int):void{
 			this.height = hight;
 			_textFlow.flowComposer.updateAllContainers();
@@ -787,9 +785,11 @@ package com.ywit.radio91.view
 			switch(messageType){
 				case NOTICE_MESSAGE:
 					p = noticeMessageHandel(obj);
+					p.lineHeight = 18;
 					break;
 				case ROOM_MESSAGE:
 					p = roomMessageHandel(obj);
+					p.lineHeight = 18;
 					break;
 //				case SINGER_MESSAGE:
 //					p = singerMessageHandel(obj);
@@ -799,27 +799,40 @@ package com.ywit.radio91.view
 //					break;
 				case STOP_SINGING_MESSAGE:
 					p = stopSingingHandler(obj);
+					p.lineHeight = 18;
 					break;
 				case START_SINGING_MESSAGE:
 					p = startSingingHandler(obj);
+					p.lineHeight = 18;
 					break;
 				case START_LISTEN_MESSAGE:
 					p = startListenHandler(obj);
+					p.lineHeight = 18;
 					break;
 				case GIFT_MESSAGE:
 //					p = giftMessageHandel(obj);
 					
 				 	addGiftMessageHandel(obj);
+					
 					return;
 //					break;
 				case PUBLIC_MESSAGE:
 					p = publicMessageHandel(obj);
+					if(chatNum == 0){
+						p.lineHeight = 2;
+					}else{
+						p.lineHeight = 18;
+					}
+					chatNum++;
 					break;
 				case BROADCAST_MESSAGE:
 					p = publicBroadCastHandel(obj);
+					p.lineHeight = 18;
+					
 					break;
 				case PRIVATE_MESSAGE:
 					p = privateMessageHandel(obj);
+					p.lineHeight = 18;
 					break;
 			}
 			
@@ -827,14 +840,7 @@ package com.ywit.radio91.view
 //			p.marginLeft = 5;
 //			p.marginBottom = 5;
 			_textFlow.addChild(p);
-			
-			if(chatNum == 0){
-				p.lineHeight = 0;
-			}else{
-				p.lineHeight = 18;
-			}
-			chatNum++;
-	
+		
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
 			this.verticalScrollPosition= this.maxVerticalScrollPosition;
