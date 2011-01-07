@@ -96,7 +96,7 @@ package com.ywit.radio91.view
 			_tileList_roomList._columnWidth=255;
 			_tileList_roomList.width = 534;
 			_tileList_roomList.height = 403;
-			_tileList_roomList._rowHeight =95
+			_tileList_roomList.rowHeight =95
 			_tileList_roomList.x = 8;
 			_tileList_roomList.y = 86;
 			_tileList_roomList._columnCount =2;

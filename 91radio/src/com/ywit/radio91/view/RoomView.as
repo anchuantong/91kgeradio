@@ -295,14 +295,14 @@ package com.ywit.radio91.view
 			_myTileListUserInfoList.horizontalScrollPolicy = "off";
 			_myTileListUserInfoList._columnCount=1;
 			_myTileListUserInfoList._columnWidth = 243;
-			_myTileListUserInfoList._rowHeight = 30;
+			_myTileListUserInfoList.rowHeight = 30;
 			
 			_myTileListUserInfoList.width = 266;
 			_myTileListUserInfoList.height = 186;
 			
 			
 			_mySongs_tileList._columnWidth=476;
-			_mySongs_tileList._rowHeight = 25;
+			_mySongs_tileList.rowHeight = 25;
 			_mySongs_tileList.width=480;
 			_mySongs_tileList.height=123;
 			_mySongs_tileList.x = 9;
@@ -1569,6 +1569,14 @@ package com.ywit.radio91.view
 					publicChatView.addMessage(MyTextOut.ROOM_MESSAGE,data);
 					_allPlayerUserMap.put(data.uid,data);
 					refreshRoomUser();
+					if(_curRoomUserType == ROOM_USER_TYPE_SINGER && data["status"] == 0){
+						_myTileListUserInfoList.verticalScrollPosition += _myTileListUserInfoList.rowHeight;
+					}
+					
+					if(_curRoomUserType == ROOM_USER_TYPE_VIEWER && data["status"] == 1){
+						_myTileListUserInfoList.verticalScrollPosition += _myTileListUserInfoList.rowHeight;
+					}
+
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushBroadCast:
 					var broadCastObj:Object		=  CommonEvent(e).data;
@@ -1608,6 +1616,13 @@ package com.ywit.radio91.view
 					_allPlayerUserMap.remove(CommonEvent(e).data["uid"]);
 					removeNoViewUserArray(CommonEvent(e).data["uid"]);
 					refreshRoomUser();
+					if(_curRoomUserType == ROOM_USER_TYPE_SINGER && data["status"] == 0){
+						_myTileListUserInfoList.verticalScrollPosition -= _myTileListUserInfoList.rowHeight;
+					}
+					
+					if(_curRoomUserType == ROOM_USER_TYPE_VIEWER && data["status"] == 1){
+						_myTileListUserInfoList.verticalScrollPosition -= _myTileListUserInfoList.rowHeight;
+					}
 					
 					songInfoLay.levelHandel(CommonEvent(e).data)
 					
@@ -1939,7 +1954,7 @@ package com.ywit.radio91.view
 				list = getViewerList();
 			}
 			
-			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
+//			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
 			
 			if(_curRoomUserType == ROOM_USER_TYPE_LISTENER){
 				list = getListenerList();
@@ -1976,6 +1991,8 @@ package com.ywit.radio91.view
 			_myTileListUserInfoList.dataProvider = roomList;
 			refreshTargetComboBox();
 		}
+		
+
 		private function roomUse_itemDoubleHandel(e:MouseEvent):void{
 			var roomUserInfoCell:RoomUserInfoCell = RoomUserInfoCell(e.target);
 //			var roomUserInfoCell:RoomUserInfoCell = RoomUserInfoCell(e.item["source"]);
