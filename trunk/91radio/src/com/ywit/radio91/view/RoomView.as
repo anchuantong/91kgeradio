@@ -44,7 +44,6 @@ package com.ywit.radio91.view
 	import flash.utils.Timer;
 	
 	import ghostcat.display.transfer.BookTransfer;
-	
 
 	/**
 	 * 
@@ -182,7 +181,8 @@ package com.ywit.radio91.view
 			initBroadCastView();
 			
 			privateChatView.x = 2;
-//			privateChatView.y = 123;
+			
+     		//privateChatView.y = 123;
 			
 			ButtonUtil.changeButton(ui_RoomView.broadCast.but_sendMessage);
 			ButtonUtil.changeButton(ui_RoomView.btn_changeSizeBtn);
@@ -1011,6 +1011,7 @@ package com.ywit.radio91.view
 //				});
 //			}
 			if(!selectGift){
+			
 				return;
 			}
 			_playerData.cs_SendGift(_sendGifTargetUID,selectGift["giftId"],int(ui_GiftListView.count.text));
@@ -1728,7 +1729,7 @@ package com.ywit.radio91.view
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushGetNotice:
 					privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
-					watchChatView.addMessage(MyTextOut.START_LISTEN_MESSAGE,CommonEvent(e).data);
+				//	watchChatView.addMessage(MyTextOut.START_LISTEN_MESSAGE,CommonEvent(e).data);
 					break;
 				case AbsPlayerData.EVENT_RES_ListAllUser://把所有房间的人列举出来并且默认将列表显示为正在唱歌的人
 					var listAllUserData:Object = CommonEvent(e).data.userList;
