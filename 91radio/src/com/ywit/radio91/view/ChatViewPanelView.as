@@ -42,13 +42,24 @@ package com.ywit.radio91.view
 			sprite2.addEventListener(MouseEvent.MOUSE_OUT,mouseOutHandel);
 			mouseHitArea.addEventListener(MouseEvent.MOUSE_UP,mouseUpHandel);
 			
+			mouseShap.mouseEnabled=false;
+			mouseShap.mouseChildren=false;
+			mouseShap.x = mouseX;
+			mouseShap.y = mouseY-10;
+			
+			addEventListener(MouseEvent.MOUSE_MOVE,function move(evt:MouseEvent):void{
+				mouseShap.x = mouseX;
+				mouseShap.y = mouseY-10;
+				evt.updateAfterEvent();
+			});
+			
 			
 		}
 		private function drapMouse():void
 		{
 			mouseShap.graphics.clear();
 			
-			mouseShap.graphics.lineStyle(1,0x000000);
+			mouseShap.graphics.lineStyle(1,0x000000,0.8);
 			mouseShap.graphics.moveTo(0,5);
 			mouseShap.graphics.lineTo(5,0);
 			mouseShap.graphics.lineTo(10,5);
@@ -60,6 +71,7 @@ package com.ywit.radio91.view
 			mouseShap.graphics.lineTo(4,20);
 			mouseShap.graphics.lineTo(4,5);
 			mouseShap.graphics.lineTo(4,5);
+			mouseShap.graphics.lineTo(0,5);
 			mouseShap.graphics.endFill();
 			this.addChild(mouseShap);
 			mouseShap.visible  = false;
@@ -86,17 +98,6 @@ package com.ywit.radio91.view
 			//Mouse.cursor = MouseCursor.HAND;
 			Mouse.hide();
 			mouseShap.visible = true;
-			mouseShap.mouseEnabled=false;
-			mouseShap.mouseChildren=false;
-			mouseShap.x = mouseX;
-			mouseShap.y = mouseY-10;
-			this.addEventListener(MouseEvent.MOUSE_MOVE,function move(evt:MouseEvent):void{
-				mouseShap.x = mouseX;
-				mouseShap.y = mouseY-10;
-				evt.updateAfterEvent();
-			 });
-			
-				
 			
 		}
 		private function mouseOutHandel(e:MouseEvent):void{
