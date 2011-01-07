@@ -20,7 +20,7 @@ package com.ywit.radio91.component
 		public var _columnCount:int = 1;
 		/**
 		 * 显示单位的高度*/
-		public var _rowHeight:int = 30;
+		public var rowHeight:int = 30;
 		/**
 		 * 显示单位的宽度*/
 		public var _columnWidth:int = 248;
@@ -51,7 +51,7 @@ package com.ywit.radio91.component
 					continue;
 				}
 				xNow = (i%_columnCount*_columnWidth);
-				yNow = (int(i/_columnCount)*_rowHeight);
+				yNow = (int(i/_columnCount)*rowHeight);
 				cell.x = xNow;
 				cell.y = yNow;
 				_context.addChild(cell);
