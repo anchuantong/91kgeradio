@@ -737,7 +737,7 @@ package com.ywit.radio91.view
 		}
 		private function dragLineMoveHandel(e:Event=null):void{
 			if(ui_RoomView.roomChat.clearPublicScreenBtn){
-				ui_RoomView.roomChat.clearPublicScreenBtn.y	= chatViewPanel.y+publicChatView.y+publicChatView.height-15;
+				ui_RoomView.roomChat.clearPublicScreenBtn.y	= chatViewPanel.y+publicChatView.y+publicChatView.height-17;
 			}
 		}
 		/**
