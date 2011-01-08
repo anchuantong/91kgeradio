@@ -835,11 +835,7 @@ package com.ywit.radio91.view
 //			p.marginBottom = 5;
 			
 			_textFlow.addChild(p);
-		    p.lineHeight = 18;			
-			
-			
-			
-		    
+			p.lineHeight = 22;
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
 			this.verticalScrollPosition= this.maxVerticalScrollPosition;

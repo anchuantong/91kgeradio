@@ -42,6 +42,7 @@ package com.ywit.radio91.view
 			sprite2.addEventListener(MouseEvent.MOUSE_OUT,mouseOutHandel);
 			mouseHitArea.addEventListener(MouseEvent.MOUSE_UP,mouseUpHandel);
 			
+			addEventListener(Event.ENTER_FRAME,updateSize);
 			mouseShap.mouseEnabled=false;
 			mouseShap.mouseChildren=false;
 			mouseShap.x = mouseX;
@@ -79,8 +80,8 @@ package com.ywit.radio91.view
 		//设置这个类的高度,同是调整两个界面的高度
 		override public function set height(height:Number):void{
 			this._height= height;
-			sprite2.y = 78;
-			updateSize();
+			sprite2.y = height-60;
+//			updateSize();
 			
 			this.graphics.clear();
 			this.graphics.lineStyle(0,0,0);
@@ -131,8 +132,13 @@ package com.ywit.radio91.view
 			if(startDrop){
 				if(_height-mouseHitArea.mouseY-sprite2.height>=15&&mouseHitArea.mouseY >=30){
 					sprite2.y = mouseHitArea.mouseY-sprite2.height/2;
-					dispatchEvent(new Event(DRAG_LINE_MOVE));
-					updateSize();
+//					dispatchEvent(new Event(DRAG_LINE_MOVE));
+//					updateSize();
+					
+					if(displayObject1){
+						displayObject1.update();
+						displayObject1.verticalScrollPosition= displayObject1.maxVerticalScrollPosition;
+					}
 				}
 			}
 		}
@@ -155,17 +161,24 @@ package com.ywit.radio91.view
 					addChildAt(displayObject,0);
 					break;
 			}
-			updateSize();
+//			updateSize();
 		}
 		//跟新两个界面的高度
-		private function updateSize():void{
-			if(displayObject1){
+		private function updateSize(event:Event=null):void{
+			var ischange:Boolean =  false;
+			if(displayObject1&&displayObject1.height!=sprite2.y+5){
 				displayObject1.y = 0;
 				displayObject1.updateHight(sprite2.y+5);
+				ischange = true;
 			}
-			if(displayObject2){
+			if(displayObject2&&displayObject2.height!=(_height-sprite2.y-sprite2.height+5)){
 				displayObject2.y = sprite2.y+sprite2.height-5;
 				displayObject2.updateHight(_height-sprite2.y-sprite2.height+5);
+				ischange = true;
+			}
+			
+			if(ischange){
+				dispatchEvent(new Event(DRAG_LINE_MOVE));
 			}
 		}
 	}
