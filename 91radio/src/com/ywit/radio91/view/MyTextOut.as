@@ -35,7 +35,8 @@ package com.ywit.radio91.view
 		public static var _smileysMap:HashMap ;
 //		public static var _giftsMap:HashMap ;
 		private var _selectManager:SelectionManager;
-		
+		//限制的消息总数
+		private static const MSG_COUNT:int = 300;
 		
 		public function updateHight(hight:int):void{
 			this.height = hight;
@@ -833,7 +834,9 @@ package com.ywit.radio91.view
             
 //			p.marginLeft = 5;
 //			p.marginBottom = 5;
-			
+			if(_textFlow.numChildren > MSG_COUNT){
+				_textFlow.removeChildAt(0);
+			}
 			_textFlow.addChild(p);
 			p.lineHeight = 22;
 			_textFlow.flowComposer.updateAllContainers();

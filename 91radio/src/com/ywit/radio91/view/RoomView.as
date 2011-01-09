@@ -118,7 +118,7 @@ package com.ywit.radio91.view
 		//听歌者
 		private const ROOM_USER_TYPE_LISTENER:String = "ROOM_USER_TYPE_Listener";
 		
-		private var _curRoomUserType:String = ROOM_USER_TYPE_SINGER;
+		private var _curRoomUserType:String;
 		
 		//要转到的另一个房间的id
 		private var _anotherRoomId:int;
@@ -141,6 +141,7 @@ package com.ywit.radio91.view
 		private function loadData():void
 		{
 		
+			curRoomUserType = ROOM_USER_TYPE_SINGER;
 			_roomId = _playerData.initRoomObj["roomId"];
 			var obj:Object = _playerData.fetchRoomObj(_roomId);
 			roomName = obj.roomName;
@@ -721,7 +722,7 @@ package com.ywit.radio91.view
 			//好友搜索
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(Event.CHANGE,searchRoomUserList);
 //			ui_RoomView.roomUserList.search.tf_search.addEventListener(TextEvent.TEXT_INPUT,inputSearchRoomUserListHandler);
-			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_IN,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = ""});
+			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_IN,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = "";searchRoomUserList()});
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_OUT,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = "好友搜索"});
 //			ui_RoomView.broadCast.enterRoom.addEventListener(MouseEvent.CLICK,broadCastRoomIdLindClickHandler);
 			
@@ -807,9 +808,10 @@ package com.ywit.radio91.view
 			}
 		}
 		
-		private function searchRoomUserList(e:Event):void{
+		private function searchRoomUserList(e:Event = null):void{
 			
-			var text:String = TextField(e.target).text;
+//			var text:String = TextField(e.target).text;
+			var text:String = ui_RoomView.roomUserList.search.tf_search.text;
 			var dp:Array;
 			_myTileListUserInfoList.dataProvider = new Array();
 			
@@ -1286,6 +1288,11 @@ package com.ywit.radio91.view
 //			_scrollPaneWatch.visible = false;
 			
 			_mySongs_tileList.visible = true;
+			if(ui_RoomView.btn_changeSizeBtn.currentFrame == 1){
+				_mySongs_tileList.height = 150;
+			}else if (ui_RoomView.btn_changeSizeBtn.currentFrame == 2){
+				_mySongs_tileList.height = 360;
+			}
 			privateChatView.visible = false;
 			publicChatView.visible = false;
 			chatViewPanel.visible = false;
@@ -1398,7 +1405,7 @@ package com.ywit.radio91.view
 			ui_RoomView.roomUserList.userListBut.butBg.visible = false;
 			ui_RoomView.roomUserList.listenerListBut.butBg.visible = false;
 			ui_RoomView.roomUserList.gotoAndStop(1);
-			_curRoomUserType = ROOM_USER_TYPE_SINGER;
+			curRoomUserType = ROOM_USER_TYPE_SINGER;
 			refreshRoomUser();
 //			_playerData.cs_ListSingerUser(_roomId);
 		}
@@ -1408,10 +1415,12 @@ package com.ywit.radio91.view
 			ui_RoomView.roomUserList.userListBut.butBg.visible = true;
 			ui_RoomView.roomUserList.listenerListBut.butBg.visible = false;
 //			ui_RoomView.roomUserList.gotoAndStop(2);
-			_curRoomUserType = ROOM_USER_TYPE_VIEWER;
+			curRoomUserType = ROOM_USER_TYPE_VIEWER;
 			refreshRoomUser();
 //			_playerData.cs_ListUser(_roomId);
 		}
+		
+		
 		private function pdphListButHandel(e:Event = null):void{
 			ui_RoomView.roomUserList.singerListBut.butBg.visible = false;
 			ui_RoomView.roomUserList.userListBut.butBg.visible = false;
@@ -1570,14 +1579,6 @@ package com.ywit.radio91.view
 					publicChatView.addMessage(MyTextOut.ROOM_MESSAGE,data);
 					_allPlayerUserMap.put(data.uid,data);
 					refreshRoomUser();
-					if(_curRoomUserType == ROOM_USER_TYPE_SINGER && data["status"] == 0){
-						_myTileListUserInfoList.verticalScrollPosition += _myTileListUserInfoList.rowHeight;
-					}
-					
-					if(_curRoomUserType == ROOM_USER_TYPE_VIEWER && data["status"] == 1){
-						_myTileListUserInfoList.verticalScrollPosition += _myTileListUserInfoList.rowHeight;
-					}
-
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushBroadCast:
 					var broadCastObj:Object		=  CommonEvent(e).data;
@@ -1617,14 +1618,6 @@ package com.ywit.radio91.view
 					_allPlayerUserMap.remove(CommonEvent(e).data["uid"]);
 					removeNoViewUserArray(CommonEvent(e).data["uid"]);
 					refreshRoomUser();
-					if(_curRoomUserType == ROOM_USER_TYPE_SINGER && data["status"] == 0){
-						_myTileListUserInfoList.verticalScrollPosition -= _myTileListUserInfoList.rowHeight;
-					}
-					
-					if(_curRoomUserType == ROOM_USER_TYPE_VIEWER && data["status"] == 1){
-						_myTileListUserInfoList.verticalScrollPosition -= _myTileListUserInfoList.rowHeight;
-					}
-					
 					songInfoLay.levelHandel(CommonEvent(e).data)
 					
 					break;
@@ -1883,7 +1876,7 @@ package com.ywit.radio91.view
 				case AbsPlayerData.EVENT_RES_ListListens:
 					var listListens:Object = CommonEvent(e).data;
 					listListenerArray = listListens["userList"];
-					_curRoomUserType = ROOM_USER_TYPE_LISTENER;
+					curRoomUserType = ROOM_USER_TYPE_LISTENER;
 					refreshRoomUser();
 					break;
 			}
@@ -1936,6 +1929,11 @@ package com.ywit.radio91.view
 		/**
 		 * 更新当前的房间用户中的roomUser列表
 		 */ 
+		
+		//上一次的唱歌者列表
+//		private var _lastSingerList:Array = [];
+		//上一次的观众列表
+//		private var _lastViewerList:Array = [];
 		private function refreshRoomUser():void{
 //			if(list == null ){
 //				
@@ -1991,8 +1989,43 @@ package com.ywit.radio91.view
 			_curAllRoomUserList = roomList;
 			_myTileListUserInfoList.dataProvider = roomList;
 			refreshTargetComboBox();
+			
+			//这里滚动定位到当前的用户
+			var scrollIndex:int = 0
+//			if(_curRoomUserType == ROOM_USER_TYPE_SINGER){
+//				if(_lastSingerList.length > 0){//上一次歌者数量为0表示刚初始化过来的列表，因此不参与滚动计算
+//					scrollIndex = ( list.length - _lastSingerList.length);
+//					_myTileListUserInfoList.verticalScrollPosition += scrollIndex*_myTileListUserInfoList.rowHeight;
+//				}
+//				_lastSingerList = list;
+//			}
+//			
+//			if(_curRoomUserType == ROOM_USER_TYPE_VIEWER){
+//				if(_lastViewerList.length > 0){//上一次观众数量为0表示刚初始化过来的列表，因此不参与滚动计算
+//					scrollIndex = (list.length - _lastViewerList.length);
+//					_myTileListUserInfoList.verticalScrollPosition += scrollIndex*_myTileListUserInfoList.rowHeight;
+//				}
+//				_lastViewerList = list;
+//			}
+				
+			//当搜索框有搜索内容时过滤一遍内容
+			if(ui_RoomView.roomUserList.search.tf_search.text != "" && ui_RoomView.roomUserList.search.tf_search.text != "好友搜索"){
+				searchRoomUserList()
+			}
+			
 		}
 		
+		
+		public function set curRoomUserType(type:String):void{
+			_curRoomUserType = type;
+//			if(_curRoomUserType == ROOM_USER_TYPE_SINGER){
+//				_lastSingerList = [];
+//			}
+//			
+//			if(_curRoomUserType == ROOM_USER_TYPE_VIEWER){
+//				_lastViewerList = [];
+//			}
+		}
 
 		private function roomUse_itemDoubleHandel(e:MouseEvent):void{
 			var roomUserInfoCell:RoomUserInfoCell = RoomUserInfoCell(e.target);
