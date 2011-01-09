@@ -90,7 +90,11 @@ package com.ywit.radio91.view
 						evt.songId = songId;
 						evt.songName = songName;
 						evt.uid = uid;
-						ConfirmView.show("是否开始听 "+evt.songName+" .",ViewHelper._main,confirmViewHandel,evt,true,800,800)
+						if(uid == PlayerData.getInstance().playerObj["uid"]){
+							ConfirmView.show("不能收听自己歌曲",ViewHelper._main,confirmViewHandel,evt,true,800,800);
+						}else{
+							ConfirmView.show("是否开始听 "+evt.songName+" .",ViewHelper._main,confirmViewHandel,evt,true,800,800)
+						}
 					}
 				});
 			}
