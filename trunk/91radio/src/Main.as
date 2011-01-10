@@ -73,8 +73,8 @@ package
 //			init();
 			
 			if(UModelLocal.getInstance().debug == 0){
-//				var array:Array = [711857534,223941411,228024525,255694631,313580428,327886643,334406883,338935147];
-				var array:Array = [711857534];
+				var array:Array = [711857534,223941411,228024525,255694631,313580428,327886643,334406883,338935147];
+//				var array:Array = [711857534];
 				
 				var uid:int = array[Math.round(Math.random()*(array.length-1))];
 				PlayerData.getInstance().jsessionid = uid+"_browser_sessionid";
