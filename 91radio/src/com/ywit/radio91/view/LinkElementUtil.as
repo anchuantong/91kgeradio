@@ -121,6 +121,13 @@ package com.ywit.radio91.view
 			}
 			return link;
 		}
+		
+		/**
+		 * 添加一条带url指向的链接文字
+		 */ 
+		public static function addURLLink(urlStr:String,url:String):FlowElement{
+			return null;
+		}
 	
 	}
 }

@@ -110,7 +110,8 @@ package com.ywit.radio91.view
 		//当前传过来的房间内的列表包括唱歌的和观众
 		private var _curAllRoomUserList:Array;
 		
-	
+		public var _myTileListUserInfoList:MyTileList = new MyTileList();
+		
 		//当前列举的用户
 		private const ROOM_USER_TYPE_SINGER:String = "ROOM_USER_TYPE_SING";
 		//观众
@@ -309,6 +310,7 @@ package com.ywit.radio91.view
 			_mySongs_tileList.x = 9;
 			_mySongs_tileList.y = 48.35;
 			_mySongs_tileList.visible = false;
+			
 			
 			_mySongs_tileList.setStyle("upArrowDisabledSkin",UpArrowUpSkin2);
 			_mySongs_tileList.setStyle("upArrowUpSkin",UpArrowUpSkin2);
@@ -1578,7 +1580,13 @@ package com.ywit.radio91.view
 					var data:Object = CommonEvent(e).data;
 					publicChatView.addMessage(MyTextOut.ROOM_MESSAGE,data);
 					_allPlayerUserMap.put(data.uid,data);
-					refreshRoomUser();
+						if(data["status"] == 0){
+							_singerHashMap.put(data["uid"],data);
+						}else if(data["status"] == 1){
+							_viewerHashMap.put(data["uid"],data);
+						}
+						addRoomUser(data);
+//					refreshRoomUser();
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushBroadCast:
 					var broadCastObj:Object		=  CommonEvent(e).data;
@@ -1615,9 +1623,13 @@ package com.ywit.radio91.view
 //					if(!_roomId == levelRoomObj.roomId){
 //						return;
 //					}
-					_allPlayerUserMap.remove(CommonEvent(e).data["uid"]);
+					var roomObj:Object = _allPlayerUserMap.remove(CommonEvent(e).data["uid"]);
+					//当一个人离开的时候同时从歌者和观众列表移除。
+					_viewerHashMap.remove(roomObj["uid"]);
+					_singerHashMap.remove(roomObj["uid"]);
 					removeNoViewUserArray(CommonEvent(e).data["uid"]);
-					refreshRoomUser();
+//					refreshRoomUser();
+					removeRoomUser(roomObj);
 					songInfoLay.levelHandel(CommonEvent(e).data)
 					
 					break;
@@ -1657,6 +1669,9 @@ package com.ywit.radio91.view
 					
 					if(status == 1){//结束唱歌
 						publicChatView.addMessage(MyTextOut.STOP_SINGING_MESSAGE,CommonEvent(e).data);
+						_singerHashMap.remove(uid);
+						_viewerHashMap.put(uid,object);
+						
 						if(CommonEvent(e).data["follow"] == 1){
 							watchChatView.addMessage(MyTextOut.STOP_SINGING_MESSAGE,CommonEvent(e).data);
 							focusInWatchSinger();
@@ -1688,6 +1703,8 @@ package com.ywit.radio91.view
 					}else{//开始唱歌
 						
 						publicChatView.addMessage(MyTextOut.START_SINGING_MESSAGE,CommonEvent(e).data);
+						_viewerHashMap.remove(uid);
+						_singerHashMap.put(uid,object);
 						if(CommonEvent(e).data["follow"] == 1){
 							watchChatView.addMessage(MyTextOut.START_SINGING_MESSAGE,CommonEvent(e).data);
 							focusInWatchSinger();
@@ -1707,7 +1724,9 @@ package com.ywit.radio91.view
 					}
 //					updateRoomUserByUID(uid);
 //					_allPlayerUserMap.put(uid,CommonEvent(e).data);
-					refreshRoomUser();
+					addRoomUser(object);
+//					removeRoomUser(object);
+//					refreshRoomUser();
 					refershTimer();
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushListenInRoom:
@@ -1729,6 +1748,11 @@ package com.ywit.radio91.view
 					_allPlayerUserMap.clear();
 					for each(var objItem:Object in listAllUserData){
 						_allPlayerUserMap.put(objItem.uid,objItem);
+						if(objItem["status"] == 0){
+							_singerHashMap.put(objItem["uid"],objItem);
+						}else if(objItem["status"] == 1){
+							_viewerHashMap.put(objItem["uid"],objItem);
+						}
 					}
 					refreshRoomUser();
 					refershTimer();
@@ -1894,17 +1918,22 @@ package com.ywit.radio91.view
 			ui_RoomView.roomChat.tb_publicChat.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
 		}
 		
+		//正在唱歌的人
+		private var _singerHashMap:HashMap = new HashMap();
+		//当前是观众的人
+		private var _viewerHashMap:HashMap = new HashMap();
 		/**
 		 * 得到正在唱歌的人的列表
 		 */ 
 		private function getSingerList():Array{
-			var array:Array = [];
-			for each(var ele:Object in _allPlayerUserMap.values()){
-				if(ele["status"] == 0){
-					array.push(ele);
-				}
-			}
-			return array;
+//			var array:Array = [];
+//			for each(var ele:Object in _allPlayerUserMap.values()){
+//				if(ele["status"] == 0){
+//					array.push(ele);
+//				}
+//			}
+//			return array;
+			return _singerHashMap.values();
 		}
 		/**
 		 * 得到没有唱歌的观众的列表
@@ -1917,23 +1946,20 @@ package com.ywit.radio91.view
 		 * 得到没有唱歌的观众的列表
 		 */ 
 		private function getViewerList():Array{
-			var array:Array = [];
-			for each(var ele:Object in _allPlayerUserMap.values()){
-				if(ele["status"] == 1){
-					array.push(ele);
-				}
-			}
-			return array;
+//			var array:Array = [];
+//			for each(var ele:Object in _allPlayerUserMap.values()){
+//				if(ele["status"] == 1){
+//					array.push(ele);
+//				}
+//			}
+//			return array;
+			return _viewerHashMap.values();
 		}
-		public var _myTileListUserInfoList:MyTileList = new MyTileList();
+	
 		/**
 		 * 更新当前的房间用户中的roomUser列表
+		 * 更改为切换按钮的时候才刷新
 		 */ 
-		
-		//上一次的唱歌者列表
-//		private var _lastSingerList:Array = [];
-		//上一次的观众列表
-//		private var _lastViewerList:Array = [];
 		private function refreshRoomUser():void{
 //			if(list == null ){
 //				
@@ -1989,30 +2015,100 @@ package com.ywit.radio91.view
 			_curAllRoomUserList = roomList;
 			_myTileListUserInfoList.dataProvider = roomList;
 			refreshTargetComboBox();
-			
-			//这里滚动定位到当前的用户
-			var scrollIndex:int = 0
-//			if(_curRoomUserType == ROOM_USER_TYPE_SINGER){
-//				if(_lastSingerList.length > 0){//上一次歌者数量为0表示刚初始化过来的列表，因此不参与滚动计算
-//					scrollIndex = ( list.length - _lastSingerList.length);
-//					_myTileListUserInfoList.verticalScrollPosition += scrollIndex*_myTileListUserInfoList.rowHeight;
-//				}
-//				_lastSingerList = list;
-//			}
-//			
-//			if(_curRoomUserType == ROOM_USER_TYPE_VIEWER){
-//				if(_lastViewerList.length > 0){//上一次观众数量为0表示刚初始化过来的列表，因此不参与滚动计算
-//					scrollIndex = (list.length - _lastViewerList.length);
-//					_myTileListUserInfoList.verticalScrollPosition += scrollIndex*_myTileListUserInfoList.rowHeight;
-//				}
-//				_lastViewerList = list;
-//			}
-				
+
 			//当搜索框有搜索内容时过滤一遍内容
 			if(ui_RoomView.roomUserList.search.tf_search.text != "" && ui_RoomView.roomUserList.search.tf_search.text != "好友搜索"){
 				searchRoomUserList()
 			}
 			
+		}
+		
+		/**
+		 *  动态添加一个房间用户
+		 */ 
+		public function addRoomUser(roomObj:Object):void{
+			
+			if((_curRoomUserType == ROOM_USER_TYPE_SINGER && roomObj["status"] == 0) || (_curRoomUserType == ROOM_USER_TYPE_VIEWER && roomObj["status"] == 1)){
+				var roomUserInfoCell:RoomUserInfoCell = new RoomUserInfoCell(roomObj);
+				roomUserInfoCell.mouseChildren = false;
+				
+				if(!roomUserInfoCell.hasEventListener(MouseEvent.MOUSE_OVER)){
+					roomUserInfoCell.addEventListener(MouseEvent.MOUSE_OVER,roomUse_itemOverHandel);
+				}
+				if(!roomUserInfoCell.hasEventListener(MouseEvent.MOUSE_OUT)){
+					roomUserInfoCell.addEventListener(MouseEvent.MOUSE_OUT,roomUse_itemOutHandel);
+				}
+				//				if(!roomUserInfoCell.hasEventListener(MouseEvent.CLICK)){
+				//					roomUserInfoCell.addEventListener(MouseEvent.CLICK,roomUse_itemDoubleHandel);
+				//				}
+				if(!roomUserInfoCell.hasEventListener(MouseEvent.DOUBLE_CLICK)){
+					roomUserInfoCell.doubleClickEnabled = true;
+					roomUserInfoCell.addEventListener(MouseEvent.DOUBLE_CLICK,roomUse_itemDoubleHandel);
+				}
+				
+				_myTileListUserInfoList.addCell(roomUserInfoCell);
+				var list:Array  = [];
+				if(_curRoomUserType == ROOM_USER_TYPE_SINGER){
+					list = getSingerList();
+				}
+				
+				if(_curRoomUserType == ROOM_USER_TYPE_VIEWER){
+					list = getViewerList();
+				}
+				
+				//			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
+				
+				if(_curRoomUserType == ROOM_USER_TYPE_LISTENER){
+					list = getListenerList();
+				}
+				
+			}
+			ui_RoomView.roomUserList.singerListBut.tf_singerList.text = "唱歌("+ getSingerList().length +")";
+			ui_RoomView.roomUserList.userListBut.tf_userList.text = "观众("+getViewerList().length+")";
+			ui_RoomView.roomUserList.listenerListBut.tf_pdphList.text = "听歌("+getListenerList().length+")";
+			ui_RoomView.roomUserList.singerListBut.tf_singerList.mouseEnabled = false;
+			ui_RoomView.roomUserList.userListBut.tf_userList.mouseEnabled = false;
+			refreshTargetComboBox();
+		}
+		
+		/**
+		 * 单独删除一个房间用户
+		 */ 
+		public function removeRoomUser(roomObj:Object):void{
+//			if((_curRoomUserType == ROOM_USER_TYPE_SINGER && roomObj["status"] == 0) || (_curRoomUserType == ROOM_USER_TYPE_VIEWER && roomObj["status"] == 1)){
+				var index:int = _myTileListUserInfoList.context.numChildren - 1;
+				var roomUserInfoCell:RoomUserInfoCell;
+				while(index >= 0 ){
+					roomUserInfoCell = _myTileListUserInfoList.context.getChildAt(index) as RoomUserInfoCell;
+					if(roomObj == roomUserInfoCell.object){
+						_myTileListUserInfoList.deleteCell(roomUserInfoCell);
+						break;
+					}
+					index--;
+					
+				}
+				var list:Array  = [];
+				if(_curRoomUserType == ROOM_USER_TYPE_SINGER){
+					list = getSingerList();
+				}
+				
+				if(_curRoomUserType == ROOM_USER_TYPE_VIEWER){
+					list = getViewerList();
+				}
+				
+				//			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
+				
+				if(_curRoomUserType == ROOM_USER_TYPE_LISTENER){
+					list = getListenerList();
+				}
+				
+				ui_RoomView.roomUserList.singerListBut.tf_singerList.text = "唱歌("+ getSingerList().length +")";
+				ui_RoomView.roomUserList.userListBut.tf_userList.text = "观众("+getViewerList().length+")";
+				ui_RoomView.roomUserList.listenerListBut.tf_pdphList.text = "听歌("+getListenerList().length+")";
+				ui_RoomView.roomUserList.singerListBut.tf_singerList.mouseEnabled = false;
+				ui_RoomView.roomUserList.userListBut.tf_userList.mouseEnabled = false;
+				refreshTargetComboBox();
+//			}
 		}
 		
 		

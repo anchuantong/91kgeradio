@@ -84,6 +84,7 @@ package com.ywit.radio91.util
 		public function remove(key:Object):Object {
 			var result:Object=null;
 			if (this.containsKey(key)) {
+				result = this.props[key];
 				delete this.props[key];
 				var index:int=this._keys.indexOf(key);
 				if (index>-1) {

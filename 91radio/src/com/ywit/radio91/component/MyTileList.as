@@ -74,8 +74,38 @@ package com.ywit.radio91.component
 		
 		public function addCell(cell:Sprite):void{
 			_context.addChild(cell);
+			layout();
 			this.update();
 		}
+		
+		public function get context():Sprite{
+			return _context;
+		}
+		
+		public function deleteCell(cell:Sprite):void{
+			
+			if(_context.contains(cell)){
+				_context.removeChild(cell);
+			}
+			
+			layout();
+			this.update();
+		}
+		
+		private function layout():void{
+			var xNow:int = 0;
+			var yNow:int = 0;
+			var numchildren:int = _context.numChildren;
+			for (var i:int=0;i<numchildren;i++){
+				var cell:DisplayObject = _context.getChildAt(i);
+				xNow = (i%_columnCount*_columnWidth);
+				yNow = (int(i/_columnCount)*rowHeight);
+				cell.x = xNow;
+				cell.y = yNow;
+			}
+		}
+		
+	
 		
 		
 	}
