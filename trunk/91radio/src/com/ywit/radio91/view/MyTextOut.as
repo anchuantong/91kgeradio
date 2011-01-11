@@ -10,6 +10,7 @@ package com.ywit.radio91.view
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.text.TextColorType;
 	import flash.text.engine.TextBaseline;
