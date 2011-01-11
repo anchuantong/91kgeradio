@@ -542,7 +542,7 @@ package com.ywit.radio91.view
 		 * 得到url对象的InlineGraphicElement
 		 */ 
 		private function getURLLink(urlFormatStr:String):FlowElement{
-			if(urlFormatStr == null){
+			if(urlFormatStr == null || urlFormatStr == ""){
 				return null;
 			}
 			var exp:RegExp = /<a\s[^<]*\/>/ig;
