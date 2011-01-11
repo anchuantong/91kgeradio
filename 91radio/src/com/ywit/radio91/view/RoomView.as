@@ -625,6 +625,7 @@ package com.ywit.radio91.view
 			ui_RoomView.addChild(ui_GiftTipView);
 			
 			publicChatButHandel();
+			
 		}
 		
 		
@@ -726,7 +727,7 @@ package com.ywit.radio91.view
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(Event.CHANGE,searchRoomUserList);
 //			ui_RoomView.roomUserList.search.tf_search.addEventListener(TextEvent.TEXT_INPUT,inputSearchRoomUserListHandler);
 			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_IN,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = "";searchRoomUserList()});
-			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_OUT,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = "好友搜索"});
+			ui_RoomView.roomUserList.search.tf_search.addEventListener(FocusEvent.FOCUS_OUT,function(e:FocusEvent):void{ui_RoomView.roomUserList.search.tf_search.text = "好友搜索";refreshRoomUser()});
 //			ui_RoomView.broadCast.enterRoom.addEventListener(MouseEvent.CLICK,broadCastRoomIdLindClickHandler);
 			
 			//发送礼物确认框
@@ -812,7 +813,6 @@ package com.ywit.radio91.view
 		}
 		
 		private function searchRoomUserList(e:Event = null):void{
-			
 //			var text:String = TextField(e.target).text;
 			var text:String = ui_RoomView.roomUserList.search.tf_search.text;
 			var dp:Array;
@@ -821,10 +821,13 @@ package com.ywit.radio91.view
 			if(text == "" || text == null){
 //				dp = new DataProvider();
 //				dp.addItems(_curAllRoomUserList);
+				
+				
+//				refreshRoomUser();
+				 findCurAllRoomUserList();
 				_myTileListUserInfoList.dataProvider = _curAllRoomUserList;	
 				return;
 			}
-		
 			dp = new Array();
 			
 			//搜索房间号 以及房间名
@@ -836,7 +839,7 @@ package com.ywit.radio91.view
 			}
 			
 			_myTileListUserInfoList.dataProvider = dp;
-			
+			ui_RoomView.roomUserList.search.tf_search.text = text;
 		}
 		
 		/**
@@ -1749,7 +1752,11 @@ package com.ywit.radio91.view
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushGetNotice:
 					if(UModelLocal.getInstance().debug == 0){
-						CommonEvent(e).data["content"] = "<a href='http://www.163.com' content='点击这里' />" + CommonEvent(e).data["content"] +  "<a href='http://www.163.com' content='点击这里' />";
+						CommonEvent(e).data["content"] = "<a href='http://www.163.com' content='点击这里' />测试请<a href='http://g.cn' content='点击这里'/><a href='http://www.163.com' content='点击这里' />";
+						privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
+						privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
+						privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
+						privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
 					}
 					privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
 				//	watchChatView.addMessage(MyTextOut.START_LISTEN_MESSAGE,CommonEvent(e).data);
@@ -1967,21 +1974,8 @@ package com.ywit.radio91.view
 //			return array;
 			return _viewerHashMap.values();
 		}
-	
-		/**
-		 * 更新当前的房间用户中的roomUser列表
-		 * 更改为切换按钮的时候才刷新
-		 */ 
-		private function refreshRoomUser():void{
-//			if(list == null ){
-//				
-//				if(_myTileList.dataProvider != null){
-//					_myTileList.dataProvider.removeAll();
-//				}
-//				
-//				return;
-//			
-//			}
+		
+		private function findCurAllRoomUserList():void{
 			var list:Array  = [];
 			if(_curRoomUserType == ROOM_USER_TYPE_SINGER){
 				list = getSingerList();
@@ -1991,7 +1985,7 @@ package com.ywit.radio91.view
 				list = getViewerList();
 			}
 			
-//			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
+			//			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
 			
 			if(_curRoomUserType == ROOM_USER_TYPE_LISTENER){
 				list = getListenerList();
@@ -2014,9 +2008,9 @@ package com.ywit.radio91.view
 				if(!roomUserInfoCell.hasEventListener(MouseEvent.MOUSE_OUT)){
 					roomUserInfoCell.addEventListener(MouseEvent.MOUSE_OUT,roomUse_itemOutHandel);
 				}
-//				if(!roomUserInfoCell.hasEventListener(MouseEvent.CLICK)){
-//					roomUserInfoCell.addEventListener(MouseEvent.CLICK,roomUse_itemDoubleHandel);
-//				}
+				//				if(!roomUserInfoCell.hasEventListener(MouseEvent.CLICK)){
+				//					roomUserInfoCell.addEventListener(MouseEvent.CLICK,roomUse_itemDoubleHandel);
+				//				}
 				if(!roomUserInfoCell.hasEventListener(MouseEvent.DOUBLE_CLICK)){
 					roomUserInfoCell.doubleClickEnabled = true;
 					roomUserInfoCell.addEventListener(MouseEvent.DOUBLE_CLICK,roomUse_itemDoubleHandel);
@@ -2025,7 +2019,72 @@ package com.ywit.radio91.view
 				roomList.push(roomUserInfoCell);
 			}
 			_curAllRoomUserList = roomList;
-			_myTileListUserInfoList.dataProvider = roomList;
+		}
+		
+		/**
+		 * 更新当前的房间用户中的roomUser列表
+		 * 更改为切换按钮的时候才刷新
+		 */ 
+		private function refreshRoomUser():void{
+//			if(list == null ){
+//				
+//				if(_myTileList.dataProvider != null){
+//					_myTileList.dataProvider.removeAll();
+//				}
+//				
+//				return;
+//			
+//			}
+//			var list:Array  = [];
+//			if(_curRoomUserType == ROOM_USER_TYPE_SINGER){
+//				list = getSingerList();
+//			}
+//			
+//			if(_curRoomUserType == ROOM_USER_TYPE_VIEWER){
+//				list = getViewerList();
+//			}
+			
+//			list.sortOn("micStatus",Array.DESCENDING | Array.NUMERIC);
+			
+//			if(_curRoomUserType == ROOM_USER_TYPE_LISTENER){
+//				list = getListenerList();
+//			}
+//			
+//			ui_RoomView.roomUserList.singerListBut.tf_singerList.text = "唱歌("+ getSingerList().length +")";
+//			ui_RoomView.roomUserList.userListBut.tf_userList.text = "观众("+getViewerList().length+")";
+//			ui_RoomView.roomUserList.listenerListBut.tf_pdphList.text = "听歌("+getListenerList().length+")";
+//			ui_RoomView.roomUserList.singerListBut.tf_singerList.mouseEnabled = false;
+//			ui_RoomView.roomUserList.userListBut.tf_userList.mouseEnabled = false;
+//			
+//			var roomList :Array = new Array();
+//			for each (var roomObj:Object in list){
+//				var roomUserInfoCell:RoomUserInfoCell = new RoomUserInfoCell(roomObj);
+//				roomUserInfoCell.mouseChildren = false;
+//				
+//				if(!roomUserInfoCell.hasEventListener(MouseEvent.MOUSE_OVER)){
+//					roomUserInfoCell.addEventListener(MouseEvent.MOUSE_OVER,roomUse_itemOverHandel);
+//				}
+//				if(!roomUserInfoCell.hasEventListener(MouseEvent.MOUSE_OUT)){
+//					roomUserInfoCell.addEventListener(MouseEvent.MOUSE_OUT,roomUse_itemOutHandel);
+//				}
+//				if(!roomUserInfoCell.hasEventListener(MouseEvent.CLICK)){
+//					roomUserInfoCell.addEventListener(MouseEvent.CLICK,roomUse_itemDoubleHandel);
+//				}
+//				if(!roomUserInfoCell.hasEventListener(MouseEvent.DOUBLE_CLICK)){
+//					roomUserInfoCell.doubleClickEnabled = true;
+//					roomUserInfoCell.addEventListener(MouseEvent.DOUBLE_CLICK,roomUse_itemDoubleHandel);
+//				}
+//				
+//				roomList.push(roomUserInfoCell);
+//			}
+//			_curAllRoomUserList = roomList;
+			
+			findCurAllRoomUserList();
+			_myTileListUserInfoList.dataProvider = _curAllRoomUserList; 
+//			if(!isSechIng){
+//				_myTileListUserInfoList.dataProvider = roomList;
+//			}
+		
 			refreshTargetComboBox();
 
 			//当搜索框有搜索内容时过滤一遍内容
@@ -2034,7 +2093,7 @@ package com.ywit.radio91.view
 			}
 			
 		}
-		
+//		private var isSechIng:Boolean = false;
 		/**
 		 *  动态添加一个房间用户
 		 */ 
@@ -2080,6 +2139,10 @@ package com.ywit.radio91.view
 			ui_RoomView.roomUserList.listenerListBut.tf_pdphList.text = "听歌("+getListenerList().length+")";
 			ui_RoomView.roomUserList.singerListBut.tf_singerList.mouseEnabled = false;
 			ui_RoomView.roomUserList.userListBut.tf_userList.mouseEnabled = false;
+			
+			if(ui_RoomView.roomUserList.search.tf_search.text != "" && ui_RoomView.roomUserList.search.tf_search.text != "好友搜索"){
+				searchRoomUserList();
+			}
 			refreshTargetComboBox();
 		}
 		
