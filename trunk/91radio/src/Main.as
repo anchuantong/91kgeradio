@@ -43,38 +43,46 @@ package
 		
 		public function Main()
 		{
+			addEventListener(Event.ADDED_TO_STAGE,addedToStageHandel);
+		}
+		private function addedToStageHandel(e:Event):void{
+			removeEventListener(Event.ADDED_TO_STAGE,addedToStageHandel);
+			
+			appInit();
+		}
+		private function appInit():void{
 			ViewHelper.register = new ViewRegister();
 			ViewHelper._main = this;
 			UModelLocal.getInstance();
 			Security.allowDomain("*");
 			fillBg();
 			NetUntil.getInstance().addEventListener(Event.CONNECT,connectHandler);
-
-//			this.x += 10;
-//			var cls:Class = AssetRegister.UserInfoUI;
-//			
-//			var userInfoUI:DisplayObject = new cls();
-//			this.addChild(userInfoUI);
 			
-//			var mainStage:MainStageView = ViewHelper.addView(ViewRegister.MAIN_STAGE_VIEW,this) as MainStageView;
+			//			this.x += 10;
+			//			var cls:Class = AssetRegister.UserInfoUI;
+			//			
+			//			var userInfoUI:DisplayObject = new cls();
+			//			this.addChild(userInfoUI);
+			
+			//			var mainStage:MainStageView = ViewHelper.addView(ViewRegister.MAIN_STAGE_VIEW,this) as MainStageView;
 			//				ViewHelper.addView(ViewRegister.LOGIN_VIEW,mainStage);
-//			facade.startup(this);
-//			this.x=0;
-//			this.y=0;
-//			this.graphics.lineStyle(0,0,0);
-//			this.graphics.beginFill(0,0.4);
-//			this.graphics.drawRect(0,0,1000,600);
-//			this.graphics.endFill();
-//			
-//			this.scaleX=1;
+			//			facade.startup(this);
+			//			this.x=0;
+			//			this.y=0;
+			//			this.graphics.lineStyle(0,0,0);
+			//			this.graphics.beginFill(0,0.4);
+			//			this.graphics.drawRect(0,0,1000,600);
+			//			this.graphics.endFill();
+			//			
+			//			this.scaleX=1;
 			
-//			ViewHelper.addView(ViewRegister.HALL_VIEW,this);
-//			addChild(ViewHelper.getView(ViewRegister.HALL_VIEW));
-//			init();
+			//			ViewHelper.addView(ViewRegister.HALL_VIEW,this);
+			//			addChild(ViewHelper.getView(ViewRegister.HALL_VIEW));
+			//			init();
 			
 			if(UModelLocal.getInstance().debug == 0){
 				var array:Array = [711857534,223941411,228024525,255694631,313580428,327886643,334406883,338935147];
-//				var array:Array = [711857534];
+				//				var array:Array = [711857534];
 				
 				var uid:int = array[Math.round(Math.random()*(array.length-1))];
 				PlayerData.getInstance().jsessionid = uid+"_browser_sessionid";
@@ -83,7 +91,6 @@ package
 				return;	
 			}
 		}
-		
 		public function initRadio(jsessionid:String,ip:String,port:int):void{
 			ViewHelper.popView(ViewRegister.SYSTEM_INFO_VIEW,this,Main.KG_WIDTH,Main.KG_HEIGHT);
 			_playerData.jsessionid = jsessionid;
