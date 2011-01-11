@@ -80,7 +80,7 @@ package com.ywit.radio91.view
 			this.addChild(mouseShap);
 			mouseShap.visible  = false;
 		}
-		private var dropHeight:int = 60;
+		private var dropHeight:int = 80;
 		//设置这个类的高度,同是调整两个界面的高度
 		override public function set height(height:Number):void{
 			this._height= height;
