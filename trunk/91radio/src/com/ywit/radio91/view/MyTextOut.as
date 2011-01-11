@@ -64,10 +64,10 @@ package com.ywit.radio91.view
 			this.source = sprite2;
 			
 			this.width = weight;
-			this.height = hight;
 			
-			sprite.y = -16;
+			sprite.y = -12;
 			sprite2.addChild(sprite);
+			this.height = hight;
 			_textFlow.flowComposer.addController(_controller);
 //			_textFlow.interactionManager = new EditManager();
 			_textFlow.flowComposer.updateAllContainers();
@@ -187,7 +187,7 @@ package com.ywit.radio91.view
 			var songsName:String = object["songsName"];
 			
 			span = new SpanElement();
-			span.text=created+" ";
+			span.text=" "+created+" ";
 			span.color = 0;
 			p.addChild(span);
 			
@@ -219,7 +219,7 @@ package com.ywit.radio91.view
 			
 			
 			span = new SpanElement();
-			span.text=created+" ";
+			span.text=" "+created+" ";
 			span.color = 0;
 			p.addChild(span);
 			
@@ -263,7 +263,7 @@ package com.ywit.radio91.view
 			var songsName:String = object["songsName"];
 			
 			span = new SpanElement();
-			span.text=created+" ";
+			span.text=" "+created+" ";
 			span.color = 0;
 			p.addChild(span);
 			
@@ -298,10 +298,10 @@ package com.ywit.radio91.view
 			var recUname:String = object["recUname"];
 			var content:String = object["content"];
 			
-//			span = new SpanElement();
-//			span.text=str+" ";
-//			span.color = 0;
-//			p.addChild(span);
+			span = new SpanElement();
+			span.text=" ";
+			span.color = 0;
+			p.addChild(span);
 			
 			p.addChild(LinkElementUtil.addUserLink(sendUid,sendUname));
 			
@@ -384,7 +384,7 @@ package com.ywit.radio91.view
 			var message:String = object["content"];
 			
 			span = new SpanElement();
-			span.text=str+" ";
+			span.text=" "+str+" ";
 			span.color = 0;
 			p.addChild(span);
 			
@@ -577,7 +577,7 @@ package com.ywit.radio91.view
 			var sender:String = object["uname"];
 			
 			span = new SpanElement();
-			span.text=created+" ";
+			span.text=" "+created+" ";
 			p.addChild(span);
 			
 			p.addChild(LinkElementUtil.addUserLink(sendUid,sender));
@@ -615,7 +615,7 @@ package com.ywit.radio91.view
 			var roomName:String = object["roomName"];
 			
 			span = new SpanElement();
-			span.text=str+" ";
+			span.text=" "+str+" ";
 			span.color = 0x000000;
 			p.addChild(span);
 			
@@ -757,7 +757,7 @@ package com.ywit.radio91.view
 				}
 				
 				span = new SpanElement();
-				span.text=str+" ";
+				span.text=" "+str+" ";
 				span.color = 0;
 				p.addChild(span);
 				
