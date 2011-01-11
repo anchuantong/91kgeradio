@@ -483,14 +483,12 @@ package com.ywit.radio91.view
 		/**
 		 *
 		 * 找到匹配的链接样式并且替代成可点击的链接。
-		 * 链接格式定义<a href="http://g.cn" content='点击这里'/>
+		 * 链接格式定义<a href='http://g.cn' content='点击这里'/><a href="http://g.cn" content='点击这里'/>
 		 */ 
 		private function makeURLLink(v:String,p:ParagraphElement):void{
-			var exp:RegExp = /<a\s.*\s\/>/ig;
+			var exp:RegExp = /<a\s[^<]*\/>/ig;
 			var list:Array = v.match(exp);
 			var wordList:Array = v.split(exp);
-			trace("输出匹配的list==>"+list);
-			trace("输出匹配的wordList==>"+wordList);
 			var totalList:Array = [];
 			for(var element:* in wordList){
 				totalList.push(wordList[element]);
@@ -520,12 +518,12 @@ package com.ywit.radio91.view
 			if(urlFormatStr == null){
 				return null;
 			}
-			var exp:RegExp = /<a\s.*\s\/>/ig;
+			var exp:RegExp = /<a\s[^<]*\/>/ig;
 			var matchList:Array = urlFormatStr.match(exp);
 			if(matchList.length == 0){
 				return null;
 			}
-			var hrefExp:RegExp = /href='[\w|\.]*'/i;
+			var hrefExp:RegExp = /href='[\w\.:\/]*'/i;
 			var matchArray:Array = urlFormatStr.match(hrefExp);
 			var url:String = String(matchArray[0]).replace("href='","");
 			url = url.substring(0,url.lastIndexOf("'"));
