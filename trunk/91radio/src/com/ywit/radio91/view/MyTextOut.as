@@ -59,18 +59,25 @@ package com.ywit.radio91.view
 			_selectManager = new SelectionManager();
 			
 			var sprite:Sprite = new Sprite();
+			var sprite2:Sprite = new Sprite();
 			_controller = new DisplayObjectContainerController(sprite,weight-15,NaN);
-			this.source = sprite;
+			this.source = sprite2;
 			
 			this.width = weight;
 			this.height = hight;
 			
+			sprite.y = -16;
+			sprite2.addChild(sprite);
 			_textFlow.flowComposer.addController(_controller);
 //			_textFlow.interactionManager = new EditManager();
 			_textFlow.flowComposer.updateAllContainers();
 			
-			
-			
+			_controller.paddingTop = 0;
+			trace("effectivePaddingTop;"+_controller.effectivePaddingTop);
+			trace("contentTop;"+_controller.contentTop);
+			_controller.alignmentBaseline = BaselineOffset.ASCENT;
+			_controller.dominantBaseline = TextBaseline.IDEOGRAPHIC_TOP;
+			_controller.firstBaselineOffset = TextBaseline.IDEOGRAPHIC_TOP;
 //			this.graphics.lineStyle(0,0,0);
 //			this.graphics.beginFill(0,0.3);
 //			this.graphics.drawRect(0,0,weight,hight);
@@ -111,15 +118,24 @@ package com.ywit.radio91.view
 			this.setStyle("downArrowOverSkin",DownArrowOverSkin2);
 			this.setStyle("downArrowUpSkin",DownArrowUpSkin2);
 		}
+		private var noticeArray:Array = [];
+		
+		
 		public function cleanAll():void{
 			var num:int  = _textFlow.numChildren;
 			for(var i:int=0;i<num;i++){
 				_textFlow.removeChildAt(0);
 			}
-			
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
 			this.verticalScrollPosition= this.maxVerticalScrollPosition;
+			//以下带式是清屏时保留公告
+			var noticeArrayLast:Array = clone(noticeArray) as Array;
+			noticeArray = [];
+			for each (var obj:Object in noticeArrayLast){
+				addMessage(NOTICE_MESSAGE,obj);
+			}
+			//==-----
 		}
 		public static const MATH_COUNT:String = "0123456789";
 		public static function isCharMath(char:String):Boolean{
@@ -309,6 +325,7 @@ package com.ywit.radio91.view
 			var isEndofStr:Boolean = false;
 			var picname:String = "";
 			var messageContext:String = "";
+			var isHaveBQ:Boolean = false;
 			for (var i:int = 0;i < content.length; i++) {
 				var char:String = content.charAt(i);
 				var nextChar:String;
@@ -334,6 +351,7 @@ package com.ywit.radio91.view
 						inlineGraphic.source=obj.src as Class;
 						inlineGraphic.dominantBaseline = TextBaseline.IDEOGRAPHIC_CENTER;
 						p.addChild(inlineGraphic);
+						isHaveBQ = true;
 					}
 					picname = "";
 				}else if(nextChar==null||nextChar == "#"){
@@ -347,6 +365,11 @@ package com.ywit.radio91.view
 				}else{
 					messageContext+=char;
 				}
+			}
+			if(isHaveBQ){
+				p.lineHeight = 22;
+			}else{
+				p.lineHeight = 18;
 			}
 			return p;
 		}
@@ -400,6 +423,7 @@ package com.ywit.radio91.view
 			var isEndofStr:Boolean = false;
 			var picname:String = "";
 			var messageContext:String = "";
+			var isHaveBQ:Boolean = false;
 			for (var i:int = 0;i < message.length; i++) {
 				var char:String = message.charAt(i);
 				var nextChar:String;
@@ -424,6 +448,7 @@ package com.ywit.radio91.view
 						inlineGraphic = new InlineGraphicElement();
 						inlineGraphic.source=obj.src as Class;
 						inlineGraphic.dominantBaseline = TextBaseline.IDEOGRAPHIC_CENTER;
+						isHaveBQ = true;
 						p.addChild(inlineGraphic);
 					}
 					picname = "";
@@ -439,7 +464,11 @@ package com.ywit.radio91.view
 					messageContext+=char;
 				}
 			}
-			
+			if(isHaveBQ){
+				p.lineHeight = 22;
+			}else{
+				p.lineHeight = 18;
+			}
 			return p;
 		}
 		
@@ -851,12 +880,13 @@ package com.ywit.radio91.view
 			var p:ParagraphElement;
 			switch(messageType){
 				case NOTICE_MESSAGE:
+					noticeArray.push(obj);
 					p = noticeMessageHandel(obj);
-					
+					p.lineHeight = 18;
 					break;
 				case ROOM_MESSAGE:
 					p = roomMessageHandel(obj);
-					
+					p.lineHeight = 18;
 					break;
 //				case SINGER_MESSAGE:
 //					p = singerMessageHandel(obj);
@@ -866,35 +896,33 @@ package com.ywit.radio91.view
 //					break;
 				case STOP_SINGING_MESSAGE:
 					p = stopSingingHandler(obj);
-					
+					p.lineHeight = 18;
 					break;
 				case START_SINGING_MESSAGE:
 					p = startSingingHandler(obj);
-					
+					p.lineHeight = 18;
 					break;
 				case START_LISTEN_MESSAGE:
 					p = startListenHandler(obj);
 					
-				
+					p.lineHeight = 18;
 					break;
 				case GIFT_MESSAGE:
 //					p = giftMessageHandel(obj);
 					
 				 	addGiftMessageHandel(obj);
-					
 					return;
 //					break;
 				case PUBLIC_MESSAGE:
 					p = publicMessageHandel(obj);
-					
 					break;
 				case BROADCAST_MESSAGE:
 					p = publicBroadCastHandel(obj);
-					
+					p.lineHeight = 18;
 					break;
 				case PRIVATE_MESSAGE:
 					p = privateMessageHandel(obj);
-					
+					p.lineHeight = 18;
 					break;
 			}
 			
@@ -905,7 +933,6 @@ package com.ywit.radio91.view
 				_textFlow.removeChildAt(0);
 			}
 			_textFlow.addChild(p);
-			p.lineHeight = 22;
 			_textFlow.flowComposer.updateAllContainers();
 			this.update();
 			this.verticalScrollPosition= this.maxVerticalScrollPosition;
