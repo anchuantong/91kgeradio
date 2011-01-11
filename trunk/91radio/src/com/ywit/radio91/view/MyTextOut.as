@@ -117,6 +117,9 @@ package com.ywit.radio91.view
 			this.setStyle("downArrowDownSkin",DownArrowDownSkin2);
 			this.setStyle("downArrowOverSkin",DownArrowOverSkin2);
 			this.setStyle("downArrowUpSkin",DownArrowUpSkin2);
+			
+			this.tabEnabled = false;
+			this.tabChildren = false;
 		}
 		private var noticeArray:Array = [];
 		
