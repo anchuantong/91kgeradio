@@ -189,7 +189,8 @@ package com.ywit.radio91.view
 			ButtonUtil.changeButton(ui_RoomView.broadCast.but_sendMessage);
 			ButtonUtil.changeButton(ui_RoomView.btn_changeSizeBtn);
 //			ui_RoomView.roomUserList.listenerListBut.visible = false;
-			
+			//搜索框不允许输入多行文本
+			ui_RoomView.roomUserList.search.tf_search.multiline = false;
 			//关注主播暂时不显示，等到收听某人唱歌的时候显示
 			ui_RoomView.roomChat.tb_watchSinger.visible = false;
 			//悄悄话默认是不启用的，因为目标默认是所有人
@@ -1671,7 +1672,9 @@ package com.ywit.radio91.view
 						publicChatView.addMessage(MyTextOut.STOP_SINGING_MESSAGE,CommonEvent(e).data);
 						_singerHashMap.remove(uid);
 						_viewerHashMap.put(uid,object);
-						
+						if(_curRoomUserType == ROOM_USER_TYPE_SINGER){
+							removeRoomUser(object);
+						}
 						if(CommonEvent(e).data["follow"] == 1){
 							watchChatView.addMessage(MyTextOut.STOP_SINGING_MESSAGE,CommonEvent(e).data);
 							focusInWatchSinger();
@@ -1705,6 +1708,9 @@ package com.ywit.radio91.view
 						publicChatView.addMessage(MyTextOut.START_SINGING_MESSAGE,CommonEvent(e).data);
 						_viewerHashMap.remove(uid);
 						_singerHashMap.put(uid,object);
+						if(_curRoomUserType == ROOM_USER_TYPE_VIEWER){
+							removeRoomUser(object);
+						}
 						if(CommonEvent(e).data["follow"] == 1){
 							watchChatView.addMessage(MyTextOut.START_SINGING_MESSAGE,CommonEvent(e).data);
 							focusInWatchSinger();
