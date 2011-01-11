@@ -27,11 +27,10 @@
 //		public var jsessionid:String;
 		public var uid:int = 1;
 		//0本地调试，1远程调试(发布)
-		public var debug:int = 1;
+		public var debug:int = 0;
 		//TODO可能需要写在外部的config
 		//程序使用的资源地址
 		private var _resourceURL:String = "http://rtmpxn.91kge.com/res/sns/xn/fv1/";
-		
 		
 		public function get resourceURL():String{
 			if(debug == 0){
