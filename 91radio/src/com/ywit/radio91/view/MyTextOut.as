@@ -171,8 +171,6 @@ package com.ywit.radio91.view
 		public static const START_SINGING_MESSAGE:String = "START_SINGING_MESSAGE";
 		public static const START_LISTEN_MESSAGE:String = "START_LISTEN_MESSAGE";
 		
-		
-		
 		/**
 		 * 开始唱歌
 		 */ 
