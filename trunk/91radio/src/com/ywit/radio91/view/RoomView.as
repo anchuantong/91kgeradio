@@ -1080,6 +1080,7 @@ package com.ywit.radio91.view
 			chatViewPanel.y = 24;
 			watchChatView.height			   = 185;
 			chatViewPanel.height = 175;
+			chatViewPanel.setDropHeightDefault();
 //			publicChatView.height              = 86; 
 //			privateChatView.height                  = 81; 
 			
@@ -1133,6 +1134,7 @@ package com.ywit.radio91.view
 //			publicChatView.height                = 247; 
 //			privateChatView.height               = 127; 
 			chatViewPanel.height = 385;
+			chatViewPanel.setDropHeightDefault();
 			
 			if(_myTileListUserInfoList){
 				_myTileListUserInfoList.height = 390;
@@ -1924,7 +1926,8 @@ package com.ywit.radio91.view
 		 * 转到公聊框
 		 */ 
 		public function focusInChat():void{
-			ui_RoomView.roomChat.tb_publicChat.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+//			ui_RoomView.roomChat.tb_publicChat.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+			publicChatButHandel();
 		}
 		
 		//正在唱歌的人

@@ -54,7 +54,10 @@ package com.ywit.radio91.view
 				evt.updateAfterEvent();
 			});
 			
-			
+			setDropHeightDefault();
+		}
+		public function setDropHeightDefault():void{
+			sprite2.y = this._height-dropHeight;
 		}
 		private function drapMouse():void
 		{
@@ -77,10 +80,11 @@ package com.ywit.radio91.view
 			this.addChild(mouseShap);
 			mouseShap.visible  = false;
 		}
+		private var dropHeight:int = 60;
 		//设置这个类的高度,同是调整两个界面的高度
 		override public function set height(height:Number):void{
 			this._height= height;
-			sprite2.y = height-60;
+			
 //			updateSize();
 			
 			this.graphics.clear();
