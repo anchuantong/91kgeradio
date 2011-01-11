@@ -8,11 +8,14 @@ package com.ywit.radio91.view
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	import flash.utils.Dictionary;
 	
 	import flashx.textLayout.elements.FlowElement;
 	import flashx.textLayout.elements.LinkElement;
 	import flashx.textLayout.elements.SpanElement;
+
 /**
  * 提供程序中使用到的link功能的工具类，比如聊天里的人名连接，歌曲链接等等。
  */ 
@@ -125,8 +128,17 @@ package com.ywit.radio91.view
 		/**
 		 * 添加一条带url指向的链接文字
 		 */ 
-		public static function addURLLink(urlStr:String,url:String):FlowElement{
-			return null;
+		public static function addURLLink(linkStr:String,url:String):FlowElement{
+			var link:LinkElement = new LinkElement();
+			link.setStyle("linkNormalFormat", new Dictionary());
+			var span:SpanElement = new SpanElement();
+			span.text=linkStr;
+			span.color = 0x0032BF;
+			link.addChild(span);
+			link.addEventListener(MouseEvent.CLICK,function customClickHandler(e:Event):void{
+				navigateToURL(new URLRequest(url),"_blank");
+			});
+			return link;
 		}
 	
 	}

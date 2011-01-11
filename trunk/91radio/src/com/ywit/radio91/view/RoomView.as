@@ -1746,6 +1746,7 @@ package com.ywit.radio91.view
 					
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushGetNotice:
+					CommonEvent(e).data["content"] = CommonEvent(e).data["content"] + "<a href='www.163.com' content='点击这里' />";
 					privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
 				//	watchChatView.addMessage(MyTextOut.START_LISTEN_MESSAGE,CommonEvent(e).data);
 					break;

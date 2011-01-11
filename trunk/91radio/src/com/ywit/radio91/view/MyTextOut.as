@@ -11,13 +11,16 @@ package com.ywit.radio91.view
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
+	import flash.text.TextColorType;
 	import flash.text.engine.TextBaseline;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
 	
 	import flashx.textLayout.container.DisplayObjectContainerController;
+	import flashx.textLayout.conversion.TextFilter;
 	import flashx.textLayout.edit.EditManager;
 	import flashx.textLayout.edit.SelectionManager;
+	import flashx.textLayout.elements.FlowElement;
 	import flashx.textLayout.elements.InlineGraphicElement;
 	import flashx.textLayout.elements.LinkElement;
 	import flashx.textLayout.elements.ParagraphElement;
@@ -461,12 +464,78 @@ package com.ywit.radio91.view
 			span.color = 0;
 			p.addChild(span);
 			
-			span = new SpanElement();
-			span.text=content;
-			span.color = 0xFF0000;
-			p.addChild(span);
-			
+//			span = new SpanElement();
+//			span.text=content;
+//			span.color = 0xFF0000;
+//			p.addChild(span);
+			makeURLLink(content,p);
 			return p;
+		}
+		
+		/**
+		 * 找到匹配的链接样式并且替代成可点击的链接。
+		 * 链接格式定义<a href="http://g.cn">点击这里</a>
+		 */ 
+//		private function makeURLLink(contentStr:String):void{
+//			var regExp:RegExp = /<a[\w\s]*\/>/g;
+//		}
+		
+		/**
+		 *
+		 * 找到匹配的链接样式并且替代成可点击的链接。
+		 * 链接格式定义<a href="http://g.cn" content='点击这里'/>
+		 */ 
+		private function makeURLLink(v:String,p:ParagraphElement):void{
+			var exp:RegExp = /<a\s.*\s\/>/ig;
+			var list:Array = v.match(exp);
+			var wordList:Array = v.split(exp);
+			trace("输出匹配的list==>"+list);
+			trace("输出匹配的wordList==>"+wordList);
+			var totalList:Array = [];
+			for(var element:* in wordList){
+				totalList.push(wordList[element]);
+				totalList.push(list[element]);
+			}
+			
+			trace(totalList);
+			
+			for each(var ele:String in totalList){
+				var urlLinkElement:FlowElement = getURLLink(ele);
+				if(urlLinkElement != null){
+					p.addChild(urlLinkElement);
+					continue;
+				}
+				var span:SpanElement = new SpanElement();
+				span.text = ele;
+				span.color = 0xFF0000;
+				p.addChild(span);
+			}
+//			p.addChild(new BreakElement());
+		}
+		
+		/**
+		 * 得到url对象的InlineGraphicElement
+		 */ 
+		private function getURLLink(urlFormatStr:String):FlowElement{
+			if(urlFormatStr == null){
+				return null;
+			}
+			var exp:RegExp = /<a\s.*\s\/>/ig;
+			var matchList:Array = urlFormatStr.match(exp);
+			if(matchList.length == 0){
+				return null;
+			}
+			var hrefExp:RegExp = /href='\w*'/i;
+			var matchArray:Array = urlFormatStr.match(hrefExp);
+			var url:String = String(matchArray[0]).replace("href='","");
+			url = url.substring(0,url.lastIndexOf("'"));
+			
+			var urlNameExp:RegExp = /content='.*'/;
+			matchArray = urlFormatStr.match(urlNameExp);
+			var urlName:String = String(matchArray[0]).replace("content='","");
+				urlName = urlName.substring(0,urlName.lastIndexOf("'"));
+				
+				return LinkElementUtil.addURLLink(urlName,url);
 		}
 		
 		public function publicBroadCastHandel(object:Object):ParagraphElement{
