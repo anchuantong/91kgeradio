@@ -30,6 +30,9 @@ package com.ywit.radio91.component
 			this.source = _context;
 			_dataProvider = new Array();
 			
+			
+			this.tabEnabled = false;
+			this.tabChildren = false;
 		}
 		
 		public function get  dataProvider():Array{
