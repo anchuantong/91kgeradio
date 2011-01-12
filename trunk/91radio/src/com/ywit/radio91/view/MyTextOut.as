@@ -554,7 +554,7 @@ package com.ywit.radio91.view
 			if(matchList.length == 0){
 				return null;
 			}
-			var hrefExp:RegExp = /href='[\w\.:\/]*'/i;
+			var hrefExp:RegExp = /href='.*'/i; 
 			var matchArray:Array = urlFormatStr.match(hrefExp);
 			var url:String = String(matchArray[0]).replace("href='","");
 			url = url.substring(0,url.lastIndexOf("'"));
