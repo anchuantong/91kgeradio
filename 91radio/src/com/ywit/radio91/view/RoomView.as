@@ -1752,7 +1752,7 @@ package com.ywit.radio91.view
 					break;
 				case AbsPlayerData.EVENT_PUSH_pushGetNotice:
 					if(UModelLocal.getInstance().debug == 0){
-						CommonEvent(e).data["content"] = "<a href='http://www.163.com' content='点击这里' />测试请<a href='http://g.cn' content='点击这里'/><a href='http://www.163.com' content='点击这里' />";
+						CommonEvent(e).data["content"] = "<a href=' http://apps.renren.com/jiuykge/?helpcenter=6' content='新手帮助5'/>测试请<a href='http://g.cn' content='点击这里'/><a href='http://www.163.com' content='点击这里' />";
 						privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
 						privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
 						privateChatView.addMessage(MyTextOut.NOTICE_MESSAGE,CommonEvent(e).data);
