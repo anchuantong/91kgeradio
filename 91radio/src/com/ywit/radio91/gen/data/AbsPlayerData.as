@@ -237,6 +237,9 @@ public class AbsPlayerData extends EventDispatcher{;
 		public function responseStartListen(resObj:Object):void{;
 			BaseInteract.baseSendPacket(resObj);
 		};
+		public function responseEndSing(resObj:Object):void{;
+			BaseInteract.baseEndSing(resObj);
+		};
 		
 			public static function getInstance():AbsPlayerData{;
 							if (_instance == null) {;
